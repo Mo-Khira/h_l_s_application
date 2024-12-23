@@ -4,6 +4,7 @@ import 'package:h_l_s_application/features/auth/presentation/views/signup_page.d
 import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
+import 'package:h_l_s_application/features/home/presentation/views/home_view_body.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
@@ -33,11 +34,15 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kLoginPage,
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) => LoginPage(),
       ),
       GoRoute(
         path: kSignupPage,
         builder: (context, state) => SignupPage(),
+      ),
+      GoRoute(
+        path: kHomeView,
+        builder: (context, state) => const HomeViewBody(),
       ),
       // GoRoute(
       //   path: kHomeView,

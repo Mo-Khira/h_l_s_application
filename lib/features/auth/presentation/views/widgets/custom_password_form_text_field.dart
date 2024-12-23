@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 
-class CustomPasswordTextField extends StatefulWidget {
-  CustomPasswordTextField({super.key, required this.text, this.onChanged});
+class CustomPasswordFormTextField extends StatefulWidget {
+  CustomPasswordFormTextField(
+      {super.key,
+      required this.text,
+      this.onChanged,
+      this.formTextFieldController});
 
   final String text;
   Function(String)? onChanged;
+  final TextEditingController? formTextFieldController;
 
   @override
-  State<CustomPasswordTextField> createState() =>
-      _CustomPasswordTextFieldState();
+  State<CustomPasswordFormTextField> createState() =>
+      _CustomPasswordFormTextFieldState();
 }
 
-class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
+class _CustomPasswordFormTextFieldState
+    extends State<CustomPasswordFormTextField> {
   bool _obscureText = true;
-  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +31,11 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
           if (value!.isEmpty) {
             return "please Enter your password";
           }
+          return null;
         },
         onChanged: widget.onChanged,
         obscureText: _obscureText,
-        controller: _controller,
+        controller: widget.formTextFieldController,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(
             top: 20,

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseFirestore.instance.collection('users').get().then((value) {
+    print('Firestore connection successful');
+  }).catchError((e) {
+    print('Error connecting to Firestore: $e');
+  });
+
   runApp(const HLS());
 }
 

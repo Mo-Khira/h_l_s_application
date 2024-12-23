@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,17 +7,18 @@ import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/layouts/custom_login_decoration_row.dart';
-import 'package:h_l_s_application/features/auth/presentation/views/layouts/login_text_fields.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
-import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_password_text_field.dart';
-import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_text_field.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_password_form_text_field.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_form_text_field.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/widgets/show_snack_bar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignupPage extends StatefulWidget {
-  SignupPage({super.key, this.email, this.password});
-
-  String? email;
-  String? password;
+  SignupPage({
+    super.key,
+    // this.email,
+    // this.password,
+  });
 
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -26,6 +28,14 @@ class _SignupPageState extends State<SignupPage> {
   bool isLoading = false;
 
   GlobalKey<FormState> formKey = GlobalKey();
+
+  String? email;
+  String? password;
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,31 +55,50 @@ class _SignupPageState extends State<SignupPage> {
                     const SizedBox(
                       height: 60,
                     ),
-                    // CustomTextField(labelText: "First Name"),
+                    CustomFormTextField(
+                      labelText: "First Name",
+                      formTextFieldController: firstNameController,
+                      // onChanged: (data) {
+                      //   firstNameController.text = data;
+                      // },
+                    ),
+                    const SizedBox(height: 24),
+                    CustomFormTextField(
+                      labelText: "Last Name",
+                      formTextFieldController: lastNameController,
+                      // onChanged: (data) {
+                      //   lastNameController.text = data;
+                      // },
+                    ),
+                    const SizedBox(height: 24),
+                    CustomFormTextField(
+                      labelText: "Phone Number",
+                      formTextFieldController: phoneNumberController,
+                      keyboardType: TextInputType.phone,
+                      // onChanged: (data) {
+                      //   phoneNumberController.text = data;
+                      // },
+                    ),
                     const SizedBox(
                       height: 24,
                     ),
-                    // CustomTextField(labelText: "Last Name"),
+                    CustomFormTextField(
+                      labelText: "Email Address",
+                      keyboardType: TextInputType.emailAddress,
+                      formTextFieldController: emailController,
+                      // onChanged: (data) {
+                      //   email = data;
+                      // },
+                    ),
                     const SizedBox(
                       height: 24,
                     ),
-                    CustomTextField(
-                        labelText: "Email Address",
-                        onChanged: (data) {
-                          widget.email = data;
-                        }),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    // CustomTextField(labelText: "Phone Number"),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    CustomPasswordTextField(
+                    CustomPasswordFormTextField(
                       text: "Password",
-                      onChanged: (data) {
-                        widget.password = data;
-                      },
+                      formTextFieldController: passwordController,
+                      // onChanged: (data) {
+                      //   password = data;
+                      // },
                     ),
                     const SizedBox(
                       height: 24,
@@ -94,10 +123,11 @@ class _SignupPageState extends State<SignupPage> {
                             }
                           } catch (e) {
                             showSnackBar(context, "there was an error");
+                          } finally {
+                            isLoading = false;
+                            setState(() {});
                           }
-                          isLoading = false;
-                          setState(() {});
-                        } else {}
+                        }
                       },
                       text: "Sign up",
                     ),
@@ -177,19 +207,77 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  void showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
-
   Future<void> registerUser() async {
-    UserCredential user =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: widget.email!,
-      password: widget.password!,
-    );
+    FirebaseFirestore.instance.settings =
+        const Settings(persistenceEnabled: true);
+
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      String userId = userCredential.user!.uid;
+
+      await FirebaseFirestore.instance.collection('users').doc(userId).set({
+        'firstName': firstNameController.text,
+        'lastName': lastNameController.text,
+        'phoneNumber': phoneNumberController.text,
+        'email': emailController.text,
+        // 'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      print("*********************User registered and data saved to Firestore");
+    } catch (e) {
+      print("*******************Error during registration: $e");
+      showSnackBar(context, "An error occurred: $e");
+    }
   }
 }
+/*
+  Future<void> registerUser() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email!,
+        password: password!,
+      );
+
+      String userId = userCredential.user!.uid;
+
+      await FirebaseFirestore.instance.collection('users').add({
+        "firstName": firstNameController.text,
+        'lastName': lastNameController.text,
+        'phoneNumber': phoneNumberController.text,
+        'email': email,
+        // 'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      print("User registered and data saved to Firestore");
+    } catch (e) {
+      print("Error during registration: $e");
+      showSnackBar(context, "An error occurred: $e");
+    }
+  }
+
+*/
+  // Future<void> registerUser() async {
+  //   UserCredential userCredential =
+  //       await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  //     email: email!,
+  //     password: password!,
+  //   );
+  //   // String userId = user.user!.uid;
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(userCredential.user!.uid)
+  //       .set({
+  //     'firstName': firstNameController.text,
+  //     'lastName': lastNameController.text,
+  //     'phoneNumber': phoneNumberController.text,
+  //     'email': email,
+  //     'createdAt': FieldValue.serverTimestamp(),
+  //   });
+  // }
+// }

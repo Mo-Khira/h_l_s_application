@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 
-class CustomTextField extends StatelessWidget {
-  CustomTextField({super.key, required this.labelText, this.onChanged});
+class CustomFormTextField extends StatelessWidget {
+  CustomFormTextField(
+      {super.key,
+      required this.labelText,
+      this.onChanged,
+      this.keyboardType,
+      this.formTextFieldController});
 
   final String? labelText;
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController? formTextFieldController;
+  final TextInputType? keyboardType;
   Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
@@ -17,8 +23,10 @@ class CustomTextField extends StatelessWidget {
           if (value!.isEmpty) {
             return "required field";
           }
+          return null;
         },
-        controller: emailController,
+        keyboardType: keyboardType ?? TextInputType.text,
+        controller: formTextFieldController,
         onChanged: onChanged,
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.only(

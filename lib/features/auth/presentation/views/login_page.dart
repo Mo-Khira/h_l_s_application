@@ -43,7 +43,14 @@ class _SignupPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(
-                      height: 124,
+                      height: 24,
+                    ),
+                    SizedBox(
+                      height: 104,
+                      child: Image.asset(AssetsData.logo),
+                    ),
+                    const SizedBox(
+                      height: 64,
                     ),
                     CustomFormTextField(
                         labelText: "Email Address",
@@ -60,10 +67,28 @@ class _SignupPageState extends State<LoginPage> {
                       },
                     ),
                     const SizedBox(
-                      height: 24,
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              padding: const EdgeInsets.all(0)),
+                          onPressed: () {
+                            GoRouter.of(context)
+                                .push(AppRouter.kResetPasswordPage);
+                          },
+                          child: Text(
+                            "Forget Password?",
+                            style: Styles.textStyle14
+                                .copyWith(color: kSecondaryColor),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 20,
                     ),
                     CustomLoginButton(
                       onPressed: () async {

@@ -10,6 +10,7 @@ import 'package:h_l_s_application/features/auth/presentation/views/layouts/custo
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_password_form_text_field.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_form_text_field.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_phone_number_text_filed.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/show_snack_bar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -53,7 +54,14 @@ class _SignupPageState extends State<SignupPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(
-                      height: 60,
+                      height: 24,
+                    ),
+                    SizedBox(
+                      height: 104,
+                      child: Image.asset(AssetsData.logo),
+                    ),
+                    const SizedBox(
+                      height: 24,
                     ),
                     CustomFormTextField(
                       labelText: "First Name",
@@ -70,15 +78,6 @@ class _SignupPageState extends State<SignupPage> {
                       //   lastNameController.text = data;
                       // },
                     ),
-                    const SizedBox(height: 24),
-                    CustomFormTextField(
-                      labelText: "Phone Number",
-                      formTextFieldController: phoneNumberController,
-                      keyboardType: TextInputType.phone,
-                      // onChanged: (data) {
-                      //   phoneNumberController.text = data;
-                      // },
-                    ),
                     const SizedBox(
                       height: 24,
                     ),
@@ -90,6 +89,16 @@ class _SignupPageState extends State<SignupPage> {
                       //   email = data;
                       // },
                     ),
+                    const SizedBox(height: 24),
+                    CustomPhoneNumberTextField(),
+                    // CustomFormTextField(
+                    //   labelText: "Phone Number",
+                    //   formTextFieldController: phoneNumberController,
+                    //   keyboardType: TextInputType.phone,
+                    // onChanged: (data) {
+                    //   phoneNumberController.text = data;
+                    // },
+                    // ),
                     const SizedBox(
                       height: 24,
                     ),
@@ -103,7 +112,9 @@ class _SignupPageState extends State<SignupPage> {
                     const SizedBox(
                       height: 24,
                     ),
-                    // CustomPasswordTextField(text: "Confirm Password"),
+                    CustomPasswordFormTextField(
+                      text: "Confirm Password",
+                    ),
                     const SizedBox(
                       height: 40,
                     ),
@@ -135,7 +146,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 60,
                     ),
                     const CustomLoginDecorationRow(
-                      text: 'Or SignUp With',
+                      text: 'Or Register With',
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

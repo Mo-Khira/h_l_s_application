@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/login_page.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/reset_password_page.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/signup_page.dart';
 import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
@@ -14,6 +15,8 @@ abstract class AppRouter {
   static const kScreenThree = '/screen3';
   static const kLoginPage = '/loginPage';
   static const kSignupPage = '/signupPage';
+  static const kResetPasswordPage = '/resetPasswordPage';
+
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -43,6 +46,10 @@ abstract class AppRouter {
       GoRoute(
         path: kHomeView,
         builder: (context, state) => const HomeViewBody(),
+      ),
+      GoRoute(
+        path: kResetPasswordPage,
+        builder: (context, state) => ResetPasswordScreen(),
       ),
       // GoRoute(
       //   path: kHomeView,

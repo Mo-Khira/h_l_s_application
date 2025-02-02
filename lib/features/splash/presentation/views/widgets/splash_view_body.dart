@@ -39,7 +39,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       children: [
         SizedBox(
           height: 150,
-          child: Image.asset(AssetsData.screen1),
+          child: Image.asset(AssetsData.logo),
         ),
         SlidingText(
             animationController: animationController,

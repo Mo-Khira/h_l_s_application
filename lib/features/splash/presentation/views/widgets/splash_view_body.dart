@@ -38,7 +38,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(
-          height: 150,
+          height: 200,
           child: Image.asset(AssetsData.logo),
         ),
         SlidingText(
@@ -58,14 +58,14 @@ class _SplashViewBodyState extends State<SplashViewBody>
             .animate(animationController);
 
     animationController.forward();
-    // slidingAnimation.addListener(() {
-    //   setState(() {});
-    // });
+    slidingAnimation.addListener(() {
+      setState(() {});
+    });
   }
 
   void navigateToHome() {
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 5),
       () {
         // Get.to(
         //   () => const HomeView(),

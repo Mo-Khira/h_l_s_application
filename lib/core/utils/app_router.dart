@@ -1,7 +1,10 @@
 import 'package:go_router/go_router.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/create_password_page.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/login_page.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/password_changed.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/reset_password_page.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/signup_page.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/verify_code_page.dart';
 import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
@@ -16,6 +19,9 @@ abstract class AppRouter {
   static const kLoginPage = '/loginPage';
   static const kSignupPage = '/signupPage';
   static const kResetPasswordPage = '/resetPasswordPage';
+  static const kVerityCodePage = '/verityCodePage';
+  static const kCreatePasswordPage = '/createPasswordPage';
+  static const kPasswordChangedPage = '/passwordChangedPage';
 
   static final router = GoRouter(
     routes: [
@@ -51,14 +57,18 @@ abstract class AppRouter {
         path: kResetPasswordPage,
         builder: (context, state) => ResetPasswordScreen(),
       ),
-      // GoRoute(
-      //   path: kHomeView,
-      //   builder: (context, state) => const HomeView(),
-      // ),
-      // GoRoute(
-      //   path: kBookDetailsView,
-      //   builder: (context, state) => const BookDetailsView(),
-      // ),
+      GoRoute(
+        path: kVerityCodePage,
+        builder: (context, state) => VerifyCodePage(),
+      ),
+      GoRoute(
+        path: kCreatePasswordPage,
+        builder: (context, state) => CreatePasswordPage(),
+      ),
+      GoRoute(
+        path: kPasswordChangedPage,
+        builder: (context, state) => PasswordChangedPage(),
+      ),
     ],
   );
 }

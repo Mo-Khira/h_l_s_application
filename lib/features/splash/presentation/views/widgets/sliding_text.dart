@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class SlidingText extends StatelessWidget {
   const SlidingText({
@@ -17,11 +19,12 @@ class SlidingText extends StatelessWidget {
       builder: (context, _) {
         return SlideTransition(
           position: slidingAnimation,
-          child: const Text(
-            textAlign: TextAlign.center,
-            "H L S",
-            style: TextStyle(fontSize: 40),
-          ),
+          child: Text(
+              textAlign: TextAlign.center,
+              "H.L.Style",
+              style: Styles.textStyle40
+              // .copyWith(color: kSecondaryColor),
+              ),
         );
       },
     );

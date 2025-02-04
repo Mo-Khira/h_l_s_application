@@ -4,14 +4,15 @@ import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_password_form_text_field.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_phone_number_text_filed.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
+class CreatePasswordPage extends StatefulWidget {
   @override
-  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+  _CreatePasswordPage createState() => _CreatePasswordPage();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _CreatePasswordPage extends State<CreatePasswordPage> {
   final TextEditingController _phoneController = TextEditingController();
   bool _isFieldFocused = false;
 
@@ -44,7 +45,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     Center(
                       child: SizedBox(
                         height: 164,
-                        child: Image.asset(AssetsData.passwordImage),
+                        child: Image.asset(AssetsData.createPasswordImage),
                       ),
                     ),
                     const SizedBox(
@@ -53,20 +54,26 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ],
                 ),
                 const SizedBox(height: 56),
-                Text('Reset Password', style: Styles.textStyle24),
+                Text('Create Password', style: Styles.textStyle24),
                 const SizedBox(height: 8),
-                Text(
-                    'Please enter your phone number below to\nrecover your password',
+                Text('The password should have at least\n6 characters',
                     style: Styles.textStyle16),
                 const SizedBox(height: 55),
-                CustomPhoneNumberTextField(),
+                CustomPasswordFormTextField(
+                  text: "new password",
+                ),
+                const SizedBox(height: 32),
+
+                CustomPasswordFormTextField(
+                  text: "Confirm new password",
+                ),
                 const SizedBox(
-                    height: 100), // Increased height to move the button lower
+                    height: 53), // Increased height to move the button lower
                 Center(
                   child: CustomLoginButton(
-                    text: "Send",
+                    text: "Confirm",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kVerityCodePage);
+                      GoRouter.of(context).push(AppRouter.kPasswordChangedPage);
                     },
                   ),
                 ),

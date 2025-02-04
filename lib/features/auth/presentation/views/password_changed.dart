@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_phone_number_text_filed.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
+class PasswordChangedPage extends StatefulWidget {
   @override
-  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+  _PasswordChangedPage createState() => _PasswordChangedPage();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _PasswordChangedPage extends State<PasswordChangedPage> {
   final TextEditingController _phoneController = TextEditingController();
   bool _isFieldFocused = false;
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = kWidth(context);
+    double screenHeight = kHeight(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
                   height: 54,
@@ -41,32 +44,27 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         GoRouter.of(context).pop();
                       },
                     ),
-                    Center(
-                      child: SizedBox(
-                        height: 164,
-                        child: Image.asset(AssetsData.passwordImage),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 32,
-                    )
+                    const SizedBox(),
                   ],
                 ),
+                SizedBox(height: screenHeight * 0.2),
+                Center(
+                  child: SizedBox(
+                    height: 100,
+                    child: Image.asset(AssetsData.successMarkImage),
+                  ),
+                ),
                 const SizedBox(height: 56),
-                Text('Reset Password', style: Styles.textStyle24),
+                Text('Password Changed !', style: Styles.textStyle26),
                 const SizedBox(height: 8),
-                Text(
-                    'Please enter your phone number below to\nrecover your password',
+                Text('Your password has been \n changed successfully.',
                     style: Styles.textStyle16),
-                const SizedBox(height: 55),
-                CustomPhoneNumberTextField(),
-                const SizedBox(
-                    height: 100), // Increased height to move the button lower
+                const SizedBox(height: 90),
                 Center(
                   child: CustomLoginButton(
-                    text: "Send",
+                    text: "Return to Login",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kVerityCodePage);
+                      GoRouter.of(context).push(AppRouter.kLoginPage);
                     },
                   ),
                 ),

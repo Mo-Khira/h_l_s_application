@@ -27,9 +27,15 @@ abstract class Styles {
     fontFamily: GoogleFonts.poppins().fontFamily,
     color: Color(0xFFFFFFFF),
   );
+  static TextStyle textStyle22 = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.normal,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+    color: Color(0xFFFFFFFF),
+  );
   static TextStyle textStyle24 = TextStyle(
     fontSize: 24,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     fontFamily: GoogleFonts.poppins().fontFamily,
     color: Color(0xFFFFFFFF),
   );

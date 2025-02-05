@@ -9,4 +9,7 @@ class AssetsData {
   static const verifyCodeImage = "assets/Images/verifyCode.png";
   static const createPasswordImage = "assets/Images/createPassword.png";
   static const successMarkImage = "assets/Images/successMark.png";
+  static const weightLossImage = "assets/Images/weightLoss.png";
+  static const gainMuscleImage = "assets/Images/gainMuscle.png";
+  static const improveFitnessImage = "assets/Images/improveFitness.png";
 }

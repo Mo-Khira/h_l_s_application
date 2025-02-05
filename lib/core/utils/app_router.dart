@@ -11,9 +11,13 @@ import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view_body.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_age_page.dart';
+import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_page.dart';
+import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_goal_page.dart';
+import 'package:h_l_s_application/features/user_details/presentation/views/user_height_page.dart';
+import 'package:h_l_s_application/features/user_details/presentation/views/user_weight_goal_page.dart';
+import 'package:h_l_s_application/features/user_details/presentation/views/user_weight_page.dart';
 
 abstract class AppRouter {
-  static const kHomeView = '/homeView';
   static const kScreenOne = '/screen1';
   static const kScreenTwo = '/screen2';
   static const kScreenThree = '/screen3';
@@ -24,6 +28,11 @@ abstract class AppRouter {
   static const kCreatePasswordPage = '/createPasswordPage';
   static const kPasswordChangedPage = '/passwordChangedPage';
   static const kUserAgePage = '/userAgePage';
+  static const kUserWeightPage = '/userWeightPage';
+  static const kUserWeightGoalPage = '/userWeightGoalPage';
+  static const kUserHeightPage = '/userHeightPage';
+  static const kUserFitnessPage = '/userFitnessPage';
+  static const kUserFitnessGoalPage = '/userFitnessGoalPage';
 
   static final router = GoRouter(
     routes: [
@@ -52,10 +61,6 @@ abstract class AppRouter {
         builder: (context, state) => SignupPage(),
       ),
       GoRoute(
-        path: kHomeView,
-        builder: (context, state) => const HomeViewBody(),
-      ),
-      GoRoute(
         path: kResetPasswordPage,
         builder: (context, state) => ResetPasswordScreen(),
       ),
@@ -74,6 +79,26 @@ abstract class AppRouter {
       GoRoute(
         path: kUserAgePage,
         builder: (context, state) => UserAgePage(),
+      ),
+      GoRoute(
+        path: kUserWeightPage,
+        builder: (context, state) => UserWeightPage(),
+      ),
+      GoRoute(
+        path: kUserWeightGoalPage,
+        builder: (context, state) => UserWeightGoalPage(),
+      ),
+      GoRoute(
+        path: kUserHeightPage,
+        builder: (context, state) => UserHeightPage(),
+      ),
+      GoRoute(
+        path: kUserFitnessPage,
+        builder: (context, state) => UserFitnessPage(),
+      ),
+      GoRoute(
+        path: kUserFitnessGoalPage,
+        builder: (context, state) => UserFitnessGoalPage(),
       ),
     ],
   );

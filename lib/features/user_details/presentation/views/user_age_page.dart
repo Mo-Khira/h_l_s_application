@@ -23,14 +23,17 @@ class _UserAgePage extends State<UserAgePage> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: kPrimaryColor,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 24,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -116,7 +119,7 @@ class _UserAgePage extends State<UserAgePage> {
                 CustomLoginButton(
                   text: "Next Steps",
                   onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kLoginPage);
+                    GoRouter.of(context).push(AppRouter.kUserWeightPage);
                   },
                 ),
               ],

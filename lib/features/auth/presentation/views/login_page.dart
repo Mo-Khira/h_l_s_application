@@ -116,7 +116,7 @@ class _SignupPageState extends State<LoginPage> {
                           setState(() {});
                         } else {}
                         GoRouter.of(context)
-                            .pushReplacement(AppRouter.kHomeView);
+                            .pushReplacement(AppRouter.kUserAgePage);
                       },
                       text: "Login",
                     ),

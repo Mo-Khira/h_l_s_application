@@ -24,7 +24,7 @@ class CustomLoginButton extends StatelessWidget {
         child: Text(
           text,
           style: Styles.textStyle18
-              .copyWith(color: kPrimaryColor, fontWeight: FontWeight.w800),
+              .copyWith(color: kPrimaryColor, fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
       ),

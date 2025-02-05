@@ -34,7 +34,7 @@ class _CustomPhoneNumberTextFieldState
             borderRadius: BorderRadius.circular(8),
           ),
           height: 60,
-          width: 90,
+          width: 100,
         ),
         Container(
           padding: const EdgeInsets.only(left: 8),

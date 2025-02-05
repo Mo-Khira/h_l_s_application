@@ -10,6 +10,7 @@ import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view_body.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
+import 'package:h_l_s_application/features/user_details/presentation/views/user_age_page.dart';
 
 abstract class AppRouter {
   static const kHomeView = '/homeView';
@@ -22,6 +23,7 @@ abstract class AppRouter {
   static const kVerityCodePage = '/verityCodePage';
   static const kCreatePasswordPage = '/createPasswordPage';
   static const kPasswordChangedPage = '/passwordChangedPage';
+  static const kUserAgePage = '/userAgePage';
 
   static final router = GoRouter(
     routes: [
@@ -68,6 +70,10 @@ abstract class AppRouter {
       GoRoute(
         path: kPasswordChangedPage,
         builder: (context, state) => PasswordChangedPage(),
+      ),
+      GoRoute(
+        path: kUserAgePage,
+        builder: (context, state) => UserAgePage(),
       ),
     ],
   );

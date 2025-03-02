@@ -39,7 +39,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       children: [
         SizedBox(
           height: 200,
-          child: Image.asset(AssetsData.logo),
+          child: Image.asset(AssetsData.logo), // TODO this
         ),
         SlidingText(
             animationController: animationController,
@@ -65,7 +65,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateToHome() {
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2), // TODO this
       () {
         // Get.to(
         //   () => const HomeView(),

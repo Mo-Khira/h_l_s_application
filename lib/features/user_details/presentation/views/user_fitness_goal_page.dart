@@ -127,7 +127,7 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                 CustomLoginButton(
                   text: "Next Steps",
                   onPressed: () {
-                    // GoRouter.of(context).push(AppRouter.kUserWeightPage);
+                    GoRouter.of(context).push(AppRouter.kHomeView);
                   },
                 ),
                 const SizedBox(

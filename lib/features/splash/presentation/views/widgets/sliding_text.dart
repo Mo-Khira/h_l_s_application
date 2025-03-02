@@ -20,11 +20,10 @@ class SlidingText extends StatelessWidget {
         return SlideTransition(
           position: slidingAnimation,
           child: Text(
-              textAlign: TextAlign.center,
-              "H.L.Style",
-              style: Styles.textStyle40
-              // .copyWith(color: kSecondaryColor),
-              ),
+            textAlign: TextAlign.center,
+            "H.L.Style",
+            style: Styles.textStyle40.copyWith(color: kSecondaryColor),
+          ),
         );
       },
     );

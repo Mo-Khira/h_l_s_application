@@ -25,3 +25,27 @@ class HLS extends StatelessWidget {
     );
   }
 }
+
+/*
+
+
+SafeArea(
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Center(
+                  child: Text("Profile page"),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+
+ */

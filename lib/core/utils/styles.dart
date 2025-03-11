@@ -3,6 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 abstract class Styles {
+  static TextStyle textStyle12 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+    color: Color(0xFFFFFFFF),
+  );
   static TextStyle textStyle14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,

@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
@@ -120,25 +118,25 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     CustomLoginButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          isLoading = true;
-                          setState(() {});
-                          try {
-                            await registerUser();
-                            showSnackBar(context, "success");
-                          } on FirebaseAuthException catch (e) {
-                            if (e.code == "weak-password") {
-                              showSnackBar(context, "weak password");
-                            } else if (e.code == "email-already-in-use") {
-                              showSnackBar(context, "Email already exist");
-                            }
-                          } catch (e) {
-                            showSnackBar(context, "there was an error");
-                          } finally {
-                            isLoading = false;
-                            setState(() {});
-                          }
-                        }
+                        // if (formKey.currentState!.validate()) {
+                        //   isLoading = true;
+                        //   setState(() {});
+                        //   try {
+                        //     await registerUser();
+                        //     showSnackBar(context, "success");
+                        //   } on FirebaseAuthException catch (e) {
+                        //     if (e.code == "weak-password") {
+                        //       showSnackBar(context, "weak password");
+                        //     } else if (e.code == "email-already-in-use") {
+                        //       showSnackBar(context, "Email already exist");
+                        //     }
+                        //   } catch (e) {
+                        //     showSnackBar(context, "there was an error");
+                        //   } finally {
+                        //     isLoading = false;
+                        //     setState(() {});
+                        //   }
+                        // }
                       },
                       text: "Sign up",
                     ),
@@ -218,33 +216,33 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Future<void> registerUser() async {
-    FirebaseFirestore.instance.settings =
-        const Settings(persistenceEnabled: true);
+  // Future<void> registerUser() async {
+  //   FirebaseFirestore.instance.settings =
+  //       const Settings(persistenceEnabled: true);
 
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
+  //   try {
+  //     UserCredential userCredential =
+  //         await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  //       email: emailController.text,
+  //       password: passwordController.text,
+  //     );
 
-      String userId = userCredential.user!.uid;
+  //     String userId = userCredential.user!.uid;
 
-      await FirebaseFirestore.instance.collection('users').doc(userId).set({
-        'firstName': firstNameController.text,
-        'lastName': lastNameController.text,
-        'phoneNumber': phoneNumberController.text,
-        'email': emailController.text,
-        // 'createdAt': FieldValue.serverTimestamp(),
-      });
+  //     await FirebaseFirestore.instance.collection('users').doc(userId).set({
+  //       'firstName': firstNameController.text,
+  //       'lastName': lastNameController.text,
+  //       'phoneNumber': phoneNumberController.text,
+  //       'email': emailController.text,
+  //       // 'createdAt': FieldValue.serverTimestamp(),
+  //     });
 
-      print("*********************User registered and data saved to Firestore");
-    } catch (e) {
-      print("*******************Error during registration: $e");
-      showSnackBar(context, "An error occurred: $e");
-    }
-  }
+  //     print("*********************User registered and data saved to Firestore");
+  //   } catch (e) {
+  //     print("*******************Error during registration: $e");
+  //     showSnackBar(context, "An error occurred: $e");
+  //   }
+  // }
 }
 /*
   Future<void> registerUser() async {

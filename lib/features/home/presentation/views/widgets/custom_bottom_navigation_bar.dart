@@ -28,6 +28,7 @@ class CustomBottomNavBar extends StatelessWidget {
             topRight: Radius.circular(20),
           )),
       child: BottomNavigationBar(
+        selectedFontSize: 12,
         elevation: 2,
         currentIndex: currentIndex,
         selectedItemColor: kSecondaryColor,

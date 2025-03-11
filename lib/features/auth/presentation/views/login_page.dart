@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
@@ -92,29 +91,29 @@ class _SignupPageState extends State<LoginPage> {
                     ),
                     CustomLoginButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          isLoading = true;
-                          setState(() {});
-                          try {
-                            await loginUser();
-                            showSnackBar(context, "success");
-                          } on FirebaseAuthException catch (e) {
-                            isLoading = false;
-                            setState(() {});
-                            if (e.code == "user-not-found") {
-                              showSnackBar(context, "User not found");
-                            } else if (e.code == "wrong-password") {
-                              showSnackBar(context, "Wrong password");
-                            }
-                          } catch (e) {
-                            isLoading = false;
-                            setState(() {});
-                            print(e);
-                            showSnackBar(context, "there was an error");
-                          }
-                          isLoading = false;
-                          setState(() {});
-                        } else {}
+                        // if (formKey.currentState!.validate()) {
+                        //   isLoading = true;
+                        //   setState(() {});
+                        //   try {
+                        //     await loginUser();
+                        //     showSnackBar(context, "success");
+                        //   } on FirebaseAuthException catch (e) {
+                        //     isLoading = false;
+                        //     setState(() {});
+                        //     if (e.code == "user-not-found") {
+                        //       showSnackBar(context, "User not found");
+                        //     } else if (e.code == "wrong-password") {
+                        //       showSnackBar(context, "Wrong password");
+                        //     }
+                        //   } catch (e) {
+                        //     isLoading = false;
+                        //     setState(() {});
+                        //     print(e);
+                        //     showSnackBar(context, "there was an error");
+                        //   }
+                        //   isLoading = false;
+                        //   setState(() {});
+                        // } else {}
                         // GoRouter.of(context) // TODO
                         //     .pushReplacement(AppRouter.kUserAgePage);// TODO
                         GoRouter.of(context).push(AppRouter.kHomeView);
@@ -197,13 +196,13 @@ class _SignupPageState extends State<LoginPage> {
     );
   }
 
-  Future<void> loginUser() async {
-    UserCredential user =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: widget.email!,
-      password: widget.password!,
-    );
-  }
+  // Future<void> loginUser() async {
+  //   UserCredential user =
+  //       await FirebaseAuth.instance.signInWithEmailAndPassword(
+  //     email: widget.email!,
+  //     password: widget.password!,
+  //   );
+  // }
 }
 
 

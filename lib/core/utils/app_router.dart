@@ -9,6 +9,7 @@ import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/edit_profile_page.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_age_page.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_page.dart';
@@ -34,6 +35,7 @@ abstract class AppRouter {
   static const kUserFitnessPage = '/userFitnessPage';
   static const kUserFitnessGoalPage = '/userFitnessGoalPage';
   static const kHomeView = '/homeView';
+  static const kEditProfilePage = '/editProfilePage';
 
   static final router = GoRouter(
     routes: [
@@ -104,6 +106,10 @@ abstract class AppRouter {
       GoRoute(
         path: kHomeView,
         builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: kEditProfilePage,
+        builder: (context, state) => EditProfilePage(),
       ),
       // GoRoute(
       //   path: '/',

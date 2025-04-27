@@ -49,8 +49,7 @@ class ScreenOne extends StatelessWidget {
                       style: Styles.textStyle20,
                     ),
                     onPressed: () {
-                      GoRouter.of(context)
-                          .pushReplacement(AppRouter.kLoginPage);
+                      GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
                     },
                   ),
                   Container(

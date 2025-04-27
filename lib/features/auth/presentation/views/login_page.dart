@@ -114,9 +114,9 @@ class _SignupPageState extends State<LoginPage> {
                         //   isLoading = false;
                         //   setState(() {});
                         // } else {}
-                        // GoRouter.of(context) // TODO
-                        //     .pushReplacement(AppRouter.kUserAgePage);// TODO
-                        GoRouter.of(context).push(AppRouter.kHomeView);
+                        GoRouter.of(context) // TODO
+                            .pushReplacement(AppRouter.kUserAgePage);// TODO
+                        // GoRouter.of(context).push(AppRouter.kHomeView);
                       },
                       text: "Login",
                     ),

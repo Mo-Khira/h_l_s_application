@@ -49,7 +49,9 @@ class _UserHeightPage extends State<UserHeightPage> {
                         },
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          GoRouter.of(context).push(AppRouter.kHomeView);
+                        },
                         child: Text("Skip",
                             style: Styles.textStyle14.copyWith(
                                 color: kSecondaryColor,
@@ -169,7 +171,7 @@ class _UserHeightPage extends State<UserHeightPage> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            isKgSelected = label == "KG";
+            isKgSelected = label == "CM";
           });
         },
         child: Container(

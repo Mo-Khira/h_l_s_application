@@ -52,7 +52,9 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                       },
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kHomeView);
+                      },
                       child: Text("Skip",
                           style: Styles.textStyle14.copyWith(
                               color: kSecondaryColor,

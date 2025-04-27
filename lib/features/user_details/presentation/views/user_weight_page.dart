@@ -49,7 +49,9 @@ class _UserWeightPage extends State<UserWeightPage> {
                         },
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          GoRouter.of(context).push(AppRouter.kHomeView);
+                        },
                         child: Text("Skip",
                             style: Styles.textStyle14.copyWith(
                                 color: kSecondaryColor,
@@ -93,8 +95,8 @@ class _UserWeightPage extends State<UserWeightPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                _buildToggleButton("LBS", !isKgSelected),
-                                _buildToggleButton("KG", isKgSelected),
+                                buildToggleButton("LBS", !isKgSelected),
+                                buildToggleButton("KG", isKgSelected),
                               ],
                             ),
                           ),
@@ -164,7 +166,7 @@ class _UserWeightPage extends State<UserWeightPage> {
     );
   }
 
-  Widget _buildToggleButton(String label, bool isSelected) {
+  Widget buildToggleButton(String label, bool isSelected) {
     return Expanded(
       child: GestureDetector(
         onTap: () {

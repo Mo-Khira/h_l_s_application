@@ -49,7 +49,9 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                         },
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          GoRouter.of(context).push(AppRouter.kHomeView);
+                        },
                         child: Text("Skip",
                             style: Styles.textStyle14.copyWith(
                                 color: kSecondaryColor,
@@ -119,7 +121,7 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     style: Styles.textStyle24,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       counterText: "",
                                       border: InputBorder.none,
                                       contentPadding: EdgeInsets.zero,

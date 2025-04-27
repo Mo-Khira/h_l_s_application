@@ -49,7 +49,9 @@ class _UserAgePage extends State<UserAgePage> {
                       },
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kHomeView);
+                      },
                       child: Text("Skip",
                           style: Styles.textStyle14.copyWith(
                               color: kSecondaryColor,

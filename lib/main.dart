@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/services/auth_repo.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
-// import 'package:go_router/go_router.dart';
-// import 'package:get/get.dart';
+import 'package:h_l_s_application/features/auth/data/signup_fun.dart';
 
 void main() async {
-  runApp(const HLS());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // await dotenv.load(fileName: '.env');
+
+  // assert(
+  //     dotenv.get('API_BASE_URL').isNotEmpty, 'API_BASE_URL not found in .env');
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SignupCubit(AuthRepo()),
+        ),
+      ],
+      child: const HLS(),
+    ),
+  );
 }
 
 class HLS extends StatelessWidget {

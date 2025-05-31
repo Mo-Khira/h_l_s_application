@@ -17,7 +17,7 @@ class _HomepageState extends State<Homepage> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
+      child: const Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
           child: SingleChildScrollView(

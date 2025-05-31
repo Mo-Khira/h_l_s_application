@@ -28,8 +28,11 @@ class _CustomPasswordFormTextFieldState
       height: 60,
       child: TextFormField(
         validator: (value) {
-          if (value!.isEmpty) {
-            return "please Enter your password";
+          if (value == null || value.isEmpty) {
+            return 'Please enter your password';
+          }
+          if (value.length < 8) {
+            return 'Password must be at least 8 characters';
           }
           return null;
         },

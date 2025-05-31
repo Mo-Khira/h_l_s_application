@@ -20,9 +20,13 @@ class CustomFormTextField extends StatelessWidget {
       height: 60,
       child: TextFormField(
         validator: (value) {
-          if (value!.isEmpty) {
-            return "required field";
+          if (value == null || value.isEmpty) {
+            return 'This field is required';
           }
+          // if (keyboardType == TextInputType.emailAddress &&
+          //     !value.contains('@')) {
+          //   return 'Please enter a valid email';
+          // }
           return null;
         },
         keyboardType: keyboardType ?? TextInputType.text,

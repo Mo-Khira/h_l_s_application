@@ -59,7 +59,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     'Please enter your phone number below to\nrecover your password',
                     style: Styles.textStyle16),
                 const SizedBox(height: 55),
-                CustomPhoneNumberTextField(),
+                CustomPhoneNumberTextField(
+                  controller: _phoneController,
+                ),
                 const SizedBox(
                     height: 100), // Increased height to move the button lower
                 Center(

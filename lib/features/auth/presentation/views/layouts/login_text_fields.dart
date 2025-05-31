@@ -7,7 +7,9 @@ import 'package:h_l_s_application/features/auth/presentation/views/widgets/custo
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_phone_number_text_filed.dart';
 
 class LoginTextFields extends StatelessWidget {
-  const LoginTextFields({super.key});
+  LoginTextFields({super.key});
+
+  TextEditingController phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,9 @@ class LoginTextFields extends StatelessWidget {
         const SizedBox(
           height: 24,
         ),
-        CustomPhoneNumberTextField(),
+        CustomPhoneNumberTextField(
+          controller: phoneNumberController,
+        ),
         const SizedBox(
           height: 24,
         ),

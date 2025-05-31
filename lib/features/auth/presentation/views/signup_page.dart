@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/services/auth_repo.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
+import 'package:h_l_s_application/features/auth/data/signup_fun.dart';
+import 'package:h_l_s_application/features/auth/data/signup_state.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/layouts/custom_login_decoration_row.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_password_form_text_field.dart';
@@ -35,258 +39,146 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: isLoading,
-      child: SafeArea(
-        child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    SizedBox(
-                      height: 104,
-                      child: Image.asset(AssetsData.logo),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    CustomFormTextField(
-                      labelText: "First Name",
-                      formTextFieldController: firstNameController,
-                      // onChanged: (data) {
-                      //   firstNameController.text = data;
-                      // },
-                    ),
-                    const SizedBox(height: 24),
-                    CustomFormTextField(
-                      labelText: "Last Name",
-                      formTextFieldController: lastNameController,
-                      // onChanged: (data) {
-                      //   lastNameController.text = data;
-                      // },
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    CustomFormTextField(
-                      labelText: "Email Address",
-                      keyboardType: TextInputType.emailAddress,
-                      formTextFieldController: emailController,
-                      // onChanged: (data) {
-                      //   email = data;
-                      // },
-                    ),
-                    const SizedBox(height: 24),
-                    CustomPhoneNumberTextField(),
-                    // CustomFormTextField(
-                    //   labelText: "Phone Number",
-                    //   formTextFieldController: phoneNumberController,
-                    //   keyboardType: TextInputType.phone,
-                    // onChanged: (data) {
-                    //   phoneNumberController.text = data;
-                    // },
-                    // ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    CustomPasswordFormTextField(
-                      text: "Password",
-                      formTextFieldController: passwordController,
-                      // onChanged: (data) {
-                      //   password = data;
-                      // },
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    CustomPasswordFormTextField(
-                      text: "Confirm Password",
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    CustomLoginButton(
-                      onPressed: () async {
-                        // if (formKey.currentState!.validate()) {
-                        //   isLoading = true;
-                        //   setState(() {});
-                        //   try {
-                        //     await registerUser();
-                        //     showSnackBar(context, "success");
-                        //   } on FirebaseAuthException catch (e) {
-                        //     if (e.code == "weak-password") {
-                        //       showSnackBar(context, "weak password");
-                        //     } else if (e.code == "email-already-in-use") {
-                        //       showSnackBar(context, "Email already exist");
-                        //     }
-                        //   } catch (e) {
-                        //     showSnackBar(context, "there was an error");
-                        //   } finally {
-                        //     isLoading = false;
-                        //     setState(() {});
-                        //   }
-                        // }
-                      },
-                      text: "Sign up",
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                    const CustomLoginDecorationRow(
-                      text: 'Or Register With',
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.apple_sharp,
-                            color: Colors.white,
-                            size: 30,
+    return BlocProvider(
+      create: (context) => SignupCubit(AuthRepo()),
+      child: BlocConsumer<SignupCubit, SignupState>(
+        listener: (context, state) {
+          if (state is SignupSuccess) {
+            GoRouter.of(context).pushReplacement(AppRouter.kLoginPage);
+          } else if (state is SignupFailure) {
+            showSnackBar(context, state.errorMessage);
+          }
+        },
+        builder: (context, state) {
+          return ModalProgressHUD(
+            inAsyncCall: state is SignupLoading,
+            child: SafeArea(
+              child: Scaffold(
+                body: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const SizedBox(height: 24),
+                          SizedBox(
+                            height: 104,
+                            child: Image.asset(AssetsData.logo),
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.facebook,
-                            color: Colors.blue,
-                            size: 30,
+                          const SizedBox(height: 24),
+                          CustomFormTextField(
+                            labelText: "First Name",
+                            formTextFieldController: firstNameController,
                           ),
-                        ),
-                        MaterialButton(
-                          minWidth: 0,
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () {},
-                          child: Image.asset(
-                            AssetsData.googleIcon,
-                            height: 30,
-                            width: 30,
+                          const SizedBox(height: 24),
+                          CustomFormTextField(
+                            labelText: "Last Name",
+                            formTextFieldController: lastNameController,
                           ),
-                        ),
-                      ],
-                    ),
-                    // const Spacer(
-                    //   flex: 2,
-                    // ),
-                    const SizedBox(
-                      height: 64,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "I have an account",
-                          style: Styles.textStyle16,
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              padding: const EdgeInsets.all(0)),
-                          onPressed: () {
-                            GoRouter.of(context)
-                                .pushReplacement(AppRouter.kLoginPage);
-                          },
-                          child: Text(
-                            "Login",
-                            style: Styles.textStyle16.copyWith(
-                              color: kSecondaryColor,
-                            ),
+                          const SizedBox(height: 24),
+                          CustomFormTextField(
+                            labelText: "Email Address",
+                            keyboardType: TextInputType.emailAddress,
+                            formTextFieldController: emailController,
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 24),
+                          CustomPhoneNumberTextField(
+                            controller: phoneNumberController,
+                          ),
+                          const SizedBox(height: 24),
+                          CustomPasswordFormTextField(
+                            text: "Password",
+                            formTextFieldController: passwordController,
+                          ),
+                          const SizedBox(height: 24),
+                          CustomPasswordFormTextField(
+                            text: "Confirm Password",
+                            formTextFieldController: confirmPasswordController,
+                          ),
+                          const SizedBox(height: 40),
+                          CustomLoginButton(
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                context.read<SignupCubit>().signup(
+                                      firstName: firstNameController.text,
+                                      lastName: lastNameController.text,
+                                      email: emailController.text,
+                                      phone: phoneNumberController.text,
+                                      password: passwordController.text,
+                                    );
+                              }
+                            },
+                            text: "Sign up",
+                          ),
+                          const SizedBox(height: 60),
+                          const CustomLoginDecorationRow(
+                            text: 'Or Register With',
+                          ),
+                          // Social buttons here...
+                          const SizedBox(height: 64),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("I have an account",
+                                  style: Styles.textStyle16),
+                              TextButton(
+                                onPressed: () {
+                                  GoRouter.of(context)
+                                      .pushReplacement(AppRouter.kLoginPage);
+                                },
+                                child: Text("Login",
+                                    style: Styles.textStyle16
+                                        .copyWith(color: kSecondaryColor)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
-
-  // Future<void> registerUser() async {
-  //   FirebaseFirestore.instance.settings =
-  //       const Settings(persistenceEnabled: true);
-
-  //   try {
-  //     UserCredential userCredential =
-  //         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-  //       email: emailController.text,
-  //       password: passwordController.text,
-  //     );
-
-  //     String userId = userCredential.user!.uid;
-
-  //     await FirebaseFirestore.instance.collection('users').doc(userId).set({
-  //       'firstName': firstNameController.text,
-  //       'lastName': lastNameController.text,
-  //       'phoneNumber': phoneNumberController.text,
-  //       'email': emailController.text,
-  //       // 'createdAt': FieldValue.serverTimestamp(),
-  //     });
-
-  //     print("*********************User registered and data saved to Firestore");
-  //   } catch (e) {
-  //     print("*******************Error during registration: $e");
-  //     showSnackBar(context, "An error occurred: $e");
-  //   }
-  // }
 }
-/*
-  Future<void> registerUser() async {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email!,
-        password: password!,
-      );
 
-      String userId = userCredential.user!.uid;
 
-      await FirebaseFirestore.instance.collection('users').add({
-        "firstName": firstNameController.text,
-        'lastName': lastNameController.text,
-        'phoneNumber': phoneNumberController.text,
-        'email': email,
-        // 'createdAt': FieldValue.serverTimestamp(),
-      });
-
-      print("User registered and data saved to Firestore");
-    } catch (e) {
-      print("Error during registration: $e");
-      showSnackBar(context, "An error occurred: $e");
-    }
-  }
-
-*/
-  // Future<void> registerUser() async {
-  //   UserCredential userCredential =
-  //       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-  //     email: email!,
-  //     password: password!,
-  //   );
-  //   // String userId = user.user!.uid;
-  //   await FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(userCredential.user!.uid)
-  //       .set({
-  //     'firstName': firstNameController.text,
-  //     'lastName': lastNameController.text,
-  //     'phoneNumber': phoneNumberController.text,
-  //     'email': email,
-  //     'createdAt': FieldValue.serverTimestamp(),
-  //   });
-  // }
-// }
+// onPressed: () async {
+                            //   if (formKey.currentState!.validate()) {
+                            //     if (passwordController.text !=
+                            //         confirmPasswordController.text) {
+                            //       showSnackBar(
+                            //           context, "Passwords don't match");
+                            //       return;
+                            //     }
+                            //     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                            //         .hasMatch(emailController.text)) {
+                            //       showSnackBar(
+                            //           context, "Please enter a valid email");
+                            //       return;
+                            //     }
+                            //     if (passwordController.text.length < 8) {
+                            //       showSnackBar(context,
+                            //           "Password must be at least 8 characters");
+                            //       return;
+                            //     }
+                            //     await BlocProvider.of<SignupCubit>(context)
+                            //         .signupUser(
+                            //       firstName: firstNameController.text,
+                            //       lastName: lastNameController.text,
+                            //       email: emailController.text,
+                            //       password: passwordController.text,
+                            //       phoneNumber: phoneNumberController.text,
+                            //     );
+                            //   }
+                            // },

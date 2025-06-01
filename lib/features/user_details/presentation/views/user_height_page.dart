@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
+import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 
 class UserHeightPage extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class UserHeightPage extends StatefulWidget {
 
 class _UserHeightPage extends State<UserHeightPage> {
   bool isKgSelected = true;
-  TextEditingController weightController = TextEditingController(text: "");
+  TextEditingController heightController = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -110,14 +112,14 @@ class _UserHeightPage extends State<UserHeightPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 // Number Input
                                 SizedBox(
-                                  width: 45,
+                                  width: screenWidth * 0.37,
                                   child: TextField(
                                     maxLength: 3,
-                                    controller: weightController,
+                                    controller: heightController,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     style: Styles.textStyle24,
@@ -128,8 +130,6 @@ class _UserHeightPage extends State<UserHeightPage> {
                                     ),
                                   ),
                                 ),
-
-                                // Vertical Separator
                                 Container(
                                   width: 1,
                                   height: 25,
@@ -137,10 +137,11 @@ class _UserHeightPage extends State<UserHeightPage> {
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 10),
                                 ),
-
-                                // Unit Text (kg/lbs)
-                                Text(isKgSelected ? "Cm   " : "feet  ",
-                                    style: Styles.textStyle24),
+                                Text(
+                                  isKgSelected ? "Cm   " : "feet  ",
+                                  style: Styles.textStyle24,
+                                ),
+                                const Spacer(),
                               ],
                             ),
                           ),
@@ -154,7 +155,34 @@ class _UserHeightPage extends State<UserHeightPage> {
                   CustomLoginButton(
                     text: "Next Steps",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kUserFitnessPage);
+                      String input = heightController.text.trim();
+                      if (input.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Please enter your goal weight"),
+                            backgroundColor: Colors.yellowAccent[400],
+                          ),
+                        );
+                        return;
+                      }
+
+                      int? height = int.tryParse(input);
+                      if (height == null || height <= 0) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content:
+                                Text("Please enter a valid numeric height"),
+                            backgroundColor: Colors.redAccent,
+                          ),
+                        );
+                        return;
+                      }
+
+                      // ✅ Store in Cubit
+                      context.read<UserInfoCubit>().setHeight(height);
+
+                      // ➡️ Navigate
+                      GoRouter.of(context).push('/onboarding/userFitnessPage');
                     },
                   ),
                 ],

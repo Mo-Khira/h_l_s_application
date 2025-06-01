@@ -22,32 +22,59 @@ class _CustomPhoneNumberTextFieldState
 
   @override
   Widget build(BuildContext context) {
-    return InternationalPhoneNumberInput(
-      onInputChanged: (PhoneNumber number) {
-        widget.controller.text = number.phoneNumber ?? '';
-      },
-      selectorConfig: const SelectorConfig(
-        selectorType: PhoneInputSelectorType.DIALOG,
-      ),
-      initialValue: number,
-      textFieldController: TextEditingController(),
-      inputDecoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(16),
-        labelText: "Phone Number",
-        labelStyle: Styles.textStyle16.copyWith(fontWeight: FontWeight.w700),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: kSecondaryColor, width: 1),
+    return Stack(
+      children: [
+        Container(
+          padding: const EdgeInsets.only(left: 8),
+          decoration: BoxDecoration(
+            border: Border.all(
+              style: BorderStyle.solid,
+              color: kSecondaryColor,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          height: 60,
+          width: kWidth(context) * 0.27,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: kSecondaryColor, width: 1),
+        Container(
+          height: 60,
+          padding: const EdgeInsets.only(left: 8.0),
+          child: InternationalPhoneNumberInput(
+            onInputChanged: (PhoneNumber number) {
+              widget.controller.text = number.phoneNumber ?? '';
+            },
+            selectorConfig: const SelectorConfig(
+              selectorType: PhoneInputSelectorType.DIALOG,
+            ),
+            initialValue: number,
+            textFieldController: TextEditingController(),
+            inputDecoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(
+                top: 20,
+                bottom: 20,
+                right: 10,
+                left: 10,
+              ),
+              labelText: "Phone Number",
+              labelStyle:
+                  Styles.textStyle16.copyWith(fontWeight: FontWeight.w700),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: kSecondaryColor, width: 1),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: kSecondaryColor, width: 1),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: kSecondaryColor, width: 1),
+              ),
+            ),
+          ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: kSecondaryColor, width: 1),
-        ),
-      ),
+      ],
     );
   }
 }

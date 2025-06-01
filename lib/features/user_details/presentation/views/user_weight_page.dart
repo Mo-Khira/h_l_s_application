@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
+import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 
 class UserWeightPage extends StatefulWidget {
   @override
@@ -76,76 +78,75 @@ class _UserWeightPage extends State<UserWeightPage> {
                   SizedBox(
                     height: screenHeight * 0.15,
                   ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // KG / LBS Toggle
-                          Container(
-                            width: 122,
-                            height: 45,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.white, width: 1),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                buildToggleButton("LBS", !isKgSelected),
-                                buildToggleButton("KG", isKgSelected),
-                              ],
-                            ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // KG / LBS Toggle
+                        Container(
+                          width: 122,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.white, width: 1),
                           ),
-                          const SizedBox(height: 40),
-                          // Weight Input Box (Perfectly Aligned)
-                          Container(
-                            width: screenWidth * 0.8,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white, width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                // Number Input
-                                SizedBox(
-                                  width: 45,
-                                  child: TextField(
-                                    maxLength: 3,
-                                    controller: weightController,
-                                    keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
-                                    style: Styles.textStyle24,
-                                    decoration: InputDecoration(
-                                      counterText: "",
-                                      border: InputBorder.none,
-                                      contentPadding: EdgeInsets.zero,
-                                    ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              buildToggleButton("LBS", !isKgSelected),
+                              buildToggleButton("KG", isKgSelected),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 40),
+                        // Weight Input Box (Perfectly Aligned)
+                        Container(
+                          width: screenWidth * 0.8,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Number Input
+                              SizedBox(
+                                width: screenWidth * 0.37,
+                                child: TextField(
+                                  maxLength: 3,
+                                  controller: weightController,
+                                  keyboardType: TextInputType.number,
+                                  textAlign: TextAlign.center,
+                                  style: Styles.textStyle24,
+                                  decoration: InputDecoration(
+                                    counterText: "",
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.zero,
                                   ),
                                 ),
-
-                                // Vertical Separator
-                                Container(
-                                  width: 1,
-                                  height: 25,
-                                  color: Colors.white,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                ),
-
-                                // Unit Text (kg/lbs)
-                                Text(isKgSelected ? "kg   " : "lbs   ",
-                                    style: Styles.textStyle24),
-                              ],
-                            ),
+                              ),
+                              // Vertical Separator
+                              Container(
+                                width: 1,
+                                height: 25,
+                                color: Colors.white,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                              ),
+                              // Unit Text (kg/lbs)
+                              Text(
+                                isKgSelected ? "kg   " : "lbs   ",
+                                style: Styles.textStyle24,
+                              ),
+                              const Spacer(),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -154,7 +155,31 @@ class _UserWeightPage extends State<UserWeightPage> {
                   CustomLoginButton(
                     text: "Next Steps",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kUserWeightGoalPage);
+                      String input = weightController.text.trim();
+                      if (input.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Please enter a valid weight"),
+                            backgroundColor: Colors.yellowAccent[400],
+                          ),
+                        );
+                        return;
+                      }
+                      int? weight = int.tryParse(input);
+                      if (weight == null || weight <= 0) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content:
+                                Text("Please enter a valid numeric weight"),
+                            backgroundColor: Colors.redAccent,
+                          ),
+                        );
+                        return;
+                      }
+                      context.read<UserInfoCubit>().setWeight(weight);
+                      GoRouter.of(context).push(
+                        '/onboarding/userWeightGoalPage',
+                      ); // استخدم ثابت لو حابب
                     },
                   ),
                 ],

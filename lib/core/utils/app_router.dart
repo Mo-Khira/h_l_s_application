@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/create_password_page.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/login_page.dart';
@@ -11,6 +13,7 @@ import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/edit_profile_page.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
+import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_age_page.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_page.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_goal_page.dart';
@@ -28,6 +31,7 @@ abstract class AppRouter {
   static const kVerityCodePage = '/verityCodePage';
   static const kCreatePasswordPage = '/createPasswordPage';
   static const kPasswordChangedPage = '/passwordChangedPage';
+  static const kOnboarding = '/onboarding';
   static const kUserAgePage = '/userAgePage';
   static const kUserWeightPage = '/userWeightPage';
   static const kUserWeightGoalPage = '/userWeightGoalPage';
@@ -84,26 +88,6 @@ abstract class AppRouter {
         builder: (context, state) => UserAgePage(),
       ),
       GoRoute(
-        path: kUserWeightPage,
-        builder: (context, state) => UserWeightPage(),
-      ),
-      GoRoute(
-        path: kUserWeightGoalPage,
-        builder: (context, state) => UserWeightGoalPage(),
-      ),
-      GoRoute(
-        path: kUserHeightPage,
-        builder: (context, state) => UserHeightPage(),
-      ),
-      GoRoute(
-        path: kUserFitnessPage,
-        builder: (context, state) => UserFitnessPage(),
-      ),
-      GoRoute(
-        path: kUserFitnessGoalPage,
-        builder: (context, state) => const UserFitnessGoalPage(),
-      ),
-      GoRoute(
         path: kHomeView,
         builder: (context, state) => const HomeView(),
       ),
@@ -111,6 +95,36 @@ abstract class AppRouter {
         path: kEditProfilePage,
         builder: (context, state) => EditProfilePage(),
       ),
+      GoRoute(
+        path: AppRouter.kOnboarding,
+        builder: (context, state) => BlocProvider(
+          create: (_) => UserInfoCubit(),
+          child: UserAgePage(),
+        ),
+        routes: [
+          GoRoute(
+            path: kUserWeightPage,
+            builder: (context, state) => UserWeightPage(),
+          ),
+          GoRoute(
+            path: kUserWeightGoalPage,
+            builder: (context, state) => UserWeightGoalPage(),
+          ),
+          GoRoute(
+            path: kUserHeightPage,
+            builder: (context, state) => UserHeightPage(),
+          ),
+          GoRoute(
+            path: kUserFitnessPage,
+            builder: (context, state) => UserFitnessPage(),
+          ),
+          GoRoute(
+            path: kUserFitnessGoalPage,
+            builder: (context, state) => const UserFitnessGoalPage(),
+          ),
+        ],
+      ),
+
       // GoRoute(
       //   path: '/',
       //   builder: (context, state) => const HomeView(),

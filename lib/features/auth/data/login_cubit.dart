@@ -8,15 +8,16 @@ class LoginCubit extends Cubit<LoginState> {
   void userLogin({required String email, required String password}) async {
     emit(LoginLoading());
     try {
-      final result =
-          await ApiService.loginUser(email: email, password: password);
-      emit(LoginSuccess());
-      // await Future.delayed(const Duration(seconds: 2));
-      // if (email == "test@example.com" && password == "12345678") {
-      //   emit(LoginSuccess());
-      // } else {
-      //   emit(LoginFailure("Invalid email or password"));
-      // }
+      // final result =
+      //     await ApiService.loginUser(email: email, password: password);
+      // emit(LoginSuccess());
+//
+      await Future.delayed(const Duration(seconds: 2));
+      if (email == "t" && password == "12345678") {
+        emit(LoginSuccess());
+      } else {
+        emit(LoginFailure("Invalid email or password"));
+      }
 //
     } catch (e) {
       emit(LoginFailure(e.toString()));

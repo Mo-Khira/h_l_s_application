@@ -120,7 +120,37 @@ class _SignupPageState extends State<SignupPage> {
                           const CustomLoginDecorationRow(
                             text: 'Or Register With',
                           ),
-                          // Social buttons here...
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.apple_sharp,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.facebook,
+                                  color: Colors.blue,
+                                  size: 30,
+                                ),
+                              ),
+                              MaterialButton(
+                                minWidth: 0,
+                                padding: const EdgeInsets.all(0),
+                                onPressed: () {},
+                                child: Image.asset(
+                                  AssetsData.googleIcon,
+                                  height: 30,
+                                  width: 30,
+                                ),
+                              ),
+                            ],
+                          ),
                           const SizedBox(height: 64),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

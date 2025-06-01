@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
+import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 
 class UserWeightGoalPage extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class UserWeightGoalPage extends StatefulWidget {
 
 class _UserWeightGoalPage extends State<UserWeightGoalPage> {
   bool isKgSelected = true;
-  TextEditingController weightController = TextEditingController(text: "");
+  TextEditingController goalWeightController = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -110,14 +112,14 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 // Number Input
                                 SizedBox(
-                                  width: 45,
+                                  width: screenWidth * 0.37,
                                   child: TextField(
                                     maxLength: 3,
-                                    controller: weightController,
+                                    controller: goalWeightController,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     style: Styles.textStyle24,
@@ -128,7 +130,6 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                                     ),
                                   ),
                                 ),
-
                                 // Vertical Separator
                                 Container(
                                   width: 1,
@@ -137,10 +138,12 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 10),
                                 ),
-
                                 // Unit Text (kg/lbs)
-                                Text(isKgSelected ? "kg   " : "lbs   ",
-                                    style: Styles.textStyle24),
+                                Text(
+                                  isKgSelected ? "kg   " : "lbs   ",
+                                  style: Styles.textStyle24,
+                                ),
+                                const Spacer(),
                               ],
                             ),
                           ),
@@ -154,7 +157,29 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                   CustomLoginButton(
                     text: "Next Steps",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kUserHeightPage);
+                      String input = goalWeightController.text.trim();
+                      if (input.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Please enter your goal weight"),
+                            backgroundColor: Colors.yellowAccent[400],
+                          ),
+                        );
+                        return;
+                      }
+                      int? goalWeight = int.tryParse(input);
+                      if (goalWeight == null || goalWeight <= 0) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content:
+                                Text("Please enter a valid numeric weight"),
+                            backgroundColor: Colors.redAccent,
+                          ),
+                        );
+                        return;
+                      }
+                      context.read<UserInfoCubit>().setGoalWeight(goalWeight);
+                      GoRouter.of(context).push('/onboarding/userHeightPage');
                     },
                   ),
                 ],

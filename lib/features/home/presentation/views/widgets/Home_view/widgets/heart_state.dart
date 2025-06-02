@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/heart_pulse.dart';
 
 class HeartState extends StatefulWidget {
@@ -20,7 +21,7 @@ class _HeartStateState extends State<HeartState> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         height: 175,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -34,16 +35,13 @@ class _HeartStateState extends State<HeartState> {
                 SvgPicture.asset(widget.iconPath),
                 Text(
                   widget.text,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
+                  style: Styles.textStyle16.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.w500),
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            HeartBeatAnimation(),
+            const SizedBox(height: 16),
+            const HeartBeatAnimation(),
           ],
         ),
       ),

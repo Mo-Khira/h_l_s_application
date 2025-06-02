@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/circular_progress_state.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/heart_state.dart';
 
@@ -28,7 +29,7 @@ class _StatsState extends State<Stats> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         height: 175,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -42,15 +43,14 @@ class _StatsState extends State<Stats> {
                 SvgPicture.asset(widget.iconPath),
                 Text(
                   widget.text,
-                  style: TextStyle(
-                    fontSize: 16,
+                  style: Styles.textStyle16.copyWith(
+                    color: Colors.black,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black, // Ensure text color is black
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             CustomCircularProgressState(
               endPoint: widget.endPoint,
               text1: widget.text1,
@@ -72,8 +72,8 @@ class StatsGrid extends StatelessWidget {
       height: 500,
       child: GridView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 30,
           mainAxisSpacing: 30,
@@ -90,25 +90,25 @@ class StatsGrid extends StatelessWidget {
 
 // Define the stats grid items
 List<dynamic> statGridList = [
-  Stats(
+  const Stats(
     text: "Calories",
     iconPath: "assets/svgs/fire.svg",
     endPoint: 0.6,
     text1: "399",
     text2: "Kcal",
   ),
-  HeartState(
+  const HeartState(
     text: "Heart",
     iconPath: "assets/svgs/black_heart.svg",
   ),
-  Stats(
+  const Stats(
     text: "Walk",
     iconPath: "assets/svgs/shoe.svg",
     endPoint: 0.5,
     text1: "2265",
     text2: "Steps",
   ),
-  Stats(
+  const Stats(
     text: "Sleep",
     iconPath: "assets/svgs/moon.svg",
     endPoint: 0.3,

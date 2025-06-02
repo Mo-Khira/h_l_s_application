@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_view/widgets/meal_card.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/meal_card.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/mealplans.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_detail_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_plans_screen.dart';

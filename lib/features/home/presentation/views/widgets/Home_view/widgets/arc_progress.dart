@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math';
 
+import 'package:h_l_s_application/constants.dart';
+
 class ArcProgress extends StatelessWidget {
   const ArcProgress({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = 200.0;
     return Center(
       child: TweenAnimationBuilder(
         tween: Tween(begin: 0.0, end: 0.7),
-        duration: Duration(seconds: 4),
+        duration: const Duration(seconds: 4),
         builder: (context, value, child) {
           int percentage = (value * 100).ceil();
-          return Container(
-            width: size,
-            height: size / 2, // Half-circle height
+          return SizedBox(
+            width: kWidth(context) * 0.4,
+            height: kHeight(context) * 0.3, // Half-circle height
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
@@ -33,15 +34,15 @@ class ArcProgress extends StatelessWidget {
                           stops: [value, value],
                           center: Alignment.bottomCenter,
                           colors: [
-                            Color(0xff9EFF00),
+                            kSecondaryColor,
                             Colors.grey.withAlpha(55),
                           ],
                         ).createShader(rect);
                       },
                       child: Container(
-                        width: size,
-                        height: size,
-                        decoration: BoxDecoration(
+                        width: kWidth(context) * 0.4,
+                        height: kWidth(context) * 0.4,
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
@@ -49,15 +50,14 @@ class ArcProgress extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Inner white half-circle
                 Center(
                   child: Container(
-                    width: size - 40,
-                    height: (size - 40) / 2, // Inner half-circle
+                    width: kWidth(context) * 0.3,
+                    height: kWidth(context) * 0.2, // Inner half-circle
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.vertical(
-                        top: Radius.circular((size - 40) / 2),
+                        top: Radius.circular(kWidth(context) * 0.2),
                       ),
                     ),
                     child: Center(

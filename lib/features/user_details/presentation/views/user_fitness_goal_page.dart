@@ -1,12 +1,14 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
+import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 
 class UserFitnessGoalPage extends StatefulWidget {
   const UserFitnessGoalPage({super.key});
@@ -99,7 +101,7 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                             });
                           },
                         ),
-                        SizedBox(height: 50), // Adjusted margin
+                        const SizedBox(height: 50), // Adjusted margin
                         FitnessLevelButton(
                           level: 'Gain muscle',
                           imagePath: AssetsData.gainMuscleImage,
@@ -110,7 +112,7 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                             });
                           },
                         ),
-                        SizedBox(height: 50), // Adjusted margin
+                        const SizedBox(height: 50), // Adjusted margin
                         FitnessLevelButton(
                           level: 'Improve fitness',
                           imagePath: AssetsData.improveFitnessImage,
@@ -129,6 +131,18 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                 CustomLoginButton(
                   text: "Next Steps",
                   onPressed: () {
+                    if (selectedLevel == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Please select your fitness level"),
+                          backgroundColor: Colors.orangeAccent,
+                        ),
+                      );
+                      return;
+                    }
+                    context
+                        .read<UserInfoCubit>()
+                        .setFitnessGoalLevel(selectedLevel!);
                     GoRouter.of(context).push(AppRouter.kHomeView);
                   },
                 ),
@@ -163,10 +177,10 @@ class FitnessLevelButton extends StatelessWidget {
     return GestureDetector(
       onTap: onSelect,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        width: 330,
-        height: 65, //
-        margin: EdgeInsets.only(bottom: 30),
+        duration: const Duration(milliseconds: 300),
+        width: kWidth(context),
+        height: 65,
+        margin: const EdgeInsets.only(bottom: 30),
         decoration: BoxDecoration(
           color: isSelected ? kSecondaryColor : kPrimaryColor,
           borderRadius: BorderRadius.circular(8),
@@ -176,22 +190,17 @@ class FitnessLevelButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Image inside the box
               AnimatedOpacity(
-                opacity:
-                    isSelected ? 1.0 : 0.5, // Change opacity based on selection
-                duration: Duration(milliseconds: 300),
+                opacity: isSelected ? 1.0 : 0.5,
+                duration: const Duration(milliseconds: 300),
                 child: Image.asset(
                   imagePath,
-                  width: 24, // Adjust image size
+                  width: 24,
                   height: 24,
-                  color: isSelected
-                      ? Colors.black
-                      : null, // Change image color to black when selected
+                  color: isSelected ? Colors.black : null,
                 ),
               ),
-              SizedBox(width: 20),
-              // Text inside the box
+              const SizedBox(width: 20),
               Text(level,
                   style: Styles.textStyle20.copyWith(
                     color: isSelected ? kPrimaryColor : Colors.white,

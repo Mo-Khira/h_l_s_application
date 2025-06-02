@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
+import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 
 class UserFitnessPage extends StatefulWidget {
   @override
@@ -121,9 +123,20 @@ class _UserFitnessPage extends State<UserFitnessPage> {
                 CustomLoginButton(
                   text: "Next Steps",
                   onPressed: () {
-                    GoRouter.of(context).push(
-                      '/onboarding/userFitnessGoalPage',
-                    );
+                    if (selectedLevel == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Please select your fitness level"),
+                          backgroundColor: Colors.orangeAccent,
+                        ),
+                      );
+                      return;
+                    }
+                    context
+                        .read<UserInfoCubit>()
+                        .setFitnessLevel(selectedLevel!);
+                    GoRouter.of(context)
+                        .push('/onboarding/userFitnessGoalPage');
                   },
                 ),
                 const SizedBox(
@@ -154,10 +167,10 @@ class FitnessLevelButton extends StatelessWidget {
     return GestureDetector(
       onTap: onSelect,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300), // Smooth transition
+        duration: const Duration(milliseconds: 300), // Smooth transition
         width: 330,
         height: 65,
-        margin: EdgeInsets.only(bottom: 30), // Adjusted margin
+        margin: const EdgeInsets.only(bottom: 30), // Adjusted margin
         decoration: BoxDecoration(
           color: isSelected
               ? kSecondaryColor

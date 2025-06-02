@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/circular_progress.dart';
 
 class PlanPercent extends StatefulWidget {
@@ -12,11 +13,11 @@ class _PlanPercentState extends State<PlanPercent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       height: 157,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: const Color.fromARGB(255, 255, 255, 255),
       ),
       child: Row(
         children: [
@@ -24,26 +25,22 @@ class _PlanPercentState extends State<PlanPercent> {
             children: [
               Text(
                 "My Plan",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
+                style: Styles.textStyle16.copyWith(
                   color: Colors.black,
                 ),
               ),
               Text(
                 "For Today",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
+                style: Styles.textStyle16.copyWith(
                   color: Colors.black,
                 ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             width: 70,
           ),
-          CustomCircularProgress()
+          const CustomCircularProgress()
         ],
       ),
     );

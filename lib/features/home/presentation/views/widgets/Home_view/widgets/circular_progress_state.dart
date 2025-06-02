@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
 
 class CustomCircularProgressState extends StatelessWidget {
   final double endPoint;
@@ -13,22 +14,20 @@ class CustomCircularProgressState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = 150.0;
-
     // Debug: Print the value of endPoint
-    print('endPoint: $endPoint');
+    // print('endPoint: $endPoint');
 
     return Center(
       child: TweenAnimationBuilder(
         tween: Tween(begin: 0.0, end: endPoint),
-        duration: Duration(seconds: 4),
+        duration: const Duration(seconds: 4),
         builder: (context, value, child) {
           // Debug: Print the value of `value`
-          print('TweenAnimationBuilder value: $value');
+          // print('TweenAnimationBuilder value: $value');
 
           return SizedBox(
-            width: size,
-            height: size,
+            width: kWidth(context) * 0.3,
+            height: kWidth(context) * 0.3,
             child: Stack(
               children: [
                 ShaderMask(
@@ -38,16 +37,16 @@ class CustomCircularProgressState extends StatelessWidget {
                       endAngle: 3.14 * 2,
                       stops: [value, value],
                       center: Alignment.center,
-                      colors: [
-                        Color(0xff9EFF00),
-                        Color(0xff171515),
+                      colors: const [
+                        kSecondaryColor,
+                        kPrimaryColor,
                       ],
                     ).createShader(rect);
                   },
                   child: Container(
-                    width: size,
-                    height: size,
-                    decoration: BoxDecoration(
+                    width: kWidth(context) * 0.3,
+                    height: kWidth(context) * 0.3,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
@@ -55,9 +54,9 @@ class CustomCircularProgressState extends StatelessWidget {
                 ),
                 Center(
                   child: Container(
-                    width: size - 40,
-                    height: size - 40,
-                    decoration: BoxDecoration(
+                    width: kWidth(context) * 0.25,
+                    height: kWidth(context) * 0.25,
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
@@ -67,7 +66,7 @@ class CustomCircularProgressState extends StatelessWidget {
                         children: [
                           Text(
                             text1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
                               color: Colors.black,
@@ -75,7 +74,7 @@ class CustomCircularProgressState extends StatelessWidget {
                           ),
                           Text(
                             text2,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                               color: Colors.black,

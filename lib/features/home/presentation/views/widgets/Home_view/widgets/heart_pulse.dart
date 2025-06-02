@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class HeartBeatAnimation extends StatefulWidget {
   const HeartBeatAnimation({super.key});
@@ -37,7 +39,7 @@ class _HeartBeatAnimationState extends State<HeartBeatAnimation>
               scale: 1 + (_controller.value * 0.3),
               child: const Icon(
                 Icons.favorite,
-                color: Color(0xff9EFF00),
+                color: kSecondaryColor,
                 size: 100,
               ),
             );
@@ -45,20 +47,17 @@ class _HeartBeatAnimationState extends State<HeartBeatAnimation>
         ),
         Text(
           "115",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
+          style: Styles.textStyle16.copyWith(
             color: Colors.black,
+            fontWeight: FontWeight.w700,
           ),
         ),
         Text(
           "bmp",
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
+          style: Styles.textStyle12.copyWith(
             color: Colors.black,
           ),
-        )
+        ),
       ],
     );
   }

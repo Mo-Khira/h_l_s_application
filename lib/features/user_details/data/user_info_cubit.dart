@@ -21,5 +21,13 @@ class UserInfoCubit extends Cubit<UserInfoState> {
     emit(state.copyWith(height: height));
   }
 
+  void setFitnessLevel(String fitnessLevel) {
+    emit(state.copyWith(fitnessLevel: fitnessLevel));
+  }
+
+  void setFitnessGoalLevel(String fitnessGoalLevel) {
+    emit(state.copyWith(fitnessGoalLevel: fitnessGoalLevel));
+  }
+
   // تقدر تضيف باقي البيانات بنفس الشكل لاحقًا (goal, target weight, etc.)
 }

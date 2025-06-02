@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({super.key});
@@ -7,11 +9,9 @@ class CustomSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: "Search",
-        labelStyle: TextStyle(
-            color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
+        labelStyle: Styles.textStyle14,
         prefixIcon: Padding(
           padding: const EdgeInsets.only(right: 4),
           child: SizedBox(
@@ -24,21 +24,21 @@ class CustomSearchBar extends StatelessWidget {
             ),
           ),
         ),
-        contentPadding: EdgeInsets.all(12),
+        contentPadding: const EdgeInsets.all(12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(
-            color: Color(0xff9EFF00),
+          borderSide: const BorderSide(
+            color: kSecondaryColor,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(
-            color: Color(0xff9EFF00),
+          borderSide: const BorderSide(
+            color: kSecondaryColor,
           ),
         ),
       ),

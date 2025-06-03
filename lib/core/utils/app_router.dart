@@ -31,13 +31,13 @@ abstract class AppRouter {
   static const kVerityCodePage = '/verityCodePage';
   static const kCreatePasswordPage = '/createPasswordPage';
   static const kPasswordChangedPage = '/passwordChangedPage';
-  static const kOnboarding = '/onboarding';
+  static const kUserInfoInputs = '/userInfoInputs';
   static const kUserAgePage = '/userAgePage';
-  static const kUserWeightPage = '/userWeightPage';
-  static const kUserWeightGoalPage = '/userWeightGoalPage';
-  static const kUserHeightPage = '/userHeightPage';
-  static const kUserFitnessPage = '/userFitnessPage';
-  static const kUserFitnessGoalPage = '/userFitnessGoalPage';
+  static const kUserWeightPage = 'userWeightPage';
+  static const kUserWeightGoalPage = 'userWeightGoalPage';
+  static const kUserHeightPage = 'userHeightPage';
+  static const kUserFitnessPage = 'userFitnessPage';
+  static const kUserFitnessGoalPage = 'userFitnessGoalPage';
   static const kHomeView = '/homeView';
   static const kEditProfilePage = '/editProfilePage';
 
@@ -96,11 +96,13 @@ abstract class AppRouter {
         builder: (context, state) => EditProfilePage(),
       ),
       GoRoute(
-        path: AppRouter.kOnboarding,
-        builder: (context, state) => BlocProvider(
-          create: (_) => UserInfoCubit(),
-          child: UserAgePage(),
-        ),
+        path: AppRouter.kUserInfoInputs,
+        //
+        builder: (context, state) => UserAgePage(),
+        // BlocProvider(
+        //   create: (_) => UserInfoCubit(),
+        // child: UserAgePage(),
+        // ),
         routes: [
           GoRoute(
             path: kUserWeightPage,

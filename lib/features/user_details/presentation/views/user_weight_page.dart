@@ -122,7 +122,7 @@ class _UserWeightPage extends State<UserWeightPage> {
                                   keyboardType: TextInputType.number,
                                   textAlign: TextAlign.center,
                                   style: Styles.textStyle24,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     counterText: "",
                                     border: InputBorder.none,
                                     contentPadding: EdgeInsets.zero,
@@ -159,7 +159,7 @@ class _UserWeightPage extends State<UserWeightPage> {
                       if (input.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text("Please enter a valid weight"),
+                            content: const Text("Please enter a valid weight"),
                             backgroundColor: Colors.yellowAccent[400],
                           ),
                         );
@@ -168,7 +168,7 @@ class _UserWeightPage extends State<UserWeightPage> {
                       int? weight = int.tryParse(input);
                       if (weight == null || weight <= 0) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content:
                                 Text("Please enter a valid numeric weight"),
                             backgroundColor: Colors.redAccent,
@@ -178,7 +178,7 @@ class _UserWeightPage extends State<UserWeightPage> {
                       }
                       context.read<UserInfoCubit>().setWeight(weight);
                       GoRouter.of(context).push(
-                        '/onboarding/userWeightGoalPage',
+                        '${AppRouter.kUserInfoInputs}/${AppRouter.kUserWeightGoalPage}',
                       ); // استخدم ثابت لو حابب
                     },
                   ),

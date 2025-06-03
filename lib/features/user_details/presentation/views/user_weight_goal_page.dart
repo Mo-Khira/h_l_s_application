@@ -161,7 +161,8 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                       if (input.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text("Please enter your goal weight"),
+                            content:
+                                const Text("Please enter your goal weight"),
                             backgroundColor: Colors.yellowAccent[400],
                           ),
                         );
@@ -170,7 +171,7 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                       int? goalWeight = int.tryParse(input);
                       if (goalWeight == null || goalWeight <= 0) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content:
                                 Text("Please enter a valid numeric weight"),
                             backgroundColor: Colors.redAccent,
@@ -179,7 +180,9 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                         return;
                       }
                       context.read<UserInfoCubit>().setGoalWeight(goalWeight);
-                      GoRouter.of(context).push('/onboarding/userHeightPage');
+                      GoRouter.of(context).push(
+                        '${AppRouter.kUserInfoInputs}/${AppRouter.kUserHeightPage}',
+                      );
                     },
                   ),
                 ],

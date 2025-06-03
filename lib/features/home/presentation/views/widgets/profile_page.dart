@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
+import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -14,6 +16,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePage extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    final userInfo = context.watch<UserInfoCubit>().state;
+
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -76,7 +80,7 @@ class _ProfilePage extends State<ProfilePage> {
                         Row(
                           children: [
                             Text(
-                              "67 ",
+                              userInfo.weight.toString(),
                               style: Styles.textStyle18,
                             ),
                             Text(
@@ -102,7 +106,7 @@ class _ProfilePage extends State<ProfilePage> {
                         Row(
                           children: [
                             Text(
-                              "172 ",
+                              userInfo.height.toString(),
                               style: Styles.textStyle18,
                             ),
                             Text(
@@ -128,7 +132,7 @@ class _ProfilePage extends State<ProfilePage> {
                         Row(
                           children: [
                             Text(
-                              "22 ",
+                              userInfo.age.toString(),
                               style: Styles.textStyle18,
                             ),
                             Text(

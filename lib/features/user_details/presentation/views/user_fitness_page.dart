@@ -135,8 +135,9 @@ class _UserFitnessPage extends State<UserFitnessPage> {
                     context
                         .read<UserInfoCubit>()
                         .setFitnessLevel(selectedLevel!);
-                    GoRouter.of(context)
-                        .push('/onboarding/userFitnessGoalPage');
+                    GoRouter.of(context).push(
+                      '${AppRouter.kUserInfoInputs}/${AppRouter.kUserFitnessGoalPage}',
+                    );
                   },
                 ),
                 const SizedBox(

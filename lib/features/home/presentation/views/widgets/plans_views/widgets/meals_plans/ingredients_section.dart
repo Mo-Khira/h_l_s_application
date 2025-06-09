@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class IngredientsSection extends StatefulWidget {
   final List<String> ingredients; // Dynamic ingredients data
@@ -37,7 +39,7 @@ class _IngredientsSectionState extends State<IngredientsSection> {
 
     return Positioned(
       left: 21,
-      top: 556,
+      top: kHeight(context) * 0.64,
       child: Transform.scale(
         scale: scaleFactor,
         alignment: Alignment.topLeft,
@@ -47,18 +49,11 @@ class _IngredientsSectionState extends State<IngredientsSection> {
           child: Stack(
             children: [
               // Ingredients Title
-              const Positioned(
+              Positioned(
                 left: 10,
                 top: 0,
-                child: Text(
-                  'Ingredients',
-                  style: TextStyle(
-                    decoration: TextDecoration.none,
-                    fontSize: 18,
-                    color: Color(0xff9eff00),
-                    fontFamily: 'Poppins-Medium',
-                  ),
-                ),
+                child: Text('Ingredients',
+                    style: Styles.textStyle18.copyWith(color: kSecondaryColor)),
               ),
 
               // Ingredients List
@@ -67,45 +62,35 @@ class _IngredientsSectionState extends State<IngredientsSection> {
                 top: 42,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:
-                      _ingredients
-                          .map(
-                            (item) => Padding(
-                              padding: const EdgeInsets.only(bottom: 7.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 5,
-                                    height: 5,
-                                    margin: const EdgeInsets.only(
-                                      top: 6,
-                                      right: 8,
-                                    ),
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        originalWidth -
-                                        40, // Adjust text wrap width
-                                    child: Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                        fontFamily: 'Poppins-Regular',
-                                        decoration: TextDecoration.none,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                  children: _ingredients
+                      .map(
+                        (item) => Padding(
+                          padding: const EdgeInsets.only(bottom: 7.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 5,
+                                height: 5,
+                                margin: const EdgeInsets.only(
+                                  top: 6,
+                                  right: 8,
+                                ),
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
+                              SizedBox(
+                                width: originalWidth -
+                                    40, // Adjust text wrap width
+                                child: Text(item, style: Styles.textStyle16),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ],

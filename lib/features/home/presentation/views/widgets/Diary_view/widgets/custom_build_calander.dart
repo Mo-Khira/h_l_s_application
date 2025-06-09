@@ -4,34 +4,45 @@ import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/extentations/time_extention.dart';
 
 class customBuildCalender extends StatefulWidget {
-  const customBuildCalender({super.key});
+  final Function(DateTime) onDateSelected;
+  final DateTime selectedDate;
+
+  const customBuildCalender({
+    super.key,
+    required this.onDateSelected,
+    required this.selectedDate,
+  });
 
   @override
   State<customBuildCalender> createState() => _customBuildCalenderState();
 }
 
 class _customBuildCalenderState extends State<customBuildCalender> {
-  DateTime selectcalenderdate = DateTime.now();
+  // DateTime selectcalenderdate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 150,
       child: EasyInfiniteDateTimeLine(
-          firstDate: DateTime.now().subtract(Duration(days: 365)),
-          focusDate: selectcalenderdate,
-          lastDate: DateTime.now().add(Duration(days: 365)),
-          onDateChange: (selectedDate) {},
+          dayProps: const EasyDayProps(
+            dayStructure: DayStructure.dayStrDayNum, // عرض اليوم والرقم معًا
+            width: 50, // عرض كل عنصر يوم
+            height: 80,
+          ),
+          firstDate: DateTime.now().subtract(const Duration(days: 365)),
+          focusDate: widget.selectedDate,
+          lastDate: DateTime.now().add(const Duration(days: 365)),
+          onDateChange: widget.onDateSelected,
           headerBuilder: (context, date) {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
-          itemBuilder: (context, date, isSelected, ondatetapped) {
+          itemBuilder: (context, date, isSelected, onTap) {
             return InkWell(
               onTap: () {
-                setState(() {
-                  selectcalenderdate = date;
-                });
-                ondatetapped();
+                widget.onDateSelected(date);
+                // widget.onDateSelected(date);
+                onTap();
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -44,7 +55,7 @@ class _customBuildCalenderState extends State<customBuildCalender> {
                     Center(
                       child: Text(
                         date.dayName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
                           color: kPrimaryColor,
@@ -55,7 +66,7 @@ class _customBuildCalenderState extends State<customBuildCalender> {
                     Center(
                       child: Text(
                         date.day.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
                           color: kPrimaryColor,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class MealCard extends StatelessWidget {
   final String image;
@@ -23,7 +25,6 @@ class MealCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Meal Image
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
@@ -37,19 +38,13 @@ class MealCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-
-            // Meal Details
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xff161515),
-                      fontFamily: 'Poppins-SemiBold',
-                    ),
+                    style: Styles.textStyle12.copyWith(color: kPrimaryColor),
                   ),
                   const SizedBox(height: 4),
                   Row(
@@ -62,11 +57,8 @@ class MealCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         calories,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xff161515),
-                          fontFamily: 'Poppins-Regular',
-                        ),
+                        style:
+                            Styles.textStyle12.copyWith(color: kPrimaryColor),
                       ),
                     ],
                   ),

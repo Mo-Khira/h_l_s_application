@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/widgets/training_plans/training_image_details.dart';
 import '../widgets/training_plans/exercise_list.dart';
 import '../widgets/training_plans/subtitle_and_clock.dart';
@@ -25,7 +27,7 @@ class TrainingDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: kPrimaryColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -33,6 +35,15 @@ class TrainingDetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: GoRouter.of(context).pop,
+                      icon: const Icon(Icons.arrow_back_outlined),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 68),
                 buildImage(imagePath),
                 const SizedBox(height: 51),
@@ -41,7 +52,6 @@ class TrainingDetailScreen extends StatelessWidget {
                 buildExerciseList(exercises),
                 // const Spacer(),
                 const SizedBox(height: 60),
-
                 buildStartButton(context, selectedIndex),
                 const SizedBox(height: 20),
               ],

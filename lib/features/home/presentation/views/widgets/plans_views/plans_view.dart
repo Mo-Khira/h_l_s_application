@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/meal_card.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/mealplans.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/meal_card.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_detail_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_plans_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/widgets/meals_plans/training_card_item.dart'; // Updated import
@@ -10,10 +12,10 @@ class PlansView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xff161515),
-      body: SafeArea(
-        child: Padding(
+    return SafeArea(
+      child: Scaffold(
+        // backgroundColor: const Color(0xff161515),
+        body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 22),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +56,7 @@ class PlansView extends StatelessWidget {
       onSeeAll: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => Mealplans()),
+          MaterialPageRoute(builder: (_) => const MealPlans()),
         );
       },
     );
@@ -67,7 +69,7 @@ class PlansView extends StatelessWidget {
       onSeeAll: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => TrainingPlansScreen()),
+          MaterialPageRoute(builder: (_) => TrainingPlansPage()),
         );
       },
     );
@@ -253,22 +255,12 @@ class PlansSection extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-              fontFamily: 'Poppins-SemiBold',
-            ),
+            style: Styles.textStyle18,
           ),
           GestureDetector(
             onTap: onSeeAll,
-            child: const Text(
-              'See All',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xff9eff00),
-                fontFamily: 'Poppins-Medium',
-              ),
-            ),
+            child: Text('See All',
+                style: Styles.textStyle16.copyWith(color: kSecondaryColor)),
           ),
         ],
       ),

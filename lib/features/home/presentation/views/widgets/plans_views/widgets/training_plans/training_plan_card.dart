@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class TrainingPlanCard extends StatelessWidget {
   final String title;
@@ -24,7 +26,7 @@ class TrainingPlanCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 20),
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: Colors.yellow,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -40,27 +42,18 @@ class TrainingPlanCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
+                      style: Styles.textStyle16.copyWith(color: kPrimaryColor),
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        // color: ,
-                      ),
-                    ),
+                    Text(subtitle,
+                        style:
+                            Styles.textStyle14.copyWith(color: kPrimaryColor)),
                   ],
                 ),
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Colors.black, size: 12),
+            const Icon(Icons.arrow_forward_ios, color: kPrimaryColor, size: 12),
           ],
         ),
       ),

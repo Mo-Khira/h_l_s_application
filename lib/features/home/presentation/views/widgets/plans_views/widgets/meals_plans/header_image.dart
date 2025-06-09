@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
 
 class HeaderImage extends StatelessWidget {
   final String imagePath;
@@ -6,23 +7,19 @@ class HeaderImage extends StatelessWidget {
   const HeaderImage({
     super.key,
     required this.imagePath,
-  }); // 👈 accept imagePath
+  });
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    double imageHeight = screenHeight * 0.35;
-
     return Positioned(
       left: 0,
       top: 0,
-      width: screenWidth,
-      height: imageHeight,
+      width: kWidth(context),
+      height: kWidth(context) * 0.66,
       child: Image.asset(
-        imagePath, // 👈 use the passed image
-        width: screenWidth,
-        height: imageHeight,
+        imagePath,
+        width: kWidth(context),
+        height: kWidth(context) * 0.66,
         fit: BoxFit.cover,
       ),
     );

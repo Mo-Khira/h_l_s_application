@@ -12,7 +12,7 @@ class _ChatbotPage extends State<ChatbotPage> {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Scaffold(
-        body: const Padding(
+        body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

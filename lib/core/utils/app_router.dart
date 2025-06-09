@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/create_password_page.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/login_page.dart';
@@ -11,9 +9,16 @@ import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/mealplans.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_plans_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/edit_profile_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/favorites/favorites_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/help_and_support_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/changepassword_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/notification_setting.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/reminder_page.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
-import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_age_page.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_page.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_goal_page.dart';
@@ -40,6 +45,14 @@ abstract class AppRouter {
   static const kUserFitnessGoalPage = 'userFitnessGoalPage';
   static const kHomeView = '/homeView';
   static const kEditProfilePage = '/editProfilePage';
+  static const kSettingsPage = '/settingsPage';
+  static const kHelpAndSupportPage = '/helpAndSupportPage';
+  static const kFavoritesPage = '/favoritesPage';
+  static const kMealPlans = '/mealPlans';
+  static const kChangePasswordPage = '/changePasswordPage';
+  static const kNotificationSettingPage = '/notificationSettingPage';
+  static const kReminderPage = '/reminderPage';
+  static const kTrainingPlanPage = '/trainingPlansPage';
 
   static final router = GoRouter(
     routes: [
@@ -97,12 +110,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: AppRouter.kUserInfoInputs,
-        //
         builder: (context, state) => UserAgePage(),
-        // BlocProvider(
-        //   create: (_) => UserInfoCubit(),
-        // child: UserAgePage(),
-        // ),
         routes: [
           GoRoute(
             path: kUserWeightPage,
@@ -126,27 +134,38 @@ abstract class AppRouter {
           ),
         ],
       ),
-
-      // GoRoute(
-      //   path: '/',
-      //   builder: (context, state) => const HomeView(),
-      // ),
-      // GoRoute(
-      //   path: '/plans',
-      //   builder: (context, state) => const HomeView(),
-      // ),
-      // GoRoute(
-      //   path: '/chatbot',
-      //   builder: (context, state) => const HomeView(),
-      // ),
-      // GoRoute(
-      //   path: '/diary',
-      //   builder: (context, state) => const HomeView(),
-      // ),
-      // GoRoute(
-      //   path: '/profile',
-      //   builder: (context, state) => const HomeView(),
-      // ),
+      GoRoute(
+        path: kSettingsPage,
+        builder: (context, state) => const SettingsPage(),
+      ),
+      GoRoute(
+        path: kHelpAndSupportPage,
+        builder: (context, state) => const HelpAndSupportPage(),
+      ),
+      GoRoute(
+        path: kFavoritesPage,
+        builder: (context, state) => const FavoritePage(),
+      ),
+      GoRoute(
+        path: kMealPlans,
+        builder: (context, state) => const MealPlans(),
+      ),
+      GoRoute(
+        path: kChangePasswordPage,
+        builder: (context, state) => const ChangePasswordPage(),
+      ),
+      GoRoute(
+        path: kNotificationSettingPage,
+        builder: (context, state) => const NotificationSetting(),
+      ),
+      GoRoute(
+        path: kReminderPage,
+        builder: (context, state) => const ReminderPage(),
+      ),
+      GoRoute(
+        path: kTrainingPlanPage,
+        builder: (context, state) => const TrainingPlansPage(),
+      ),
     ],
   );
 }

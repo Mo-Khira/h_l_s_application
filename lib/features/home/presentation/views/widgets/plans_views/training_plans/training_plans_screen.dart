@@ -3,8 +3,8 @@ import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_detail_screen.dart';
 import '../widgets/training_plans/training_plan_card.dart';
 
-class TrainingPlansScreen extends StatelessWidget {
-  const TrainingPlansScreen({super.key});
+class TrainingPlansPage extends StatelessWidget {
+  const TrainingPlansPage({super.key});
 
   final List<Map<String, dynamic>> trainingPlans = const [
     {
@@ -86,7 +86,7 @@ class TrainingPlansScreen extends StatelessWidget {
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: kSecondaryColor,
+                // color: kSecondaryColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: IconButton(

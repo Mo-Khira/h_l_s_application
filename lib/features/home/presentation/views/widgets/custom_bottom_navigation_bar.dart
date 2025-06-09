@@ -32,30 +32,45 @@ class CustomBottomNavBar extends StatelessWidget {
         elevation: 2,
         currentIndex: currentIndex,
         selectedItemColor: kSecondaryColor,
-        unselectedItemColor: Colors.white54,
+        unselectedItemColor: Colors.white,
         backgroundColor: kPrimaryColor,
         type: BottomNavigationBarType.fixed,
         onTap: onTap,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: "Home",
+            icon: ImageIcon(
+              AssetImage('assets/Images/home.png'),
+              size: 24,
+            ),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.sticky_note_2_outlined),
-            label: "Plans",
+            icon: ImageIcon(
+              AssetImage('assets/Images/plans.png'),
+              size: 24,
+            ),
+            label: 'Plans',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.face),
-            label: "Chatbot",
+            icon: ImageIcon(
+              AssetImage('assets/Images/chatbot.png'),
+              size: 24,
+            ),
+            label: 'Chatbot',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.incomplete_circle),
-            label: "Diary",
+            icon: ImageIcon(
+              AssetImage('assets/Images/diary.png'),
+              size: 24,
+            ),
+            label: 'Diary',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_3_outlined),
-            label: "Profile",
+            icon: ImageIcon(
+              AssetImage('assets/Images/profile.png'),
+              size: 24,
+            ),
+            label: 'Profile',
           ),
         ],
       ),

@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
-class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({super.key});
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        // Image.asset('assets/Images/logo.png'),
+        const SizedBox(
+          width: 18,
+        ),
+        SizedBox(
+          height: 45,
+          width: 45,
+          child: Image.asset(
+            'assets/Images/projLogo.png',
+          ),
+        ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Chatbot',
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
+            Text('Chatbot',
+                style:
+                    Styles.textStyle22.copyWith(fontWeight: FontWeight.bold)),
             Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 6,
                   backgroundColor: kSecondaryColor,
                 ),
-                Text(
-                  ' online',
-                  style: TextStyle(fontSize: 16, color: kSecondaryColor),
-                ),
+                Text(' online',
+                    style: Styles.textStyle14.copyWith(color: kSecondaryColor)),
               ],
             )
           ],

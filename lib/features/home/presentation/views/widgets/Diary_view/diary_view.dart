@@ -2,8 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/custom_build_calander.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/meal_selection_widget.dart';
 
-class DiaryView extends StatelessWidget {
+class DiaryView extends StatefulWidget {
   const DiaryView({super.key});
+
+  @override
+  State<DiaryView> createState() => _DiaryViewState();
+}
+
+class _DiaryViewState extends State<DiaryView> {
+  DateTime selectedDate = DateTime.now();
+
+  TimeOfDay selectedTime = TimeOfDay.now();
+
+  bool isReminderOn = true;
+
+  void _onDateSelected(DateTime newDate) {
+    setState(() => selectedDate = newDate);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +32,16 @@ class DiaryView extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 80),
-              customBuildCalender(), // Custom calendar widget
+              customBuildCalender(
+                // onDateSelected: (DateTime) {},
+                onDateSelected: _onDateSelected,
+                selectedDate: selectedDate,
+              ), // Custom calendar widget
               const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 18),
+              const Padding(
+                padding: EdgeInsets.only(top: 20, left: 18),
                 child: Column(
-                  children: const [
+                  children: [
                     MealSelectionWidget(
                         title: "Breakfast",
                         imagePath: "assets/Images/test1.png"),

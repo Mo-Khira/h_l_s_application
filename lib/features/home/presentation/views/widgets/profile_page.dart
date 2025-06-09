@@ -150,7 +150,7 @@ class _ProfilePage extends State<ProfilePage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 61),
+                const SizedBox(height: 61),
                 Column(
                   children: [
                     GestureDetector(
@@ -178,7 +178,9 @@ class _ProfilePage extends State<ProfilePage> {
                     ),
                     const SizedBox(height: 40),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kFavoritesPage);
+                      },
                       child: Row(
                         children: [
                           const Icon(
@@ -200,7 +202,9 @@ class _ProfilePage extends State<ProfilePage> {
                     ),
                     const SizedBox(height: 40),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kSettingsPage);
+                      },
                       child: Row(
                         children: [
                           const Icon(
@@ -222,7 +226,10 @@ class _ProfilePage extends State<ProfilePage> {
                     ),
                     const SizedBox(height: 40),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context)
+                            .push(AppRouter.kHelpAndSupportPage);
+                      },
                       child: Row(
                         children: [
                           const Icon(

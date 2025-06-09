@@ -39,13 +39,13 @@ class MealsDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(40),
             ),
             child: SizedBox(
-              height: 926,
+              height: kHeight(context),
               child: Stack(
                 children: [
                   HeaderImage(imagePath: imagePath),
                   const FavoriteButton(),
-                  NutritionInfo(fat: fat, protein: protein, carbs: carbs),
                   MealInfoRow(calories: calories, cookTime: cookTime),
+                  NutritionInfo(fat: fat, protein: protein, carbs: carbs),
                   IngredientsSection(ingredients: ingredients),
                 ],
               ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class FoodCard extends StatelessWidget {
   final String imagePath;
@@ -20,25 +22,21 @@ class FoodCard extends StatelessWidget {
     return (inputHeight / 844.0) * MediaQuery.of(context).size.height;
   }
 
-  double getWidth(BuildContext context, double inputWidth) {
-    return (inputWidth / 390.0) * MediaQuery.of(context).size.width;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      left: getWidth(context, 24),
+      // left: kWidth(context) * 0.5,
       top: getHeight(context, top),
       child: GestureDetector(
         onTap: onTap,
         child: SizedBox(
-          width: getWidth(context, 342),
-          height: getHeight(context, 77),
+          width: kWidth(context),
+          height: kHeight(context) * 0.1,
           child: Stack(
             children: [
               Container(
-                width: getWidth(context, 382),
-                height: getHeight(context, 75),
+                width: kWidth(context),
+                height: kHeight(context) * 0.1,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -48,43 +46,33 @@ class FoodCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   imagePath,
-                  width: getWidth(context, 120),
-                  height: getHeight(context, 77),
+                  width: kWidth(context) * 0.3,
+                  height: kHeight(context) * 0.1,
                   fit: BoxFit.cover,
                 ),
               ),
               Positioned(
-                left: getWidth(context, 130),
+                left: kWidth(context) * 0.34,
                 top: getHeight(context, 18),
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff161515),
-                    fontFamily: 'Poppins-SemiBold',
-                  ),
-                ),
+                child: Text(title,
+                    style: Styles.textStyle12.copyWith(
+                        color: kPrimaryColor, fontWeight: FontWeight.bold)),
               ),
               Positioned(
-                left: getWidth(context, 130),
+                left: kWidth(context) * 0.34,
                 top: getHeight(context, 44),
                 child: Row(
                   children: [
                     Image.asset(
                       'assets/Images/fire.png',
-                      width: getWidth(context, 10),
-                      height: getHeight(context, 12),
+                      width: kWidth(context) * 0.05,
+                      height: kWidth(context) * 0.05,
                     ),
                     const SizedBox(width: 5),
                     Text(
                       calories,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff161515),
-                        fontFamily: 'Poppins-Regular',
-                      ),
-                    ),
+                      style: Styles.textStyle12.copyWith(color: kPrimaryColor),
+                    )
                   ],
                 ),
               ),

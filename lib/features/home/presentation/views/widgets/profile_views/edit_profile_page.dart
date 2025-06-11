@@ -20,36 +20,39 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return SafeArea(
       child: Scaffold(
           body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 28),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    padding: const EdgeInsetsDirectional.all(0),
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 28,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      padding: const EdgeInsetsDirectional.all(0),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
                     ),
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                  ),
-                  Text(
-                    "Edit Profile",
-                    style: Styles.textStyle20
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                ],
+                    Text(
+                      "Edit Profile",
+                      style: Styles.textStyle20
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 35),
               Stack(

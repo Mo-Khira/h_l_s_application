@@ -18,15 +18,15 @@ class _UserFitnessPage extends State<UserFitnessPage> {
   @override
   Widget build(BuildContext context) {
     // Get screen dimensions for responsive design
-    double screenWidth = kWidth(context);
     double screenHeight = kHeight(context);
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: kPrimaryColor,
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,30 +34,33 @@ class _UserFitnessPage extends State<UserFitnessPage> {
                 const SizedBox(
                   height: 24,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      padding: const EdgeInsetsDirectional.all(0),
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 28,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        padding: const EdgeInsetsDirectional.all(0),
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                        onPressed: () {
+                          GoRouter.of(context).pop();
+                        },
                       ),
-                      onPressed: () {
-                        GoRouter.of(context).pop();
-                      },
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.kHomeView);
-                      },
-                      child: Text("Skip",
-                          style: Styles.textStyle14.copyWith(
-                              color: kSecondaryColor,
-                              fontWeight: FontWeight.w700)),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: () {
+                          GoRouter.of(context).push(AppRouter.kHomeView);
+                        },
+                        child: Text("Skip",
+                            style: Styles.textStyle14.copyWith(
+                                color: kSecondaryColor,
+                                fontWeight: FontWeight.w700)),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
@@ -141,7 +144,7 @@ class _UserFitnessPage extends State<UserFitnessPage> {
                   },
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
               ],
             ),

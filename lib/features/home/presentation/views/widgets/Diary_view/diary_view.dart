@@ -27,7 +27,7 @@ class _DiaryViewState extends State<DiaryView> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
               SizedBox(height: kHeight(context) * 0.1),
@@ -57,9 +57,8 @@ class _DiaryViewState extends State<DiaryView> {
 
               // Responsive "Complete Diary" Button
               CustomLoginButton(text: "Complete Diary"),
-              SizedBox(
-                  height: kHeight(context) *
-                      0.04), // 4% of screen height// Space after button
+              const SizedBox(
+                  height: 10), // 4% of screen height// Space after button
             ],
           ),
         ),

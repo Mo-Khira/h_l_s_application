@@ -38,7 +38,7 @@ class _SignupPageState extends State<LoginPage> {
         child: SafeArea(
           child: Scaffold(
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: SingleChildScrollView(
                 child: Form(
                   key: formKey,

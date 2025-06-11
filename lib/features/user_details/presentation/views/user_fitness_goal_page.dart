@@ -31,7 +31,7 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
         backgroundColor: kPrimaryColor,
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,30 +39,33 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                 const SizedBox(
                   height: 24,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      padding: const EdgeInsetsDirectional.all(0),
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 28,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        padding: const EdgeInsetsDirectional.all(0),
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                        onPressed: () {
+                          GoRouter.of(context).pop();
+                        },
                       ),
-                      onPressed: () {
-                        GoRouter.of(context).pop();
-                      },
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.kHomeView);
-                      },
-                      child: Text("Skip",
-                          style: Styles.textStyle14.copyWith(
-                              color: kSecondaryColor,
-                              fontWeight: FontWeight.w700)),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: () {
+                          GoRouter.of(context).push(AppRouter.kHomeView);
+                        },
+                        child: Text("Skip",
+                            style: Styles.textStyle14.copyWith(
+                                color: kSecondaryColor,
+                                fontWeight: FontWeight.w700)),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
@@ -147,7 +150,7 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                   },
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
               ],
             ),
@@ -201,10 +204,12 @@ class FitnessLevelButton extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 20),
-              Text(level,
-                  style: Styles.textStyle20.copyWith(
-                    color: isSelected ? kPrimaryColor : Colors.white,
-                  )),
+              Text(
+                level,
+                style: Styles.textStyle20.copyWith(
+                  color: isSelected ? kPrimaryColor : Colors.white,
+                ),
+              ),
             ],
           ),
         ),

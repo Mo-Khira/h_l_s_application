@@ -46,13 +46,14 @@ class _ReminderPage extends State<ReminderPage> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
-                Row(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
@@ -68,42 +69,44 @@ class _ReminderPage extends State<ReminderPage> {
                     const SizedBox(width: 28),
                   ],
                 ),
-                const SizedBox(height: 40),
-                DateHeader(
-                  selectedDate: selectedDate,
-                  onChangeMonth: _changeMonth,
-                ),
-                const SizedBox(height: 40),
-                CustomBuildCalender(
-                  onDateSelected: _onDateSelected,
-                  selectedDate: selectedDate,
-                ),
-                const SizedBox(height: 20),
-                ReminderTimePicker(
-                  initialTime: selectedTime,
-                  onTimeSelected: (time) {
-                    setState(() {
-                      selectedTime = time;
-                    });
-                  },
-                ),
-                const SizedBox(height: 40),
-                ReminderToggle(
-                  isOn: isReminderOn,
-                  onToggle: (value) {
-                    setState(() {
-                      isReminderOn = value;
-                    });
-                  },
-                ),
-                SizedBox(height: kHeight(context) * 0.15),
-                CustomLoginButton(
-                  onPressed: _handleCreate,
-                  text: 'Create',
-                ),
-                const SizedBox(height: 30),
-              ],
-            ),
+              ),
+              const SizedBox(height: 40),
+              DateHeader(
+                selectedDate: selectedDate,
+                onChangeMonth: _changeMonth,
+              ),
+              const SizedBox(height: 40),
+              CustomBuildCalender(
+                onDateSelected: _onDateSelected,
+                selectedDate: selectedDate,
+              ),
+              const SizedBox(height: 20),
+              ReminderTimePicker(
+                initialTime: selectedTime,
+                onTimeSelected: (time) {
+                  setState(() {
+                    selectedTime = time;
+                  });
+                },
+              ),
+              const SizedBox(height: 40),
+              ReminderToggle(
+                isOn: isReminderOn,
+                onToggle: (value) {
+                  setState(() {
+                    isReminderOn = value;
+                  });
+                },
+              ),
+              const Expanded(
+                child: SizedBox(),
+              ),
+              CustomLoginButton(
+                onPressed: _handleCreate,
+                text: 'Create',
+              ),
+              const SizedBox(height: 20),
+            ],
           ),
         ),
       ),

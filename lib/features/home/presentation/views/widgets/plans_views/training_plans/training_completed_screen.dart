@@ -18,33 +18,36 @@ class _TrainingCompletedScreen extends State<TrainingCompletedScreen> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    padding: const EdgeInsetsDirectional.all(0),
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 28,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      padding: const EdgeInsetsDirectional.all(0),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
                     ),
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                  ),
-                  Text(
-                    "Result ",
-                    style: Styles.textStyle20
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(),
-                ],
+                    Text(
+                      "Result ",
+                      style: Styles.textStyle20
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(),
+                  ],
+                ),
               ),
               const SizedBox(height: 60),
               Text(

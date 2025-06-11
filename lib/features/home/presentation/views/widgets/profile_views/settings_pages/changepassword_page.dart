@@ -18,7 +18,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,29 +26,32 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      padding: const EdgeInsetsDirectional.all(0),
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 28,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        padding: const EdgeInsetsDirectional.all(0),
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                        onPressed: () {
+                          GoRouter.of(context).pop();
+                        },
                       ),
-                      onPressed: () {
-                        GoRouter.of(context).pop();
-                      },
-                    ),
-                    Text(
-                      "Change Password",
-                      style: Styles.textStyle20
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      width: 32,
-                    ),
-                  ],
+                      Text(
+                        "Change Password",
+                        style: Styles.textStyle20
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        width: 32,
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 70,

@@ -33,7 +33,7 @@ class MealSelectionWidget extends StatelessWidget {
                     image: AssetImage(imagePath),
                     fit: BoxFit.cover,
                     colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.15),
+                      Colors.black..withValues(alpha: 0.15),
                       BlendMode.darken,
                     ),
                   ),
@@ -43,7 +43,7 @@ class MealSelectionWidget extends StatelessWidget {
                 // width: kWidth(context) * 0.9,
                 height: kHeight(context) * 0.1,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.white.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),

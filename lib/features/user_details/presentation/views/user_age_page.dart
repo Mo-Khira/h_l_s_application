@@ -19,16 +19,13 @@ class _UserAgePage extends State<UserAgePage> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        //  BlocProvider(
-        //   create: (context) => UserInfoCubit(),
-        //   child:
-        SafeArea(
+    return SafeArea(
       child: Scaffold(
         backgroundColor: kPrimaryColor,
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,30 +33,33 @@ class _UserAgePage extends State<UserAgePage> {
                 const SizedBox(
                   height: 24,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      padding: const EdgeInsetsDirectional.all(0),
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 28,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        padding: const EdgeInsetsDirectional.all(0),
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                        onPressed: () {
+                          GoRouter.of(context).pop();
+                        },
                       ),
-                      onPressed: () {
-                        GoRouter.of(context).pop();
-                      },
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.kHomeView);
-                      },
-                      child: Text("Skip",
-                          style: Styles.textStyle14.copyWith(
-                              color: kSecondaryColor,
-                              fontWeight: FontWeight.w700)),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: () {
+                          GoRouter.of(context).push(AppRouter.kHomeView);
+                        },
+                        child: Text("Skip",
+                            style: Styles.textStyle14.copyWith(
+                                color: kSecondaryColor,
+                                fontWeight: FontWeight.w700)),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
@@ -132,6 +132,9 @@ class _UserAgePage extends State<UserAgePage> {
                     ),
                   ),
                 ),
+                const Expanded(
+                  child: SizedBox(),
+                ),
                 CustomLoginButton(
                   text: "Next Steps",
                   onPressed: () {
@@ -141,6 +144,9 @@ class _UserAgePage extends State<UserAgePage> {
                     );
                   },
                 ),
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
           ),

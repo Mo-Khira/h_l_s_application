@@ -105,27 +105,30 @@ class TrainingProgressScreenState extends State<TrainingProgressScreen> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    padding: const EdgeInsetsDirectional.all(0),
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 28,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      padding: const EdgeInsetsDirectional.all(0),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
                     ),
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
               TrainingImage(imagePath: _trainingImages[_currentTrainingIndex]),
               const SizedBox(

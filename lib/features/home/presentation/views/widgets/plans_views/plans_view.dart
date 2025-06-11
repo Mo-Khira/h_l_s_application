@@ -17,7 +17,7 @@ class PlansView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,21 +40,24 @@ class PlansView extends StatelessWidget {
 
   // Back Button Widget
   Widget _buildBackButton(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        IconButton(
-          padding: const EdgeInsetsDirectional.all(0),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 28,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          IconButton(
+            padding: const EdgeInsetsDirectional.all(0),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 28,
+            ),
+            onPressed: () {
+              GoRouter.of(context).pop();
+            },
           ),
-          onPressed: () {
-            GoRouter.of(context).pop();
-          },
-        ),
-      ],
+        ],
+      ),
     );
   }
 

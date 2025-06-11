@@ -74,7 +74,7 @@ class _ReminderPage extends State<ReminderPage> {
                   onChangeMonth: _changeMonth,
                 ),
                 const SizedBox(height: 40),
-                customBuildCalender(
+                CustomBuildCalender(
                   onDateSelected: _onDateSelected,
                   selectedDate: selectedDate,
                 ),

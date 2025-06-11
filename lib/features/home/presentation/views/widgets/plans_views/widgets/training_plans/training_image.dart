@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
 
 class TrainingImage extends StatelessWidget {
   final String imagePath;
 
-  const TrainingImage({Key? key, required this.imagePath}) : super(key: key);
+  const TrainingImage({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 80), // Adjust as needed
-      alignment: Alignment.topCenter,
-      child: Image.asset(imagePath, width: 380, height: 245),
-    );
+    return Image.asset(imagePath,
+        width: kWidth(context), height: kWidth(context) * 0.6);
   }
 }

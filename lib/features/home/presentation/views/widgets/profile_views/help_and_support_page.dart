@@ -38,142 +38,160 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  padding: const EdgeInsetsDirectional.all(0),
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                  onPressed: () {
-                    GoRouter.of(context).pop();
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      padding: const EdgeInsetsDirectional.all(0),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                    ),
+                    Text(
+                      "Help & support",
+                      style: Styles.textStyle20
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  reverse: true,
+                  itemCount: _messages.length,
+                  itemBuilder: (context, index) {
+                    final message = _messages[index];
+                    return Align(
+                      alignment: message["sender"] == "user"
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          mainAxisAlignment: message["sender"] == "user"
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          children: [
+                            if (message["sender"] == "bot") ...[
+                              // const CircleAvatar(
+                              //   backgroundColor: kPrimaryColor,
+                              //   radius: 20,
+                              //   backgroundImage:
+                              //       AssetImage('assets/Images/projLogo.png'),
+                              // ),
+                              // const SizedBox(width: 10),
+                            ],
+                            Flexible(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 5),
+                                margin: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
+                                decoration: BoxDecoration(
+                                    color: message["sender"] == "user"
+                                        ? Colors.white
+                                        : Colors.white,
+                                    borderRadius: message["sender"] == "user"
+                                        ? const BorderRadius.only(
+                                            topLeft: Radius.circular(14),
+                                            bottomLeft: Radius.circular(14),
+                                            bottomRight: Radius.circular(14),
+                                          )
+                                        : const BorderRadius.only(
+                                            topRight: Radius.circular(14),
+                                            bottomLeft: Radius.circular(14),
+                                            bottomRight: Radius.circular(14),
+                                          )),
+                                child: Text(
+                                  message["text"]!,
+                                  style: Styles.textStyle16
+                                      .copyWith(color: kPrimaryColor),
+                                ),
+                              ),
+                            ),
+                            if (message["sender"] == "user") ...[
+                              // const SizedBox(width: 10),
+                              // const CircleAvatar(
+                              //   radius: 20,
+                              //   backgroundColor: kSecondaryColor,
+                              //   child: Icon(
+                              //     Icons.person,
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    );
                   },
                 ),
-                Text(
-                  "Help & support",
-                  style:
-                      Styles.textStyle20.copyWith(fontWeight: FontWeight.bold),
+              ),
+              if (_isLoading)
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: CircularProgressIndicator(),
                 ),
-                const SizedBox(),
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
-                reverse: true,
-                itemCount: _messages.length,
-                itemBuilder: (context, index) {
-                  final message = _messages[index];
-                  return Align(
-                    alignment: message["sender"] == "user"
-                        ? Alignment.centerRight
-                        : Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Row(
-                        mainAxisAlignment: message["sender"] == "user"
-                            ? MainAxisAlignment.end
-                            : MainAxisAlignment.start,
-                        children: [
-                          if (message["sender"] == "bot") ...[
-                            const CircleAvatar(
-                              backgroundColor: kPrimaryColor,
-                              radius: 20,
-                              backgroundImage:
-                                  AssetImage('assets/Images/projLogo.png'),
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                          Flexible(
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
-                              decoration: BoxDecoration(
-                                color: message["sender"] == "user"
-                                    ? Colors.white
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                message["text"]!,
-                                style: Styles.textStyle16
-                                    .copyWith(color: kPrimaryColor),
-                              ),
-                            ),
-                          ),
-                          if (message["sender"] == "user") ...[
-                            const SizedBox(width: 10),
-                            const CircleAvatar(
-                              radius: 20,
-                              backgroundColor: kSecondaryColor,
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            if (_isLoading)
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(),
-              ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      textAlignVertical: TextAlignVertical.top,
-                      style: Styles.textStyle16.copyWith(color: kPrimaryColor),
-                      controller: _controller,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        suffix: IconButton(
-                          constraints: const BoxConstraints(),
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.mic_none_rounded,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                        hintText: 'Ask me anything...',
-                        hintStyle:
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        textAlignVertical: TextAlignVertical.top,
+                        style:
                             Styles.textStyle16.copyWith(color: kPrimaryColor),
-                        border: textFieldBorderStyle(),
-                        enabledBorder: textFieldBorderStyle(),
-                        focusedBorder: textFieldBorderStyle(),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 0,
-                          horizontal: 15,
+                        controller: _controller,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          // suffix: IconButton(
+                          //   constraints: const BoxConstraints(),
+                          //   onPressed: () {},
+                          //   icon: const Icon(
+                          //     Icons.mic_none_rounded,
+                          //     color: kPrimaryColor,
+                          //   ),
+                          // ),
+                          hintText: 'Ask me anything...',
+                          hintStyle:
+                              Styles.textStyle16.copyWith(color: kPrimaryColor),
+                          border: textFieldBorderStyle(),
+                          enabledBorder: textFieldBorderStyle(),
+                          focusedBorder: textFieldBorderStyle(),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 0,
+                            horizontal: 15,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.arrow_circle_left,
-                        size: 40, color: kSecondaryColor),
-                    onPressed: _sendMessage,
-                  ),
-                ],
+                    IconButton(
+                      icon: const Icon(Icons.arrow_circle_left,
+                          size: 40, color: kSecondaryColor),
+                      onPressed: _sendMessage,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

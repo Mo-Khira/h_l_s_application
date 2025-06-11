@@ -10,6 +10,7 @@ import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/mealplans.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_completed_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_plans_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/edit_profile_page.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/favorites/favorites_page.dart';
@@ -53,6 +54,7 @@ abstract class AppRouter {
   static const kNotificationSettingPage = '/notificationSettingPage';
   static const kReminderPage = '/reminderPage';
   static const kTrainingPlanPage = '/trainingPlansPage';
+  static const kTrainingCompletedScreen = '/trainingCompletedScreen';
 
   static final router = GoRouter(
     routes: [
@@ -165,6 +167,10 @@ abstract class AppRouter {
       GoRoute(
         path: kTrainingPlanPage,
         builder: (context, state) => const TrainingPlansPage(),
+      ),
+      GoRoute(
+        path: kTrainingCompletedScreen,
+        builder: (context, state) => const TrainingCompletedScreen(),
       ),
     ],
   );

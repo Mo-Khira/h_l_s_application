@@ -23,7 +23,7 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
   @override
   Widget build(BuildContext context) {
     // Get screen dimensions for responsive design
-    double screenWidth = kWidth(context);
+    // double screenWidth = kWidth(context);
     double screenHeight = kHeight(context);
 
     return SafeArea(
@@ -178,7 +178,7 @@ class FitnessLevelButton extends StatelessWidget {
       onTap: onSelect,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        width: kWidth(context),
+        width: kWidth(context) * 0.9,
         height: 65,
         margin: const EdgeInsets.only(bottom: 30),
         decoration: BoxDecoration(

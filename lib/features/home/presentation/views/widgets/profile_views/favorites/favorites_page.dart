@@ -6,7 +6,7 @@ import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
 
 class FavoritePage extends StatefulWidget {
-  const FavoritePage({Key? key}) : super(key: key);
+  const FavoritePage({super.key});
 
   @override
   State<FavoritePage> createState() => _FavoritePageState();
@@ -36,7 +36,7 @@ class _FavoritePageState extends State<FavoritePage> {
     },
   ];
 
-  List<Map<String, dynamic>> favoriteWorkouts = []; // فاضية للعرض التجريبي
+  List<Map<String, dynamic>> favoriteWorkouts = [];
 
   @override
   Widget build(BuildContext context) {
@@ -83,10 +83,8 @@ class _FavoritePageState extends State<FavoritePage> {
                   });
                 },
                 borderRadius: BorderRadius.circular(8),
-                // selectedColor: Colors.black,
                 fillColor: kSecondaryColor,
                 disabledColor: Colors.grey,
-                // color: Colors.white,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -145,7 +143,7 @@ class _FavoritePageState extends State<FavoritePage> {
                       )
                     : ListView.builder(
                         itemCount: favorites.length,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        // padding: const EdgeInsets.symmetric(horizontal: 16),
                         itemBuilder: (context, index) {
                           final item = favorites[index];
                           return Card(

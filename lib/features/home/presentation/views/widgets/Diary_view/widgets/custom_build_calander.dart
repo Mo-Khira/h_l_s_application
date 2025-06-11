@@ -3,31 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/extentations/time_extention.dart';
 
-class customBuildCalender extends StatefulWidget {
+class CustomBuildCalender extends StatefulWidget {
   final Function(DateTime) onDateSelected;
   final DateTime selectedDate;
 
-  const customBuildCalender({
+  const CustomBuildCalender({
     super.key,
     required this.onDateSelected,
     required this.selectedDate,
   });
 
   @override
-  State<customBuildCalender> createState() => _customBuildCalenderState();
+  State<CustomBuildCalender> createState() => _CustomBuildCalenderState();
 }
 
-class _customBuildCalenderState extends State<customBuildCalender> {
-  // DateTime selectcalenderdate = DateTime.now();
-
+class _CustomBuildCalenderState extends State<CustomBuildCalender> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 150,
       child: EasyInfiniteDateTimeLine(
           dayProps: const EasyDayProps(
-            dayStructure: DayStructure.dayStrDayNum, // عرض اليوم والرقم معًا
-            width: 50, // عرض كل عنصر يوم
+            dayStructure: DayStructure.dayStrDayNum,
+            width: 50,
             height: 80,
           ),
           firstDate: DateTime.now().subtract(const Duration(days: 365)),

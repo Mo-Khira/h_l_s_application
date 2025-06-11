@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/circular_progress_state.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/heart_state.dart';
@@ -44,7 +45,7 @@ class _StatsState extends State<Stats> {
                 Text(
                   widget.text,
                   style: Styles.textStyle16.copyWith(
-                    color: Colors.black,
+                    color: kPrimaryColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

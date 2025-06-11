@@ -14,17 +14,11 @@ class CustomCircularProgressState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Debug: Print the value of endPoint
-    // print('endPoint: $endPoint');
-
     return Center(
       child: TweenAnimationBuilder(
         tween: Tween(begin: 0.0, end: endPoint),
         duration: const Duration(seconds: 4),
         builder: (context, value, child) {
-          // Debug: Print the value of `value`
-          // print('TweenAnimationBuilder value: $value');
-
           return SizedBox(
             width: kWidth(context) * 0.3,
             height: kWidth(context) * 0.3,

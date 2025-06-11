@@ -94,23 +94,35 @@ class _UserAgePage extends State<UserAgePage> {
                     childDelegate: ListWheelChildBuilderDelegate(
                       builder: (context, index) {
                         int age = 12 + index;
-                        return Center(
-                          child: Container(
-                            height: 45,
-                            width: 67,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: selectedAge == age
-                                  ? kSecondaryColor
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(
-                              "$age",
-                              style: Styles.textStyle32.copyWith(
+                        return GestureDetector(
+                          onTap: () {
+                            _controller.animateToItem(
+                              index,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                            setState(() {
+                              selectedAge = age;
+                            });
+                          },
+                          child: Center(
+                            child: Container(
+                              height: 45,
+                              width: 67,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
                                 color: selectedAge == age
-                                    ? Colors.black
-                                    : Colors.white,
+                                    ? kSecondaryColor
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                "$age",
+                                style: Styles.textStyle32.copyWith(
+                                  color: selectedAge == age
+                                      ? Colors.black
+                                      : Colors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -124,12 +136,8 @@ class _UserAgePage extends State<UserAgePage> {
                   text: "Next Steps",
                   onPressed: () {
                     context.read<UserInfoCubit>().setAge(selectedAge);
-                    // BlocProvider.of<UserInfoCubit>(context)
-                    //     .setAge(selectedAge);
                     GoRouter.of(context).push(
                       '${AppRouter.kUserInfoInputs}/${AppRouter.kUserWeightPage}',
-                      // AppRouter.kUserWeightPage,
-                      // '${AppRouter.kOnboarding}/${AppRouter.kUserWeightPage}',
                     );
                   },
                 ),

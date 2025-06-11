@@ -121,7 +121,7 @@ class _UserHeightPage extends State<UserHeightPage> {
                                     maxLength: 3,
                                     controller: heightController,
                                     keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
+                                    textAlign: TextAlign.end,
                                     style: Styles.textStyle24,
                                     decoration: const InputDecoration(
                                       counterText: "",

@@ -120,7 +120,7 @@ class _UserWeightPage extends State<UserWeightPage> {
                                   maxLength: 3,
                                   controller: weightController,
                                   keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.end,
                                   style: Styles.textStyle24,
                                   decoration: const InputDecoration(
                                     counterText: "",

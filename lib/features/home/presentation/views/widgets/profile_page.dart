@@ -153,120 +153,59 @@ class _ProfilePage extends State<ProfilePage> {
                 const SizedBox(height: 61),
                 Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.kEditProfilePage);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.person_3_outlined,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Edit Profile",
-                            style: Styles.textStyle20,
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          ),
-                        ],
-                      ),
+                    // Edit Profile
+                    ListTile(
+                      onTap: () =>
+                          GoRouter.of(context).push(AppRouter.kEditProfilePage),
+                      leading: const Icon(Icons.person_3_outlined, size: 24),
+                      title: Text("Edit Profile", style: Styles.textStyle20),
+                      trailing:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     ),
-                    const SizedBox(height: 40),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.kFavoritesPage);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.favorite_border_rounded,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Favorites",
-                            style: Styles.textStyle20,
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 16),
+
+                    // Favorites
+                    ListTile(
+                      onTap: () =>
+                          GoRouter.of(context).push(AppRouter.kFavoritesPage),
+                      leading:
+                          const Icon(Icons.favorite_border_rounded, size: 24),
+                      title: Text("Favorites", style: Styles.textStyle20),
+                      trailing:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     ),
-                    const SizedBox(height: 40),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.kSettingsPage);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.settings,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Settings",
-                            style: Styles.textStyle20,
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 16),
+
+                    // Settings
+                    ListTile(
+                      onTap: () =>
+                          GoRouter.of(context).push(AppRouter.kSettingsPage),
+                      leading: const Icon(Icons.settings, size: 24),
+                      title: Text("Settings", style: Styles.textStyle20),
+                      trailing:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     ),
-                    const SizedBox(height: 40),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context)
-                            .push(AppRouter.kHelpAndSupportPage);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.help_outline_rounded,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Help & Support",
-                            style: Styles.textStyle20,
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 16),
+                    ListTile(
+                      onTap: () => GoRouter.of(context)
+                          .push(AppRouter.kHelpAndSupportPage),
+                      leading: const Icon(Icons.help_outline_rounded, size: 24),
+                      title: Text("Help & Support", style: Styles.textStyle20),
+                      trailing:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     ),
-                    const SizedBox(height: 80),
-                    GestureDetector(
+                    const SizedBox(height: 32),
+                    ListTile(
                       onTap: () {},
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.logout_outlined,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Log Out",
-                            style: Styles.textStyle20,
-                          ),
-                        ],
-                      ),
+                      leading: const Icon(Icons.logout_outlined, size: 24),
+                      title: Text("Log Out", style: Styles.textStyle20),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                   ],
                 )
               ],

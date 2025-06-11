@@ -121,7 +121,7 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                                     maxLength: 3,
                                     controller: goalWeightController,
                                     keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
+                                    textAlign: TextAlign.end,
                                     style: Styles.textStyle24,
                                     decoration: const InputDecoration(
                                       counterText: "",

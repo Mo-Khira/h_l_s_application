@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/meal_details.dart';
@@ -7,14 +8,6 @@ import '../widgets/meals_plans/food_card.dart';
 
 class MealPlans extends StatelessWidget {
   const MealPlans({super.key});
-
-  double getHeight(BuildContext context, double inputHeight) {
-    return (inputHeight / 844.0) * MediaQuery.of(context).size.height;
-  }
-
-  double getWidth(BuildContext context, double inputWidth) {
-    return (inputWidth / 390.0) * MediaQuery.of(context).size.width;
-  }
 
   List<Meal> getMeals() {
     return [
@@ -110,37 +103,39 @@ class MealPlans extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Container(
-          width: kWidth(context) * 0.9,
-          decoration: BoxDecoration(
-            color: kPrimaryColor,
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: getHeight(context, 900),
-              child: Stack(
+        padding: const EdgeInsets.all(28.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Positioned(
-                    left: getWidth(context, 10),
-                    top: getHeight(context, 52),
-                    child: GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Image.asset(
-                        'assets/Images/arrow_left_alt.png',
-                        width: getWidth(context, 32),
-                        height: getHeight(context, 32),
-                      ),
+                  IconButton(
+                    padding: const EdgeInsetsDirectional.all(0),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 28,
                     ),
+                    onPressed: () {
+                      GoRouter.of(context).pop();
+                    },
                   ),
-                  Positioned(
-                    left: getWidth(context, 10),
-                    top: getHeight(context, 132),
-                    child: Text('Meal plans', style: Styles.textStyle18),
-                  ),
-                  ...meals.map((meal) {
-                    return FoodCard(
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text('Meal plans', style: Styles.textStyle18),
+              const SizedBox(
+                height: 20,
+              ),
+              ...meals.map((meal) {
+                return Column(
+                  children: [
+                    FoodCard(
                       imagePath: meal.imagePath,
                       title: meal.title,
                       calories: meal.calories,
@@ -161,11 +156,14 @@ class MealPlans extends StatelessWidget {
                           ),
                         );
                       },
-                    );
-                  }).toList(),
-                ],
-              ),
-            ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                );
+              }).toList(),
+            ],
           ),
         ),
       ),

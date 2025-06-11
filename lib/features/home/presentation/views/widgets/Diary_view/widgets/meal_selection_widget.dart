@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class MealSelectionWidget extends StatelessWidget {
   final String title;
@@ -15,10 +17,6 @@ class MealSelectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen size
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
-
     return Column(
       children: [
         GestureDetector(
@@ -26,13 +24,11 @@ class MealSelectionWidget extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // Background Image
               Container(
-                width: screenWidth * 0.9, // 90% of screen width
-                height: screenHeight * 0.1, // 10% of screen height
+                width: kWidth(context),
+                height: kHeight(context) * 0.1,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                      screenWidth * 0.04), // Scaled border radius
+                  borderRadius: BorderRadius.circular(16),
                   image: DecorationImage(
                     image: AssetImage(imagePath),
                     fit: BoxFit.cover,
@@ -43,42 +39,33 @@ class MealSelectionWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              // White overlay with opacity
               Container(
-                width: screenWidth * 0.9,
-                height: screenHeight * 0.1,
+                // width: kWidth(context) * 0.9,
+                height: kHeight(context) * 0.1,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(screenWidth * 0.04),
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              // Text and Icon
               Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.05), // 5% of screen width
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      title,
-                      style: GoogleFonts.poppins(
-                        fontSize: screenWidth * 0.045, // Responsive font size
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFF000000), // Black text
-                        height: 1.0, // 100% line height
-                      ),
-                    ),
+                    Text(title,
+                        style:
+                            Styles.textStyle18.copyWith(color: kPrimaryColor)),
                     Container(
-                      width: screenWidth * 0.08,
-                      height: screenWidth * 0.08,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF9EFF00),
+                      width: kWidth(context) * 0.08,
+                      height: kWidth(context) * 0.08,
+                      decoration: const BoxDecoration(
+                        color: kSecondaryColor,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.add,
-                        color: Colors.black,
-                        size: screenWidth * 0.05, // Responsive icon size
+                        color: kPrimaryColor,
+                        size: kWidth(context) * 0.05,
                       ),
                     ),
                   ],
@@ -87,7 +74,7 @@ class MealSelectionWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: screenHeight * 0.01), // 1% of screen height
+        SizedBox(height: kHeight(context) * 0.01),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/custom_search_bar.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/plan_percent.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/stats.dart';
@@ -17,23 +18,22 @@ class _HomepageState extends State<Homepage> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: const Scaffold(
-        backgroundColor: Colors.black,
+      child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 23),
+            padding: const EdgeInsets.symmetric(horizontal: 18),
             child: Column(
               children: [
-                SizedBox(height: 102),
-                CustomSearchBar(),
+                SizedBox(height: kHeight(context) * 0.1),
+                const CustomSearchBar(),
                 SizedBox(
-                  height: 43,
+                  height: kHeight(context) * 0.04,
                 ),
-                PlanPercent(),
+                const PlanPercent(),
                 SizedBox(
-                  height: 32,
+                  height: kHeight(context) * 0.04,
                 ),
-                StatsGrid()
+                const StatsGrid()
               ],
             ),
           ),

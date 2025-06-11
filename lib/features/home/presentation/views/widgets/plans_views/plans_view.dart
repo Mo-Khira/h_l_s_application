@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/mealplans.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/meal_card.dart';
@@ -14,9 +16,8 @@ class PlansView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // backgroundColor: const Color(0xff161515),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22),
+          padding: const EdgeInsets.symmetric(horizontal: 28),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -39,13 +40,21 @@ class PlansView extends StatelessWidget {
 
   // Back Button Widget
   Widget _buildBackButton(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.pop(context),
-      child: Image.asset(
-        'assets/Images/arrow_left_alt.png',
-        width: 32,
-        height: 32,
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        IconButton(
+          padding: const EdgeInsetsDirectional.all(0),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 28,
+          ),
+          onPressed: () {
+            GoRouter.of(context).pop();
+          },
+        ),
+      ],
     );
   }
 
@@ -54,10 +63,7 @@ class PlansView extends StatelessWidget {
     return PlansSection(
       title: 'Meal Plans',
       onSeeAll: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const MealPlans()),
-        );
+        GoRouter.of(context).push(AppRouter.kMealPlans);
       },
     );
   }
@@ -67,10 +73,7 @@ class PlansView extends StatelessWidget {
     return PlansSection(
       title: 'Training Plans',
       onSeeAll: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => TrainingPlansPage()),
-        );
+        GoRouter.of(context).push(AppRouter.kTrainingPlanPage);
       },
     );
   }
@@ -240,10 +243,10 @@ class PlansSection extends StatelessWidget {
   final VoidCallback onSeeAll;
 
   const PlansSection({
-    Key? key,
+    super.key,
     required this.title,
     required this.onSeeAll,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

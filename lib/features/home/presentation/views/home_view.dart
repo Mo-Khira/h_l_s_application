@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Chatbot/chatbot_view.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/diary_view.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/homepage.dart';
-// import 'package:h_l_s_application/features/home/presentation/views/widgets/chatbot_page.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/custom_bottom_navigation_bar.dart';
-// import 'package:h_l_s_application/features/home/presentation/views/widgets/diary_page.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/home_view_body.dart';
-// import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_page.dart';
-// import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_view/plans_view.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/plans_view.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_page.dart';
 

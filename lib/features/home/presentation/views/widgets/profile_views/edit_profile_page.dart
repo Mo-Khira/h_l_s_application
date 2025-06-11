@@ -20,7 +20,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return SafeArea(
       child: Scaffold(
           body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 28),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_detail_screen.dart';
 import '../widgets/training_plans/training_plan_card.dart';
 
@@ -74,93 +76,73 @@ class TrainingPlansPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kPrimaryColor,
-      body: Stack(
-        children: [
-          // Back button
-          Positioned(
-            top: 72,
-            left: 30,
-            child: Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                // color: kSecondaryColor,
-                borderRadius: BorderRadius.circular(8),
+    return SafeArea(
+      child: Scaffold(
+        // backgroundColor: kPrimaryColor,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 28.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 20,
               ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 20,
-                  // color: AppColors.textPrimary,
-                ),
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    padding: const EdgeInsetsDirectional.all(0),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                    onPressed: () {
+                      GoRouter.of(context).pop();
+                    },
+                  ),
+                ],
               ),
-            ),
-          ),
+              const SizedBox(
+                height: 20,
+              ),
 
-          // Title
-          Positioned(
-            top: 132,
-            left: 22,
-            child: Container(
-              width: 384,
-              height: 50.14,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              alignment: Alignment.centerLeft,
-              child: const Text(
-                'Training Plans',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  height: 1.5,
-                  // color: AppColors.textPrimary,
-                  decoration: TextDecoration.none,
-                ),
-              ),
-            ),
-          ),
-
-          // List of Training Cards
-          Positioned(
-            top: 208,
-            left: 23,
-            right: 23,
-            bottom: 20,
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: trainingPlans.length,
-              itemBuilder: (context, index) {
-                final plan = trainingPlans[index];
-                return TrainingPlanCard(
-                  title: plan["title"],
-                  subtitle: plan["subtitle"],
-                  imagePath: plan["cardImage"],
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => TrainingDetailScreen(
-                          imagePath: plan["detailImage"],
-                          title: plan["detailTitle"],
-                          subtitle: plan["detailSubtitle"],
-                          duration: plan["duration"],
-                          exercises: commonExercises,
-                          selectedIndex: index,
-                        ),
-                      ),
+              Text('Training Plans', style: Styles.textStyle18),
+              const SizedBox(
+                height: 20,
+              ), // List of Training Cards
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: trainingPlans.length,
+                  itemBuilder: (context, index) {
+                    final plan = trainingPlans[index];
+                    return TrainingPlanCard(
+                      title: plan["title"],
+                      subtitle: plan["subtitle"],
+                      imagePath: plan["cardImage"],
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => TrainingDetailScreen(
+                              imagePath: plan["detailImage"],
+                              title: plan["detailTitle"],
+                              subtitle: plan["detailSubtitle"],
+                              duration: plan["duration"],
+                              exercises: commonExercises,
+                              selectedIndex: index,
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

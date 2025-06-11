@@ -169,7 +169,7 @@ class FitnessLevelButton extends StatelessWidget {
       onTap: onSelect,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300), // Smooth transition
-        width: 330,
+        width: kWidth(context) * 0.9,
         height: 65,
         margin: const EdgeInsets.only(bottom: 30), // Adjusted margin
         decoration: BoxDecoration(

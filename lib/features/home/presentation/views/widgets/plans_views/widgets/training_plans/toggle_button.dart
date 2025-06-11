@@ -1,41 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class ToggleButton extends StatelessWidget {
   final bool isRunning;
   final VoidCallback onTap;
 
-  const ToggleButton({Key? key, required this.isRunning, required this.onTap})
-      : super(key: key);
+  const ToggleButton({super.key, required this.isRunning, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 100,
+        width: kWidth(context) * 0.25,
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFF9EFF00)),
+          border: Border.all(color: kSecondaryColor),
         ),
         child: Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Icon(
                 isRunning ? Icons.pause : Icons.play_arrow,
                 color: Colors.white,
                 size: 18,
               ),
-              const SizedBox(width: 4),
               Text(
                 isRunning ? "Stop" : "Start",
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Styles.textStyle16.copyWith(fontWeight: FontWeight.w500),
               ),
             ],
           ),

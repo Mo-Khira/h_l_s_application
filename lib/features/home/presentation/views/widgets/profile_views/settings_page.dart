@@ -48,103 +48,47 @@ class _SettingsPage extends State<SettingsPage> {
                 const SizedBox(height: 60),
                 Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.kReminderPage);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.notifications_outlined,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Reminder",
-                            style: Styles.textStyle20,
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          ),
-                        ],
-                      ),
+                    ListTile(
+                      onTap: () =>
+                          GoRouter.of(context).push(AppRouter.kReminderPage),
+                      leading:
+                          const Icon(Icons.notifications_outlined, size: 24),
+                      title: Text("Reminder", style: Styles.textStyle20),
+                      trailing:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                      contentPadding: EdgeInsets.zero,
                     ),
-                    const SizedBox(height: 40),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context)
-                            .push(AppRouter.kChangePasswordPage);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.lock_open_rounded,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Change Password",
-                            style: Styles.textStyle20,
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            size: 16,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 16),
+                    ListTile(
+                      onTap: () => GoRouter.of(context)
+                          .push(AppRouter.kChangePasswordPage),
+                      leading: const Icon(Icons.lock_open_rounded, size: 24),
+                      title: Text("Change Password", style: Styles.textStyle20),
+                      trailing: const Icon(Icons.arrow_forward_ios_outlined,
+                          size: 16),
+                      contentPadding: EdgeInsets.zero,
                     ),
-                    const SizedBox(height: 40),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context)
-                            .push(AppRouter.kNotificationSettingPage);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.notification_important_outlined,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Notification Setting",
-                            style: Styles.textStyle20,
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 16),
+                    ListTile(
+                      onTap: () => GoRouter.of(context)
+                          .push(AppRouter.kNotificationSettingPage),
+                      leading: const Icon(Icons.notification_important_outlined,
+                          size: 24),
+                      title: Text("Notification Setting",
+                          style: Styles.textStyle20),
+                      trailing:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                      contentPadding: EdgeInsets.zero,
                     ),
-                    const SizedBox(height: 40),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context)
-                            .push(AppRouter.kHelpAndSupportPage);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.help_outline_rounded,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Help & Support",
-                            style: Styles.textStyle20,
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 16),
+                    ListTile(
+                      onTap: () => GoRouter.of(context)
+                          .push(AppRouter.kHelpAndSupportPage),
+                      leading: const Icon(Icons.help_outline_rounded, size: 24),
+                      title: Text("Help & Support", style: Styles.textStyle20),
+                      trailing:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                      contentPadding: EdgeInsets.zero,
                     ),
                   ],
                 )

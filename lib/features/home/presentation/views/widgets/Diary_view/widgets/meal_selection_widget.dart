@@ -26,7 +26,7 @@ class MealSelectionWidget extends StatelessWidget {
             children: [
               Container(
                 width: kWidth(context),
-                height: kHeight(context) * 0.1,
+                height: kHeight(context) * 0.09,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   image: DecorationImage(
@@ -41,7 +41,7 @@ class MealSelectionWidget extends StatelessWidget {
               ),
               Container(
                 // width: kWidth(context) * 0.9,
-                height: kHeight(context) * 0.1,
+                height: kHeight(context) * 0.09,
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(16),

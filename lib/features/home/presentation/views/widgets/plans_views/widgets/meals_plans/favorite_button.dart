@@ -25,12 +25,12 @@ class _FavoriteButtonState extends State<FavoriteButton> {
     double boxSize = screenWidth * 0.08;
     double iconSize = boxSize * 0.7;
 
-    return Stack(
-      children: [
-        Positioned(
-          left: 20,
-          top: 18,
-          child: IconButton(
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
             padding: const EdgeInsetsDirectional.all(0),
             icon: const Icon(
               Icons.arrow_back,
@@ -41,11 +41,8 @@ class _FavoriteButtonState extends State<FavoriteButton> {
               GoRouter.of(context).pop();
             },
           ),
-        ),
-        Positioned(
-          left: screenWidth - 50,
-          top: 18,
-          child: GestureDetector(
+          const Spacer(),
+          GestureDetector(
             onTap: toggleFavorite,
             child: Container(
               width: boxSize,
@@ -65,8 +62,8 @@ class _FavoriteButtonState extends State<FavoriteButton> {
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

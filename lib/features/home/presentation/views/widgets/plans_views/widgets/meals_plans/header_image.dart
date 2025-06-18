@@ -11,9 +11,7 @@ class HeaderImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: 0,
-      top: 0,
+    return SizedBox(
       width: kWidth(context),
       height: kWidth(context) * 0.66,
       child: Image.asset(

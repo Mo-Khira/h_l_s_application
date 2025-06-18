@@ -16,32 +16,9 @@ class NutritionInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: kWidth(context) * 0.1,
-      top: kHeight(context) * 0.48,
-      child: NutritionBox(fat: fat, protein: protein, carbs: carbs),
-    );
-  }
-}
-
-class NutritionBox extends StatelessWidget {
-  final String fat;
-  final String protein;
-  final String carbs;
-
-  const NutritionBox({
-    super.key,
-    required this.fat,
-    required this.protein,
-    required this.carbs,
-  });
-
-  @override
-  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // const Spacer(),
         Container(
           width: kWidth(context) * 0.8,
           height: 74,
@@ -58,9 +35,7 @@ class NutritionBox extends StatelessWidget {
               _InfoItem(label: 'Carbs', value: carbs),
             ],
           ),
-          // ),
         ),
-        // const Spacer(),
       ],
     );
   }

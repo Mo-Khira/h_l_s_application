@@ -32,70 +32,57 @@ class _IngredientsSectionState extends State<IngredientsSection> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    const originalWidth = 302.0;
-    final scaleFactor =
-        screenWidth < originalWidth ? screenWidth / originalWidth : 1.0;
-
-    return Positioned(
-      left: 21,
-      top: kHeight(context) * 0.64,
-      child: Transform.scale(
-        scale: scaleFactor,
-        alignment: Alignment.topLeft,
-        child: SizedBox(
-          width: originalWidth,
-          height: 184,
-          child: Stack(
-            children: [
-              // Ingredients Title
-              Positioned(
-                left: 10,
-                top: 0,
-                child: Text('Ingredients',
-                    style: Styles.textStyle18.copyWith(color: kSecondaryColor)),
-              ),
-
-              // Ingredients List
-              Positioned(
-                left: 10,
-                top: 42,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: _ingredients
-                      .map(
-                        (item) => Padding(
-                          padding: const EdgeInsets.only(bottom: 7.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 5,
-                                height: 5,
-                                margin: const EdgeInsets.only(
-                                  top: 6,
-                                  right: 8,
-                                ),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                width: originalWidth -
-                                    40, // Adjust text wrap width
-                                child: Text(item, style: Styles.textStyle16),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-            ],
+    return SizedBox(
+      width: kWidth(context),
+      height: 184,
+      child: Stack(
+        children: [
+          // Ingredients Title
+          Positioned(
+            left: 10,
+            top: 0,
+            child: Text('Ingredients',
+                style: Styles.textStyle18.copyWith(color: kSecondaryColor)),
           ),
-        ),
+
+          // Ingredients List
+          Positioned(
+            left: 10,
+            top: 42,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _ingredients
+                  .map(
+                    (item) => Padding(
+                      padding: const EdgeInsets.only(bottom: 7.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 5,
+                            height: 5,
+                            margin: const EdgeInsets.only(
+                              top: 6,
+                              right: 8,
+                            ),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width:
+                                kWidth(context) - 40, // Adjust text wrap width
+                            child: Text(item, style: Styles.textStyle16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

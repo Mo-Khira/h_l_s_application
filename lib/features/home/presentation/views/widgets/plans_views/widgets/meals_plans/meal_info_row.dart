@@ -14,33 +14,15 @@ class MealInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      // left: 85,
-      top: kHeight(context) * 0.4,
-      child: MealInfoContent(calories: calories, cookTime: cookTime),
-    );
-  }
-}
-
-class MealInfoContent extends StatelessWidget {
-  final String calories;
-  final String cookTime;
-
-  const MealInfoContent({
-    super.key,
-    required this.calories,
-    required this.cookTime,
-  });
-
-  @override
-  Widget build(BuildContext context) {
     return SizedBox(
       width: kWidth(context),
       height: 25,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Spacer(),
+          const Spacer(
+            flex: 2,
+          ),
           const ImageIcon(
             AssetImage('assets/Images/calories.png'),
             size: 25,
@@ -72,7 +54,9 @@ class MealInfoContent extends StatelessWidget {
             cookTime,
             style: Styles.textStyle16,
           ),
-          const Spacer(),
+          const Spacer(
+            flex: 2,
+          ),
         ],
       ),
     );

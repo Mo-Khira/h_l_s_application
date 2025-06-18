@@ -14,7 +14,7 @@ class UserAgePage extends StatefulWidget {
 
 class _UserAgePage extends State<UserAgePage> {
   int selectedAge = 18;
-  FixedExtentScrollController _controller =
+  final FixedExtentScrollController _controller =
       FixedExtentScrollController(initialItem: 18 - 12);
 
   @override

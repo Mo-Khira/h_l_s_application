@@ -16,7 +16,7 @@ class ScreenOne extends StatelessWidget {
       child: Scaffold(
         body: GestureDetector(
           onHorizontalDragEnd: (details) {
-            if (details.primaryVelocity! < -100) {
+            if (details.primaryVelocity! < -10) {
               GoRouter.of(context).pushReplacement(AppRouter.kScreenTwo);
             }
           },

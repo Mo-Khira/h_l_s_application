@@ -1,6 +1,8 @@
 // training_card_item.dart
 
 import 'package:flutter/material.dart';
+import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 
 class TrainingCardItem extends StatelessWidget {
   final String title;
@@ -22,45 +24,31 @@ class TrainingCardItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 75,
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        height: kHeight(context) * 0.1,
+        margin: const EdgeInsets.only(top: 16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.asset(imagePath, width: 50, height: 50), // Image for card
-            const SizedBox(width: 16),
+            Image.asset(imagePath, width: 50, height: 50),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff161515),
-                    fontFamily: 'Poppins-Medium',
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color(0xff161515),
-                    fontFamily: 'Poppins-Regular',
-                  ),
-                ),
+                Text(title,
+                    style: Styles.textStyle16.copyWith(color: kPrimaryColor)),
+                const SizedBox(height: 5),
+                Text(subtitle,
+                    style: Styles.textStyle14.copyWith(color: kPrimaryColor)),
               ],
             ),
-            const Spacer(),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               size: 20,
-              color: Color(0xff161515),
+              color: kPrimaryColor,
             ),
           ],
         ),

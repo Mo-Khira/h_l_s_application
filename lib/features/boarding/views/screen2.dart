@@ -16,8 +16,10 @@ class ScreenTwo extends StatelessWidget {
       child: Scaffold(
         body: GestureDetector(
           onHorizontalDragEnd: (details) {
-            if (details.primaryVelocity! < -100) {
+            if (details.primaryVelocity! < -10) {
               GoRouter.of(context).pushReplacement(AppRouter.kScreenThree);
+            } else if (details.primaryVelocity! < 10) {
+              GoRouter.of(context).pushReplacement(AppRouter.kScreenOne);
             }
           },
           child: Column(

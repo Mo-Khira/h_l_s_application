@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/custom_build_calander.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/meal_selection_widget.dart';
@@ -36,7 +37,67 @@ class _DiaryViewState extends State<DiaryView> {
                 onDateSelected: _onDateSelected,
                 selectedDate: selectedDate,
               ), // Custom calendar widget
-              const SizedBox(height: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Calories Remaining",
+                    style: Styles.textStyle14,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "2500",
+                        style: Styles.textStyle16,
+                      ),
+                      Text(
+                        "-",
+                        style: Styles.textStyle16,
+                      ),
+                      Text(
+                        "816",
+                        style: Styles.textStyle16,
+                      ),
+                      Text(
+                        "=",
+                        style: Styles.textStyle16,
+                      ),
+                      Text(
+                        "1684",
+                        style: Styles.textStyle16,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "    Goal  ",
+                        style: Styles.textStyle14,
+                      ),
+                      Text(
+                        "     Food",
+                        style: Styles.textStyle14,
+                      ),
+                      Text(
+                        "Remaining",
+                        style: Styles.textStyle14,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
               const Column(
                 children: [
                   MealSelectionWidget(
@@ -53,12 +114,9 @@ class _DiaryViewState extends State<DiaryView> {
                       imagePath: "assets/Images/test1.png"),
                 ],
               ),
-              SizedBox(height: kHeight(context) * 0.04), // 4% of screen height
-
-              // Responsive "Complete Diary" Button
+              SizedBox(height: kHeight(context) * 0.04),
               CustomLoginButton(text: "Complete Diary"),
-              const SizedBox(
-                  height: 10), // 4% of screen height// Space after button
+              const SizedBox(height: 20),
             ],
           ),
         ),

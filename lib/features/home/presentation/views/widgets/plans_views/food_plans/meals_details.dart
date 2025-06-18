@@ -32,23 +32,31 @@ class MealsDetails extends StatelessWidget {
       backgroundColor: kPrimaryColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: kPrimaryColor,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: SizedBox(
-              height: kHeight(context),
-              child: Stack(
-                children: [
-                  HeaderImage(imagePath: imagePath),
-                  const FavoriteButton(),
-                  MealInfoRow(calories: calories, cookTime: cookTime),
-                  NutritionInfo(fat: fat, protein: protein, carbs: carbs),
-                  IngredientsSection(ingredients: ingredients),
-                ],
-              ),
+          child: SizedBox(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    HeaderImage(imagePath: imagePath),
+                    const FavoriteButton(),
+                  ],
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                MealInfoRow(calories: calories, cookTime: cookTime),
+                const SizedBox(
+                  height: 55,
+                ),
+                NutritionInfo(fat: fat, protein: protein, carbs: carbs),
+                const SizedBox(
+                  height: 50,
+                ),
+                IngredientsSection(ingredients: ingredients),
+                const SizedBox(
+                  height: 50,
+                ),
+              ],
             ),
           ),
         ),

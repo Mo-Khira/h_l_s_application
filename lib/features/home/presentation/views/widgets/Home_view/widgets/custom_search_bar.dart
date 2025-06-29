@@ -4,23 +4,30 @@ import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
+  final VoidCallback? onTap;
+  final bool readOnly;
+
+  const CustomSearchBar({
+    super.key,
+    this.onTap,
+    this.readOnly = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: readOnly,
+      onTap: onTap,
       decoration: InputDecoration(
         labelText: "Search",
         labelStyle: Styles.textStyle14,
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(right: 4),
+        prefixIcon: const Padding(
+          padding: EdgeInsets.only(right: 4),
           child: SizedBox(
             height: 16,
             width: 16,
             child: Center(
-              child: SvgPicture.asset(
-                'assets/svgs/search_lens.svg',
-              ),
+              child: Icon(Icons.search),
             ),
           ),
         ),
@@ -31,15 +38,11 @@ class CustomSearchBar extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(
-            color: kSecondaryColor,
-          ),
+          borderSide: const BorderSide(color: kSecondaryColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(
-            color: kSecondaryColor,
-          ),
+          borderSide: const BorderSide(color: kSecondaryColor),
         ),
       ),
     );

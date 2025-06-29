@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/custom_search_bar.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/plan_percent.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/widgets/stats.dart';
@@ -25,7 +27,12 @@ class _HomepageState extends State<Homepage> {
             child: Column(
               children: [
                 SizedBox(height: kHeight(context) * 0.1),
-                const CustomSearchBar(),
+                CustomSearchBar(
+                  readOnly: true,
+                  onTap: () {
+                    GoRouter.of(context).push(AppRouter.kSearchScreen);
+                  },
+                ),
                 SizedBox(
                   height: kHeight(context) * 0.04,
                 ),

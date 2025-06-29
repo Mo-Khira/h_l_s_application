@@ -65,13 +65,13 @@ class _ProfilePage extends State<ProfilePage> {
                 ),
                 const SizedBox(height: 35),
                 const CircleAvatar(
-                  backgroundImage: AssetImage(AssetsData.logo),
+                  backgroundImage: AssetImage(AssetsData.messi),
                   backgroundColor: Colors.white,
                   radius: 55,
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  "User Name",
+                  "Mohammed Khira",
                   style: Styles.textStyle16,
                 ),
                 const SizedBox(height: 35),

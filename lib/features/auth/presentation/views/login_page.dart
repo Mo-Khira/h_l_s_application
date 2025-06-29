@@ -14,6 +14,7 @@ import 'package:h_l_s_application/features/auth/presentation/views/widgets/custo
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/show_snack_bar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
   LoginPage({super.key, this.email, this.password});
 
@@ -34,6 +35,10 @@ class _SignupPageState extends State<LoginPage> {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: ModalProgressHUD(
+        color: kPrimaryColor,
+        progressIndicator: const CircularProgressIndicator(
+          color: kSecondaryColor,
+        ),
         inAsyncCall: isLoading,
         child: SafeArea(
           child: Scaffold(

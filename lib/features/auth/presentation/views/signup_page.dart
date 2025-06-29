@@ -55,6 +55,10 @@ class _SignupPageState extends State<SignupPage> {
         },
         builder: (context, state) {
           return ModalProgressHUD(
+            color: kPrimaryColor,
+            progressIndicator: const CircularProgressIndicator(
+              color: kSecondaryColor,
+            ),
             inAsyncCall: state is SignupLoading,
             child: SafeArea(
               child: Scaffold(

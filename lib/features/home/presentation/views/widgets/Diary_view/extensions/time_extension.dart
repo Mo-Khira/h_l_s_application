@@ -13,11 +13,11 @@ extension TimeExtension on DateTime {
 
   String get days {
     List<String> days = [
-      "Saterday",
+      "Saturday",
       "Sunday",
       "Monday",
       "Tuesday",
-      "Wedenesday",
+      "Wednesday",
       "Thursday",
       "Friday"
     ];

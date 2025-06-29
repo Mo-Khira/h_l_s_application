@@ -13,7 +13,7 @@ class NotificationSetting extends StatefulWidget {
 class _NotificationSetting extends State<NotificationSetting> {
   bool generalNotification = true;
   bool sound = true;
-  bool disturbMode = true;
+  bool disturbMode = false;
   bool vibrate = true;
   bool lockScreen = true;
   bool reminders = true;
@@ -58,113 +58,62 @@ class _NotificationSetting extends State<NotificationSetting> {
                 const SizedBox(height: 60),
                 Column(
                   children: [
-                    SwitchListTile(
-                      contentPadding: const EdgeInsets.all(0),
-                      activeColor: Colors.white,
-                      activeTrackColor: kSecondaryColor,
-                      inactiveThumbColor: Colors.black,
-                      title: Text(
-                        'General Notification',
-                        style: Styles.textStyle20,
-                      ),
+                    buildSwitchTile(
+                      title: 'General Notification',
                       value: generalNotification,
-                      onChanged: (bool value) {
-                        setState(() {
-                          generalNotification = value;
-                        });
-                      },
+                      onChanged: (val) =>
+                          setState(() => generalNotification = val),
                     ),
-                    const SizedBox(height: 10),
-                    SwitchListTile(
-                      contentPadding: const EdgeInsets.all(0),
-                      activeColor: Colors.white,
-                      activeTrackColor: kSecondaryColor,
-                      inactiveThumbColor: Colors.black,
-                      title: Text(
-                        'Sound',
-                        style: Styles.textStyle20,
-                      ),
+                    buildSwitchTile(
+                      title: 'Sound',
                       value: sound,
-                      onChanged: (bool value) {
-                        setState(() {
-                          sound = value;
-                        });
-                      },
+                      onChanged: (val) => setState(() => sound = val),
                     ),
-                    const SizedBox(height: 10),
-                    SwitchListTile(
-                      contentPadding: const EdgeInsets.all(0),
-                      activeColor: Colors.white,
-                      activeTrackColor: kSecondaryColor,
-                      inactiveThumbColor: Colors.black,
-                      title: Text(
-                        'Don\'t Disturb Mode',
-                        style: Styles.textStyle20,
-                      ),
+                    buildSwitchTile(
+                      title: 'Don\'t Disturb Mode',
                       value: disturbMode,
-                      onChanged: (bool value) {
-                        setState(() {
-                          disturbMode = value;
-                        });
-                      },
+                      onChanged: (val) => setState(() => disturbMode = val),
                     ),
-                    const SizedBox(height: 10),
-                    SwitchListTile(
-                      contentPadding: const EdgeInsets.all(0),
-                      activeColor: Colors.white,
-                      activeTrackColor: kSecondaryColor,
-                      inactiveThumbColor: Colors.black,
-                      title: Text(
-                        'Vibrate',
-                        style: Styles.textStyle20,
-                      ),
+                    buildSwitchTile(
+                      title: 'Vibrate',
                       value: vibrate,
-                      onChanged: (bool value) {
-                        setState(() {
-                          vibrate = value;
-                        });
-                      },
+                      onChanged: (val) => setState(() => vibrate = val),
                     ),
-                    const SizedBox(height: 10),
-                    SwitchListTile(
-                      contentPadding: const EdgeInsets.all(0),
-                      activeColor: Colors.white,
-                      activeTrackColor: kSecondaryColor,
-                      inactiveThumbColor: Colors.black,
-                      title: Text(
-                        'Lock Screen',
-                        style: Styles.textStyle20,
-                      ),
+                    buildSwitchTile(
+                      title: 'Lock Screen',
                       value: lockScreen,
-                      onChanged: (bool value) {
-                        setState(() {
-                          lockScreen = value;
-                        });
-                      },
+                      onChanged: (val) => setState(() => lockScreen = val),
                     ),
-                    const SizedBox(height: 10),
-                    SwitchListTile(
-                      contentPadding: const EdgeInsets.all(0),
-                      activeColor: Colors.white,
-                      activeTrackColor: kSecondaryColor,
-                      inactiveThumbColor: Colors.black,
-                      title: Text(
-                        'Reminders',
-                        style: Styles.textStyle20,
-                      ),
+                    buildSwitchTile(
+                      title: 'Reminders',
                       value: reminders,
-                      onChanged: (bool value) {
-                        setState(() {
-                          reminders = value;
-                        });
-                      },
+                      onChanged: (val) => setState(() => reminders = val),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildSwitchTile({
+    required String title,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        activeColor: Colors.white,
+        activeTrackColor: kSecondaryColor,
+        // inactiveThumbColor: Colors.black,
+        title: Text(title, style: Styles.textStyle20),
+        value: value,
+        onChanged: onChanged,
       ),
     );
   }

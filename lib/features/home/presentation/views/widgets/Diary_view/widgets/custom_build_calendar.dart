@@ -1,23 +1,23 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/extentations/time_extention.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/extensions/time_extension.dart';
 
-class CustomBuildCalender extends StatefulWidget {
+class CustomBuildCalendar extends StatefulWidget {
   final Function(DateTime) onDateSelected;
   final DateTime selectedDate;
 
-  const CustomBuildCalender({
+  const CustomBuildCalendar({
     super.key,
     required this.onDateSelected,
     required this.selectedDate,
   });
 
   @override
-  State<CustomBuildCalender> createState() => _CustomBuildCalenderState();
+  State<CustomBuildCalendar> createState() => _CustomBuildCalendarState();
 }
 
-class _CustomBuildCalenderState extends State<CustomBuildCalender> {
+class _CustomBuildCalendarState extends State<CustomBuildCalendar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(

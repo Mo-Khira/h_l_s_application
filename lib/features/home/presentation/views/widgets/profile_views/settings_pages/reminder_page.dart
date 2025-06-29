@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/custom_build_calander.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/custom_build_calendar.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/date_header.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/reminder_time_picker.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/reminder_toggle.dart';
@@ -36,6 +36,7 @@ class _ReminderPage extends State<ReminderPage> {
   }
 
   void _handleCreate() {
+    GoRouter.of(context).push(AppRouter.kReminderCreatedPage);
     print(
         "Date is selected $selectedDate and time : ${selectedTime.format(context)}");
     print("is Reminder on? $isReminderOn");
@@ -76,7 +77,7 @@ class _ReminderPage extends State<ReminderPage> {
                 onChangeMonth: _changeMonth,
               ),
               const SizedBox(height: 40),
-              CustomBuildCalender(
+              CustomBuildCalendar(
                 onDateSelected: _onDateSelected,
                 selectedDate: selectedDate,
               ),

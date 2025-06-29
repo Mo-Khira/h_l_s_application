@@ -9,6 +9,7 @@ import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/search_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/mealplans.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_completed_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_plans_screen.dart';
@@ -18,6 +19,7 @@ import 'package:h_l_s_application/features/home/presentation/views/widgets/profi
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_page.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/changepassword_page.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/notification_setting.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/reminder_created.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/reminder_page.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_age_page.dart';
@@ -45,6 +47,7 @@ abstract class AppRouter {
   static const kUserFitnessPage = 'userFitnessPage';
   static const kUserFitnessGoalPage = 'userFitnessGoalPage';
   static const kHomeView = '/homeView';
+  static const kSearchScreen = '/searchScreen';
   static const kEditProfilePage = '/editProfilePage';
   static const kSettingsPage = '/settingsPage';
   static const kHelpAndSupportPage = '/helpAndSupportPage';
@@ -53,6 +56,7 @@ abstract class AppRouter {
   static const kChangePasswordPage = '/changePasswordPage';
   static const kNotificationSettingPage = '/notificationSettingPage';
   static const kReminderPage = '/reminderPage';
+  static const kReminderCreatedPage = '/reminderCreatedPage';
   static const kTrainingPlanPage = '/trainingPlansPage';
   static const kTrainingCompletedScreen = '/trainingCompletedScreen';
 
@@ -96,7 +100,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kPasswordChangedPage,
-        builder: (context, state) => PasswordChangedPage(),
+        builder: (context, state) => const PasswordChangedPage(),
       ),
       GoRoute(
         path: kUserAgePage,
@@ -105,6 +109,10 @@ abstract class AppRouter {
       GoRoute(
         path: kHomeView,
         builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: kSearchScreen,
+        builder: (context, state) => const SearchScreen(),
       ),
       GoRoute(
         path: kEditProfilePage,
@@ -163,6 +171,10 @@ abstract class AppRouter {
       GoRoute(
         path: kReminderPage,
         builder: (context, state) => const ReminderPage(),
+      ),
+      GoRoute(
+        path: kReminderCreatedPage,
+        builder: (context, state) => const ReminderCreatedPage(),
       ),
       GoRoute(
         path: kTrainingPlanPage,

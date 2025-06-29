@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/custom_build_calander.dart';
+import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/custom_build_calendar.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/Diary_view/widgets/meal_selection_widget.dart';
 
 class DiaryView extends StatefulWidget {
@@ -32,7 +32,7 @@ class _DiaryViewState extends State<DiaryView> {
           child: Column(
             children: [
               SizedBox(height: kHeight(context) * 0.1),
-              CustomBuildCalender(
+              CustomBuildCalendar(
                 // onDateSelected: (DateTime) {},
                 onDateSelected: _onDateSelected,
                 selectedDate: selectedDate,

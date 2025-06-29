@@ -58,7 +58,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               Stack(
                 children: [
                   const CircleAvatar(
-                    backgroundImage: AssetImage(AssetsData.logo),
+                    backgroundImage: AssetImage(AssetsData.messi),
                     backgroundColor: Colors.white,
                     radius: 55,
                   ),

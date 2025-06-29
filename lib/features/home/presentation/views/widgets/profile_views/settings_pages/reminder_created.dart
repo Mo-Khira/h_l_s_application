@@ -6,8 +6,8 @@ import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
 
-class PasswordChangedPage extends StatelessWidget {
-  const PasswordChangedPage({super.key});
+class ReminderCreatedPage extends StatelessWidget {
+  const ReminderCreatedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class PasswordChangedPage extends StatelessWidget {
                   height: 54,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     IconButton(
@@ -35,7 +35,6 @@ class PasswordChangedPage extends StatelessWidget {
                         GoRouter.of(context).pop();
                       },
                     ),
-                    const SizedBox(),
                   ],
                 ),
                 SizedBox(height: kHeight(context) * 0.2),
@@ -46,16 +45,13 @@ class PasswordChangedPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 56),
-                Text('Password Changed !', style: Styles.textStyle26),
-                const SizedBox(height: 8),
-                Text('Your password has been \n changed successfully.',
-                    style: Styles.textStyle16),
+                Text('ReminderCreated !', style: Styles.textStyle26),
                 const SizedBox(height: 90),
                 Center(
                   child: CustomLoginButton(
-                    text: "Return to Login",
+                    text: "Return to Home",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kLoginPage);
+                      GoRouter.of(context).push(AppRouter.kHomeView);
                     },
                   ),
                 ),

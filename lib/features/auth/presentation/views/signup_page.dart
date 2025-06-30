@@ -40,6 +40,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  bool isPhoneValid = false;
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +95,11 @@ class _SignupPageState extends State<SignupPage> {
                           const SizedBox(height: 24),
                           CustomPhoneNumberTextField(
                             controller: phoneNumberController,
+                            onValidityChanged: (isValid) {
+                              setState(() {
+                                isPhoneValid = isValid;
+                              });
+                            },
                           ),
                           const SizedBox(height: 24),
                           CustomPasswordFormTextField(

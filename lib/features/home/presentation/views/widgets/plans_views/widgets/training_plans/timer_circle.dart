@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 
@@ -18,8 +17,6 @@ class TimerCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // width: 165,
-      // height: 210,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

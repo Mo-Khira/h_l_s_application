@@ -12,10 +12,9 @@ class ChatbotView extends StatefulWidget {
 }
 
 class _ChatBotViewState extends State<ChatbotView> {
-  final List<Map<String, String>> _messages =
-      []; // قائمة الرسائل (نص + نوع المرسل)
+  final List<Map<String, String>> _messages = [];
   final TextEditingController _controller = TextEditingController();
-  bool _isLoading = false; // حالة تحميل الرد
+  bool _isLoading = false;
 
   void _sendMessage() async {
     if (_controller.text.isEmpty) return;
@@ -66,10 +65,10 @@ class _ChatBotViewState extends State<ChatbotView> {
                             const CircleAvatar(
                               backgroundColor: kPrimaryColor,
                               radius: 20,
-                              backgroundImage: AssetImage(
-                                  'assets/Images/projLogo.png'), // صورة الشات بوت
+                              backgroundImage:
+                                  AssetImage('assets/Images/projLogo.png'),
                             ),
-                            const SizedBox(width: 10), // مسافة بين الصورة والنص
+                            const SizedBox(width: 10),
                           ],
                           Flexible(
                             child: Container(
@@ -90,8 +89,7 @@ class _ChatBotViewState extends State<ChatbotView> {
                             ),
                           ),
                           if (message["sender"] == "user") ...[
-                            const SizedBox(
-                                width: 10), // مسافة بين النص والأيقونة
+                            const SizedBox(width: 10),
                             const CircleAvatar(
                               radius: 20,
                               backgroundColor: kSecondaryColor,

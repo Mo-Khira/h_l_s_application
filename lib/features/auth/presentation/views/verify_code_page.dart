@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
@@ -5,19 +7,35 @@ import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
-import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_phone_number_text_filed.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_count_down_timer.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerifyCodePage extends StatefulWidget {
+  final String phoneNumber;
+
+  const VerifyCodePage({super.key, required this.phoneNumber});
+
   @override
   _VerifyCodePage createState() => _VerifyCodePage();
 }
 
 class _VerifyCodePage extends State<VerifyCodePage> {
-  final TextEditingController _phoneController = TextEditingController();
-  bool _isFieldFocused = false;
-  String num = "**********";
+  late String maskedPhone;
+  String enteredCode = '';
+  bool isResendAvailable = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final fullNumber = widget.phoneNumber;
+    if (fullNumber.length >= 5) {
+      final start = fullNumber.substring(0, 3);
+      final end = fullNumber.substring(fullNumber.length - 2);
+      maskedPhone = '$start******$end';
+    } else {
+      maskedPhone = fullNumber;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +78,7 @@ class _VerifyCodePage extends State<VerifyCodePage> {
                 Text('Verify Code ', style: Styles.textStyle24),
                 const SizedBox(height: 8),
                 Text(
-                    'We Just sent a 4-digit verification code to\n ${num} Enter the code in the box below to\n continue',
+                    'We Just sent a 4-digit verification code to\n $maskedPhone Enter the code in the box below to\n continue',
                     style: Styles.textStyle14),
                 const SizedBox(
                   height: 44,
@@ -87,6 +105,11 @@ class _VerifyCodePage extends State<VerifyCodePage> {
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   animationType: AnimationType.fade,
+                  onChanged: (value) {
+                    setState(() {
+                      enteredCode = value;
+                    });
+                  },
                   pinTheme: PinTheme(
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(10),
@@ -101,42 +124,54 @@ class _VerifyCodePage extends State<VerifyCodePage> {
                     selectedColor: kSecondaryColor,
                   ),
                 ),
-
                 const SizedBox(
                   height: 21,
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "Don't recieve a code ?",
+                      "Don't receive a code ?",
                       style: Styles.textStyle14,
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
                           padding: const EdgeInsets.all(0)),
-                      onPressed: () {},
+                      onPressed: isResendAvailable
+                          ? () {
+                              setState(() {
+                                isResendAvailable = false;
+                              });
+                            }
+                          : null,
                       child: Text(
                         "Resend",
                         style: Styles.textStyle14.copyWith(
-                          color: kSecondaryColor,
+                          color:
+                              isResendAvailable ? kSecondaryColor : Colors.grey,
                         ),
                       ),
                     ),
                     const Spacer(),
-                    const CustomCountdownTimer(),
-                    // const Text("0:00"),
+                    CustomCountdownTimer(
+                      onFinished: () {
+                        setState(() {
+                          isResendAvailable = true;
+                        });
+                      },
+                    ),
                   ],
                 ),
-                const SizedBox(
-                    height: 50), // Increased height to move the button lower
+                const SizedBox(height: 50),
                 Center(
                   child: CustomLoginButton(
                     text: "Send",
-                    onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kCreatePasswordPage);
-                    },
+                    onPressed: enteredCode.length == 4
+                        ? () {
+                            GoRouter.of(context)
+                                .push(AppRouter.kCreatePasswordPage);
+                          }
+                        : null,
                   ),
                 ),
                 const SizedBox(height: 20),

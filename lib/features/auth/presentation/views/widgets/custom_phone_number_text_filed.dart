@@ -5,10 +5,12 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class CustomPhoneNumberTextField extends StatefulWidget {
   final TextEditingController controller;
+  final Function(bool) onValidityChanged; //
 
   const CustomPhoneNumberTextField({
     super.key,
     required this.controller,
+    required this.onValidityChanged, //
   });
 
   @override
@@ -19,6 +21,7 @@ class CustomPhoneNumberTextField extends StatefulWidget {
 class _CustomPhoneNumberTextFieldState
     extends State<CustomPhoneNumberTextField> {
   PhoneNumber number = PhoneNumber(isoCode: 'EG');
+  bool isPhoneValid = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +44,18 @@ class _CustomPhoneNumberTextFieldState
           height: 60,
           padding: const EdgeInsets.only(left: 8.0),
           child: InternationalPhoneNumberInput(
-            onInputChanged: (PhoneNumber number) {
-              widget.controller.text = number.phoneNumber ?? '';
+            onInputValidated: (bool value) {
+              setState(() {
+                isPhoneValid = value;
+              });
+              widget.onValidityChanged(value);
             },
+            onInputChanged: (PhoneNumber number) {},
             selectorConfig: const SelectorConfig(
               selectorType: PhoneInputSelectorType.DIALOG,
             ),
             initialValue: number,
-            textFieldController: TextEditingController(),
+            textFieldController: widget.controller,
             inputDecoration: InputDecoration(
               contentPadding: const EdgeInsets.only(
                 top: 20,

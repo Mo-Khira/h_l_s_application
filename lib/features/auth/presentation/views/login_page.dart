@@ -110,7 +110,7 @@ class _SignupPageState extends State<LoginPage> {
                               isLoading = false;
                             });
                             GoRouter.of(context)
-                                .push(AppRouter.kUserInfoInputs);
+                                .pushReplacement(AppRouter.kUserInfoInputs);
                           } else if (state is LoginFailure) {
                             setState(() {
                               isLoading = false;

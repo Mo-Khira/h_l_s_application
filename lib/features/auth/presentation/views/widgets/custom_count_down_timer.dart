@@ -4,14 +4,16 @@ import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 
 class CustomCountdownTimer extends StatefulWidget {
-  const CustomCountdownTimer({super.key});
+  final Function()? onFinished;
+
+  const CustomCountdownTimer({super.key, this.onFinished});
 
   @override
   State<CustomCountdownTimer> createState() => CustomCountdownTimerState();
 }
 
 class CustomCountdownTimerState extends State<CustomCountdownTimer> {
-  int secondsRemaining = 60; // مدة العداد (60 ثانية)
+  int secondsRemaining = 60;
   Timer? timer;
 
   @override
@@ -27,14 +29,15 @@ class CustomCountdownTimerState extends State<CustomCountdownTimer> {
           secondsRemaining--;
         });
       } else {
-        timer.cancel(); // يوقف العداد عند انتهاء الوقت
+        timer.cancel();
+        widget.onFinished?.call();
       }
     });
   }
 
   @override
   void dispose() {
-    timer?.cancel(); // تأكد من إيقاف العداد عند إغلاق الصفحة
+    timer?.cancel();
     super.dispose();
   }
 

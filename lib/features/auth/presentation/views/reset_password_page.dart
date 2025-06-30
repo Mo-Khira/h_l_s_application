@@ -5,15 +5,20 @@ import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_phone_number_text_filed.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/widgets/show_snack_bar.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
+
   @override
-  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+  ResetPasswordScreenState createState() => ResetPasswordScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _phoneController = TextEditingController();
-  bool _isFieldFocused = false;
+  final bool isFieldFocused = false;
+
+  bool isPhoneValid = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +66,27 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(height: 55),
                 CustomPhoneNumberTextField(
                   controller: _phoneController,
+                  onValidityChanged: (isValid) {
+                    setState(() {
+                      isPhoneValid = isValid;
+                    });
+                  },
                 ),
-                const SizedBox(
-                    height: 100), // Increased height to move the button lower
+                const SizedBox(height: 100),
                 Center(
                   child: CustomLoginButton(
                     text: "Send",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kVerityCodePage);
+                      if (!isPhoneValid || _phoneController.text.isEmpty) {
+                        showSnackBar(
+                            context, "Please enter a valid phone number.");
+                        return;
+                      }
+
+                      GoRouter.of(context).push(
+                        AppRouter.kVerityCodePage,
+                        extra: _phoneController.text,
+                      );
                     },
                   ),
                 ),

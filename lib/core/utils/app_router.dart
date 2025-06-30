@@ -88,11 +88,15 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kResetPasswordPage,
-        builder: (context, state) => ResetPasswordScreen(),
+        builder: (context, state) => const ResetPasswordScreen(),
       ),
       GoRoute(
         path: kVerityCodePage,
-        builder: (context, state) => VerifyCodePage(),
+        name: AppRouter.kVerityCodePage,
+        builder: (context, state) {
+          final phoneNumber = state.extra as String;
+          return VerifyCodePage(phoneNumber: phoneNumber);
+        },
       ),
       GoRoute(
         path: kCreatePasswordPage,

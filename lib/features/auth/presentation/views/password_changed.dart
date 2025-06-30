@@ -55,7 +55,8 @@ class PasswordChangedPage extends StatelessWidget {
                   child: CustomLoginButton(
                     text: "Return to Login",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kLoginPage);
+                      GoRouter.of(context)
+                          .pushReplacement(AppRouter.kLoginPage);
                     },
                   ),
                 ),

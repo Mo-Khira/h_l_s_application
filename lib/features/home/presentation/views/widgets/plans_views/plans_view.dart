@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/custom_plan_section.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/meal_list.dart';

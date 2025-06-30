@@ -8,8 +8,6 @@ class CustomLoginDecorationRow extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -26,7 +24,7 @@ class CustomLoginDecorationRow extends StatelessWidget {
               ),
             ),
             height: 4,
-            width: screenWidth / 4,
+            width: kWidth(context) / 4,
           ),
         ),
         Padding(
@@ -49,7 +47,7 @@ class CustomLoginDecorationRow extends StatelessWidget {
               ),
             ),
             height: 4,
-            width: screenWidth / 4,
+            width: kWidth(context) / 4,
           ),
         ),
       ],

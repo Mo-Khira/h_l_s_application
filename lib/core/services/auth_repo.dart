@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class AuthRepo {
   final Dio _dio = Dio();
-  final String baseUrl = 'http://127.0.0.1:8000/api/'; // غيّر الرابط حسب مشروعك
+  final String baseUrl = 'http://127.0.0.1:8000/api/';
 
   Future<void> signup({
     required String firstName,

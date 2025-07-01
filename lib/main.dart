@@ -5,6 +5,7 @@ import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/services/auth_repo.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/features/auth/data/signup_fun.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/favorites_cubit.dart';
 import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 
 void main() async {
@@ -23,6 +24,9 @@ void main() async {
         ),
         BlocProvider<UserInfoCubit>(
           create: (_) => UserInfoCubit(),
+        ),
+        BlocProvider(
+          create: (_) => FavoritesCubit(),
         ),
       ],
       child: const HLS(),

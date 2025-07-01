@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:h_l_s_application/core/config/dio_helper.dart';
 
 class AuthRepo {
-  final Dio _dio = Dio();
+  final Dio dio = DioHelper.dio;
   final String baseUrl = 'http://127.0.0.1:8000/api/';
 
   Future<void> signup({
@@ -12,7 +13,7 @@ class AuthRepo {
     required String password,
   }) async {
     try {
-      final response = await _dio.post(
+      final response = await dio.post(
         '$baseUrl/signup',
         data: {
           'first_name': firstName,

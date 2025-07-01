@@ -34,6 +34,7 @@
 // }
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:h_l_s_application/core/config/token_service.dart';
 import 'package:h_l_s_application/core/services/auth_repo.dart';
 import 'signup_state.dart';
 
@@ -58,6 +59,13 @@ class SignupCubit extends Cubit<SignupState> {
         phone: phone,
         password: password,
       );
+
+      await TokenService.saveUserData({
+        'first_name': firstName,
+        'last_name': lastName,
+        'email': email,
+        'phone': phone,
+      });
       emit(SignupSuccess());
     } catch (e) {
       emit(SignupFailure(e.toString()));

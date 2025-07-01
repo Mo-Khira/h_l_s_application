@@ -122,7 +122,7 @@ class _SignupPageState extends State<LoginPage> {
                           return CustomLoginButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                BlocProvider.of<LoginCubit>(context).userLogin(
+                                BlocProvider.of<LoginCubit>(context).loginUser(
                                   email: widget.email!,
                                   password: widget.password!,
                                 );

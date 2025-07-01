@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'user_info_state.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
-  UserInfoCubit() : super(UserInfoState());
+  UserInfoCubit() : super(const UserInfoState());
 
   void setAge(int age) {
     emit(state.copyWith(age: age));
@@ -28,6 +28,4 @@ class UserInfoCubit extends Cubit<UserInfoState> {
   void setFitnessGoalLevel(String fitnessGoalLevel) {
     emit(state.copyWith(fitnessGoalLevel: fitnessGoalLevel));
   }
-
-  // تقدر تضيف باقي البيانات بنفس الشكل لاحقًا (goal, target weight, etc.)
 }

@@ -9,18 +9,18 @@ import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/Home_view/search_screen.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/food_plans/mealplans.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_completed_screen.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/plans_views/training_plans/training_plans_screen.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/edit_profile_page.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/favorites/favorites_page.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/help_and_support_page.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_page.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/changepassword_page.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/notification_setting.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/reminder_created.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_views/settings_pages/reminder_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/Home_view/search_screen.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/mealplans.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_completed_screen.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_plans_screen.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/edit_profile_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/favorites/favorites_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/help_and_support_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/settings_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/settings_pages/changepassword_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/settings_pages/notification_setting.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/settings_pages/widgets/reminder_created.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/settings_pages/reminder_page.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_age_page.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_page.dart';
@@ -140,7 +140,7 @@ abstract class AppRouter {
           ),
           GoRoute(
             path: kUserFitnessPage,
-            builder: (context, state) => UserFitnessPage(),
+            builder: (context, state) => const UserFitnessPage(),
           ),
           GoRoute(
             path: kUserFitnessGoalPage,

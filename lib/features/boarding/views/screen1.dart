@@ -5,7 +5,6 @@ import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/boarding/views/widgets/begin_screen_bar.dart';
-import 'package:h_l_s_application/features/boarding/views/widgets/begin_screen_image.dart';
 
 class ScreenOne extends StatelessWidget {
   const ScreenOne({super.key});
@@ -16,8 +15,8 @@ class ScreenOne extends StatelessWidget {
       child: Scaffold(
         body: GestureDetector(
           onHorizontalDragEnd: (details) {
-            if (details.primaryVelocity! < -10) {
-              GoRouter.of(context).pushReplacement(AppRouter.kScreenTwo);
+            if (details.primaryVelocity! < -1) {
+              GoRouter.of(context).push(AppRouter.kScreenTwo);
             }
           },
           child: Column(
@@ -27,7 +26,10 @@ class ScreenOne extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const BeginScreenImage(selectedImage: AssetsData.screen1),
+              SizedBox(
+                height: kWidth(context),
+                child: Image.asset(AssetsData.screen1),
+              ),
               const SizedBox(
                 height: 20,
               ),

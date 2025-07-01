@@ -8,6 +8,8 @@ import 'package:h_l_s_application/features/auth/presentation/views/widgets/custo
 import 'package:h_l_s_application/features/user_details/data/user_info_cubit.dart';
 
 class UserFitnessPage extends StatefulWidget {
+  const UserFitnessPage({super.key});
+
   @override
   _UserFitnessPage createState() => _UserFitnessPage();
 }
@@ -161,6 +163,7 @@ class FitnessLevelButton extends StatelessWidget {
   final VoidCallback onSelect;
 
   const FitnessLevelButton({
+    super.key,
     required this.level,
     required this.isSelected,
     required this.onSelect,

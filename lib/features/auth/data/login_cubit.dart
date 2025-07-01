@@ -3,11 +3,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:h_l_s_application/core/utils/api_service.dart';
 import 'package:h_l_s_application/features/auth/data/login_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
-  void userLogin({required String email, required String password}) async {
+  void loginUser({required String email, required String password}) async {
     emit(LoginLoading());
     try {
       // final result =
@@ -28,6 +29,7 @@ class LoginCubit extends Cubit<LoginState> {
 }
 
 // import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:h_l_s_application/core/config/token_service.dart';
 // import 'package:h_l_s_application/core/utils/api_service.dart';
 // import 'login_state.dart';
 // import 'package:dio/dio.dart';
@@ -35,19 +37,26 @@ class LoginCubit extends Cubit<LoginState> {
 // class LoginCubit extends Cubit<LoginState> {
 //   LoginCubit() : super(LoginInitial());
 
-//   Future<void> loginUser(
-//       {required String email, required String password}) async {
+//   Future<void> loginUser({
+//     required String email,
+//     required String password,
+//   }) async {
 //     emit(LoginLoading());
 //     try {
 //       var response = await ApiService.post(
-//         endpoint: 'login/', // اسم endpoint حسب Django
+//         endpoint: 'login/',
 //         data: {
 //           'email': email,
 //           'password': password,
 //         },
 //       );
 
-//       // إذا نجح
+//       // ✅ استخراج التوكن من الاستجابة
+//       final token = response.data['token'];
+
+//       // ✅ تخزين التوكن باستخدام SharedPreferences
+//       // final prefs = await SharedPreferences.getInstance();
+//       await TokenService.saveToken(token);
 //       emit(LoginSuccess());
 //     } on DioException catch (e) {
 //       emit(LoginFailure(e.response?.data['detail'] ?? 'Login failed'));

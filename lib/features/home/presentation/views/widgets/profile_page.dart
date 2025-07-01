@@ -41,7 +41,8 @@ class _ProfilePage extends State<ProfilePage> {
                           size: 28,
                         ),
                         onPressed: () {
-                          GoRouter.of(context).pop();
+                          GoRouter.of(context)
+                              .pushReplacement(AppRouter.kHomeView);
                         },
                       ),
                       Text(
@@ -156,7 +157,6 @@ class _ProfilePage extends State<ProfilePage> {
                 const SizedBox(height: 61),
                 Column(
                   children: [
-                    // Edit Profile
                     ListTile(
                       onTap: () =>
                           GoRouter.of(context).push(AppRouter.kEditProfilePage),
@@ -167,8 +167,6 @@ class _ProfilePage extends State<ProfilePage> {
                       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     ),
                     const SizedBox(height: 16),
-
-                    // Favorites
                     ListTile(
                       onTap: () =>
                           GoRouter.of(context).push(AppRouter.kFavoritesPage),
@@ -180,8 +178,6 @@ class _ProfilePage extends State<ProfilePage> {
                       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     ),
                     const SizedBox(height: 16),
-
-                    // Settings
                     ListTile(
                       onTap: () =>
                           GoRouter.of(context).push(AppRouter.kSettingsPage),
@@ -210,7 +206,7 @@ class _ProfilePage extends State<ProfilePage> {
                     ),
                     const SizedBox(height: 20),
                   ],
-                )
+                ),
               ],
             ),
           ),

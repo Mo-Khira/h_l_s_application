@@ -5,7 +5,8 @@ import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
-import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/favorites_cubit.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/favorites_meals_cubit.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/favorites_workouts_cubit.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -17,12 +18,15 @@ class FavoritePage extends StatefulWidget {
 class FavoritePageState extends State<FavoritePage> {
   bool isMealSelected = true;
 
-  List<Map<String, dynamic>> favoriteWorkouts = [];
-
   @override
   Widget build(BuildContext context) {
-    final favoriteMeals = context.watch<FavoritesCubit>().state;
-    final favorites = isMealSelected ? favoriteMeals : favoriteWorkouts;
+    final List<Map<String, dynamic>> favoriteWorkouts =
+        context.watch<FavoritesWorkoutCubit>().state;
+    final List<Map<String, dynamic>> favoriteMeals =
+        context.watch<FavoritesMealsCubit>().state;
+
+    final List<Map<String, dynamic>> favorites =
+        isMealSelected ? favoriteMeals : favoriteWorkouts;
 
     return Scaffold(
       backgroundColor: kPrimaryColor,
@@ -98,17 +102,24 @@ class FavoritePageState extends State<FavoritePage> {
                 child: favorites.isEmpty
                     ? Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // Image.asset('assets/images/empty.png', height: 200),
-                            const SizedBox(height: 20),
-                            const Text(
-                              "No favorites yet!",
-                              style: TextStyle(color: Colors.white),
+                            const Spacer(),
+                            Image.asset('assets/Images/nofavm.png',
+                                height: 200),
+                            const SizedBox(height: 40),
+                            Text(
+                              isMealSelected
+                                  ? "Favorite recipes to add \n           them here !"
+                                  : "Favorite workouts to add \n            them here !",
+                              style: Styles.textStyle18
+                                  .copyWith(fontWeight: FontWeight.w400),
                             ),
+                            const Spacer(),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 12, right: 12, bottom: 10),
+                                  left: 4, right: 4, bottom: 10),
                               child: CustomLoginButton(
                                   text: isMealSelected
                                       ? "Add Meal"
@@ -131,6 +142,7 @@ class FavoritePageState extends State<FavoritePage> {
                         // padding: const EdgeInsets.symmetric(horizontal: 16),
                         itemBuilder: (context, index) {
                           final item = favorites[index];
+
                           return Card(
                             color: kPrimaryColor,
                             margin: const EdgeInsets.only(bottom: 16),
@@ -140,11 +152,11 @@ class FavoritePageState extends State<FavoritePage> {
                                 Stack(
                                   children: [
                                     ClipRRect(
-                                      borderRadius: const BorderRadius.vertical(
-                                          top: Radius.circular(8)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(15)),
                                       child: Image.asset(
                                         item['image'],
-                                        height: 180,
+                                        height: 150,
                                         width: double.infinity,
                                         fit: BoxFit.cover,
                                       ),
@@ -152,14 +164,37 @@ class FavoritePageState extends State<FavoritePage> {
                                     Positioned(
                                       top: 8,
                                       right: 8,
-                                      child: IconButton(
-                                        icon: const Icon(Icons.favorite,
-                                            color: Colors.red),
-                                        onPressed: () {
-                                          context
-                                              .read<FavoritesCubit>()
-                                              .removeFavorite(item['title']);
-                                        },
+                                      child: Container(
+                                        width: 28,
+                                        height: 28,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Center(
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.favorite,
+                                              color: Colors.red[600],
+                                            ),
+                                            padding: EdgeInsets.zero,
+                                            onPressed: () {
+                                              if (isMealSelected) {
+                                                context
+                                                    .read<FavoritesMealsCubit>()
+                                                    .removeFavorite(
+                                                        item['title']);
+                                              } else {
+                                                context
+                                                    .read<
+                                                        FavoritesWorkoutCubit>()
+                                                    .removeFavorite(
+                                                        item['title']);
+                                              }
+                                            },
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],

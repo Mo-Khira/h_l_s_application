@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:h_l_s_application/constants.dart';
-import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/favorites_cubit.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/favorites_meals_cubit.dart';
 
 class FavoriteButton extends StatelessWidget {
   final Map<String, dynamic> meal;
@@ -10,22 +10,20 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double boxSize = kWidth(context) * 0.08;
-    double iconSize = boxSize * 0.7;
-    return BlocBuilder<FavoritesCubit, List<Map<String, dynamic>>>(
+    return BlocBuilder<FavoritesMealsCubit, List<Map<String, dynamic>>>(
       builder: (context, favorites) {
         final isFav = favorites.any((item) => item['title'] == meal['title']);
         return GestureDetector(
           onTap: () {
             if (isFav) {
-              context.read<FavoritesCubit>().removeFavorite(meal['title']);
+              context.read<FavoritesMealsCubit>().removeFavorite(meal['title']);
             } else {
-              context.read<FavoritesCubit>().addFavorite(meal);
+              context.read<FavoritesMealsCubit>().addFavorite(meal);
             }
           },
           child: Container(
-            width: boxSize,
-            height: boxSize,
+            width: 28,
+            height: 28,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(
@@ -36,7 +34,6 @@ class FavoriteButton extends StatelessWidget {
               child: Icon(
                 isFav ? Icons.favorite : Icons.favorite_border,
                 color: isFav ? Colors.red[600] : kPrimaryColor,
-                size: iconSize,
               ),
             ),
           ),

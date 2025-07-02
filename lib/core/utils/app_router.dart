@@ -12,7 +12,7 @@ import 'package:h_l_s_application/features/home/presentation/views/home_view.dar
 import 'package:h_l_s_application/features/home/presentation/views/Home_view/search_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/mealplans.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_completed_screen.dart';
-import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_plans_screen.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_plans.dart';
 import 'package:h_l_s_application/features/home/presentation/views/profile_views/edit_profile_page.dart';
 import 'package:h_l_s_application/features/home/presentation/views/profile_views/favorites/favorites_page.dart';
 import 'package:h_l_s_application/features/home/presentation/views/profile_views/help_and_support_page.dart';

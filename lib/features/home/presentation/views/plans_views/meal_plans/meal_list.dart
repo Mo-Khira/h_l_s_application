@@ -1,6 +1,6 @@
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/meal_details.dart';
 
-List<Meal> getMeals() {
+List<Meal> getStaticMeals() {
   return [
     Meal(
       imagePath: 'assets/Images/img (3).png',
@@ -86,4 +86,8 @@ List<Meal> getMeals() {
       top: 701,
     ),
   ];
+}
+
+List<Meal> parseMealsFromBackend(List<dynamic> data) {
+  return data.map((item) => Meal.fromJson(item)).toList();
 }

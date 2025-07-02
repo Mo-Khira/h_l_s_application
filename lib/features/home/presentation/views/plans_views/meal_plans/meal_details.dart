@@ -20,4 +20,19 @@ class Meal {
     required this.carbs,
     required this.top,
   });
+
+  // من الباك اند
+  factory Meal.fromJson(Map<String, dynamic> json) {
+    return Meal(
+      imagePath: json['imagePath'] ?? 'assets/Images/default.png',
+      title: json['title'] ?? 'Unknown',
+      calories: json['calories'] ?? '0 kcal',
+      cookTime: json['cookTime'] ?? '0 min',
+      ingredients: List<String>.from(json['ingredients'] ?? []),
+      fat: json['fat'] ?? '0 g',
+      protein: json['protein'] ?? '0 g',
+      carbs: json['carbs'] ?? '0 g',
+      top: (json['top'] ?? 0).toDouble(),
+    );
+  }
 }

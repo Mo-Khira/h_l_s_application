@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/widgets/favorite_button.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_progress_screen.dart';
 import 'widgets/exercise_list.dart';
 import 'widgets/subtitle_and_clock.dart';
@@ -27,7 +28,6 @@ class TrainingDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: kPrimaryColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -47,6 +47,19 @@ class TrainingDetailScreen extends StatelessWidget {
                           color: Colors.white,
                           size: 28,
                         ),
+                      ),
+                      const Spacer(),
+                      FavoriteWorkoutButton(
+                        workout: {
+                          'title': title,
+                          'subtitle': subtitle,
+                          'image': imagePath,
+                          'calories': 200,
+                          'time': duration.replaceAll(" min", ""),
+                        },
+                      ),
+                      const SizedBox(
+                        width: 18,
                       ),
                     ],
                   ),

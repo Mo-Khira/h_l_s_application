@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/data/meal_cubit.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/data/workouts_cubit.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/widgets/custom_plan_section.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/meal_list.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/meals_details.dart';
@@ -71,12 +74,13 @@ class PlansView extends StatelessWidget {
   }
 
   Widget _buildMealList(BuildContext context) {
-    final meals = getMeals();
+    final meals = context.watch<MealsCubit>().state;
+    final safeMeals = meals.isEmpty ? getStaticMeals() : meals;
     return Column(
       children: List.generate(
         4,
         (index) {
-          final meal = meals[index];
+          final meal = safeMeals[index];
           return MealCardItem(
             imagePath: meal.imagePath,
             title: meal.title,
@@ -106,13 +110,15 @@ class PlansView extends StatelessWidget {
   }
 
   Widget _buildTrainingCardList(BuildContext context) {
-    final trainingPlans = getTrainingPlans();
+    final trainingPlans = context.watch<WorkoutsCubit>().state;
+    final fallbackPlans = WorkoutsCubit.getStaticWorkouts();
+    final safePlans = trainingPlans.isEmpty ? fallbackPlans : trainingPlans;
     final commonExercises = getCommonExercises();
     return Column(
       children: List.generate(
         4,
         (index) {
-          final plan = trainingPlans[index];
+          final plan = safePlans[index];
           return TrainingCardItem(
             title: plan["title"],
             subtitle: plan["subtitle"],

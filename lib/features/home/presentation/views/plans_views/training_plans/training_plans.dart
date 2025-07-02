@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/data/workouts_cubit.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_detail_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_list.dart';
 import 'widgets/training_plan_card.dart';
@@ -10,7 +12,9 @@ class TrainingPlansPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> trainingPlans = getTrainingPlans();
+    final trainingPlans = context.watch<WorkoutsCubit>().state;
+    final fallbackPlans = WorkoutsCubit.getStaticWorkouts();
+    final safePlans = trainingPlans.isEmpty ? fallbackPlans : trainingPlans;
     final List<String> commonExercises = getCommonExercises();
     return SafeArea(
       child: Scaffold(
@@ -53,7 +57,7 @@ class TrainingPlansPage extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
-                  itemCount: trainingPlans.length,
+                  itemCount: safePlans.length,
                   itemBuilder: (context, index) {
                     final plan = trainingPlans[index];
                     return TrainingPlanCard(

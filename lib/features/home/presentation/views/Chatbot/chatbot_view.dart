@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
-import 'package:h_l_s_application/features/home/presentation/views/Chatbot/data/chatbot_sevice.dart';
+import 'package:h_l_s_application/features/home/presentation/views/Chatbot/data/chatbot_offline_data.dart';
 import 'package:h_l_s_application/features/home/presentation/views/Chatbot/widgets/custom_appbar.dart';
 
 class ChatbotView extends StatefulWidget {
   const ChatbotView({super.key});
 
   @override
-  _ChatBotViewState createState() => _ChatBotViewState();
+  ChatBotViewState createState() => ChatBotViewState();
 }
 
-class _ChatBotViewState extends State<ChatbotView> {
+class ChatBotViewState extends State<ChatbotView> {
   final List<Map<String, String>> _messages = [];
   final TextEditingController _controller = TextEditingController();
   bool _isLoading = false;
@@ -26,7 +26,9 @@ class _ChatBotViewState extends State<ChatbotView> {
       _isLoading = true;
     });
 
-    String botResponse = await GeminiService.sendMessage(userMessage);
+    await Future.delayed(const Duration(microseconds: 50));
+
+    String botResponse = OfflineChatBot.getResponse(userMessage);
 
     setState(() {
       _messages.insert(0, {"sender": "bot", "text": botResponse});
@@ -60,27 +62,37 @@ class _ChatBotViewState extends State<ChatbotView> {
                         mainAxisAlignment: message["sender"] == "user"
                             ? MainAxisAlignment.end
                             : MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           if (message["sender"] == "bot") ...[
                             const CircleAvatar(
                               backgroundColor: kPrimaryColor,
                               radius: 20,
-                              backgroundImage:
-                                  AssetImage('assets/Images/projLogo.png'),
+                              backgroundImage: AssetImage(
+                                'assets/Images/projLogo.png',
+                              ),
                             ),
-                            const SizedBox(width: 10),
                           ],
                           Flexible(
                             child: Container(
                               padding: const EdgeInsets.all(10),
                               margin: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
+                                  vertical: 1, horizontal: 10),
                               decoration: BoxDecoration(
-                                color: message["sender"] == "user"
-                                    ? kSecondaryColor
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+                                  color: message["sender"] == "user"
+                                      ? kSecondaryColor
+                                      : Colors.white,
+                                  borderRadius: message["sender"] == "user"
+                                      ? const BorderRadius.only(
+                                          topLeft: Radius.circular(14),
+                                          bottomLeft: Radius.circular(14),
+                                          bottomRight: Radius.circular(14),
+                                        )
+                                      : const BorderRadius.only(
+                                          topRight: Radius.circular(14),
+                                          bottomLeft: Radius.circular(14),
+                                          bottomRight: Radius.circular(14),
+                                        )),
                               child: Text(
                                 message["text"]!,
                                 style: Styles.textStyle16
@@ -88,17 +100,7 @@ class _ChatBotViewState extends State<ChatbotView> {
                               ),
                             ),
                           ),
-                          if (message["sender"] == "user") ...[
-                            const SizedBox(width: 10),
-                            const CircleAvatar(
-                              radius: 20,
-                              backgroundColor: kSecondaryColor,
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
+                          if (message["sender"] == "user") ...[],
                         ],
                       ),
                     ),
@@ -109,7 +111,9 @@ class _ChatBotViewState extends State<ChatbotView> {
             if (_isLoading)
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: kSecondaryColor,
+                ),
               ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -123,16 +127,6 @@ class _ChatBotViewState extends State<ChatbotView> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
-                        suffix: IconButton(
-                          constraints:
-                              BoxConstraints(), // تعطي حرية للحجم حسب الحاجة
-
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.mic_none_rounded,
-                            color: kPrimaryColor,
-                          ),
-                        ),
                         hintText: 'Ask me anything...',
                         hintStyle:
                             Styles.textStyle16.copyWith(color: kPrimaryColor),
@@ -141,15 +135,23 @@ class _ChatBotViewState extends State<ChatbotView> {
                         focusedBorder: textFieldBorderStyle(),
                         contentPadding: const EdgeInsets.symmetric(
                           vertical: 0,
-                          horizontal: 15,
+                          horizontal: 8,
                         ),
                       ),
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.arrow_circle_left,
-                        size: 40, color: kSecondaryColor),
-                    onPressed: _sendMessage,
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: kSecondaryColor,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: const Icon(Icons.keyboard_arrow_up_rounded,
+                          size: 40, color: kPrimaryColor),
+                      onPressed: _sendMessage,
+                    ),
                   ),
                 ],
               ),

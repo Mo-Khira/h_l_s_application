@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
-import 'package:h_l_s_application/features/home/presentation/views/Chatbot/data/chatbot_sevice.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/chatbot_help_offline_data.dart';
 
 class HelpAndSupportPage extends StatefulWidget {
   const HelpAndSupportPage({super.key});
@@ -27,7 +27,7 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
       _isLoading = true;
     });
 
-    String botResponse = await GeminiService.sendMessage(userMessage);
+    String botResponse = HelpOfflineBot.getResponse(userMessage);
 
     setState(() {
       _messages.insert(0, {"sender": "bot", "text": botResponse});
@@ -82,43 +82,34 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
                           ? Alignment.centerRight
                           : Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(1),
                         child: Row(
                           mainAxisAlignment: message["sender"] == "user"
                               ? MainAxisAlignment.end
                               : MainAxisAlignment.start,
                           children: [
-                            if (message["sender"] == "bot") ...[
-                              // const CircleAvatar(
-                              //   backgroundColor: kPrimaryColor,
-                              //   radius: 20,
-                              //   backgroundImage:
-                              //       AssetImage('assets/Images/projLogo.png'),
-                              // ),
-                              // const SizedBox(width: 10),
-                            ],
+                            if (message["sender"] == "bot") ...[],
                             Flexible(
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 5),
                                 margin: const EdgeInsets.symmetric(
-                                  vertical: 10,
+                                  vertical: 8,
                                 ),
                                 decoration: BoxDecoration(
-                                    color: message["sender"] == "user"
-                                        ? Colors.white
-                                        : Colors.white,
-                                    borderRadius: message["sender"] == "user"
-                                        ? const BorderRadius.only(
-                                            topLeft: Radius.circular(14),
-                                            bottomLeft: Radius.circular(14),
-                                            bottomRight: Radius.circular(14),
-                                          )
-                                        : const BorderRadius.only(
-                                            topRight: Radius.circular(14),
-                                            bottomLeft: Radius.circular(14),
-                                            bottomRight: Radius.circular(14),
-                                          )),
+                                  color: Colors.white,
+                                  borderRadius: message["sender"] == "user"
+                                      ? const BorderRadius.only(
+                                          topLeft: Radius.circular(14),
+                                          bottomLeft: Radius.circular(14),
+                                          bottomRight: Radius.circular(14),
+                                        )
+                                      : const BorderRadius.only(
+                                          topRight: Radius.circular(14),
+                                          bottomLeft: Radius.circular(14),
+                                          bottomRight: Radius.circular(14),
+                                        ),
+                                ),
                                 child: Text(
                                   message["text"]!,
                                   style: Styles.textStyle16
@@ -126,17 +117,7 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
                                 ),
                               ),
                             ),
-                            if (message["sender"] == "user") ...[
-                              // const SizedBox(width: 10),
-                              // const CircleAvatar(
-                              //   radius: 20,
-                              //   backgroundColor: kSecondaryColor,
-                              //   child: Icon(
-                              //     Icons.person,
-                              //     color: Colors.black,
-                              //   ),
-                              // ),
-                            ],
+                            if (message["sender"] == "user") ...[],
                           ],
                         ),
                       ),
@@ -150,7 +131,7 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
                   child: CircularProgressIndicator(),
                 ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 8.0, top: 8),
                 child: Row(
                   children: [
                     Expanded(
@@ -162,14 +143,6 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          // suffix: IconButton(
-                          //   constraints: const BoxConstraints(),
-                          //   onPressed: () {},
-                          //   icon: const Icon(
-                          //     Icons.mic_none_rounded,
-                          //     color: kPrimaryColor,
-                          //   ),
-                          // ),
                           hintText: 'Ask me anything...',
                           hintStyle:
                               Styles.textStyle16.copyWith(color: kPrimaryColor),
@@ -183,10 +156,18 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
                         ),
                       ),
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.arrow_circle_left,
-                          size: 40, color: kSecondaryColor),
-                      onPressed: _sendMessage,
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: kSecondaryColor,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: const Icon(Icons.keyboard_arrow_up_rounded,
+                            size: 40, color: kPrimaryColor),
+                        onPressed: _sendMessage,
+                      ),
                     ),
                   ],
                 ),

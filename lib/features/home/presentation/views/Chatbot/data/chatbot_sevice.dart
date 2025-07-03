@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class GeminiService {
   static const String apiKey = "....api key...";
@@ -26,10 +27,10 @@ class GeminiService {
         final data = jsonDecode(response.body);
         return data["candidates"][0]["content"]["parts"][0]["text"];
       } else {
-        return "خطأ في الاستجابة من السيرفر: ${response.statusCode}";
+        return "Error in server: ${response.statusCode}";
       }
     } catch (e) {
-      return "حدث خطأ أثناء الاتصال: $e";
+      return "Error in connection: $e";
     }
   }
 }

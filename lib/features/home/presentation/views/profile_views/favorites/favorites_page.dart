@@ -106,8 +106,13 @@ class FavoritePageState extends State<FavoritePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             const Spacer(),
-                            Image.asset('assets/Images/nofavm.png',
-                                height: 200),
+                            Image.asset(
+                              isMealSelected
+                                  ? 'assets/Images/nofavm.png'
+                                  : 'assets/Images/nofavw.png',
+                              height: 200,
+                              color: Colors.grey[700],
+                            ),
                             const SizedBox(height: 40),
                             Text(
                               isMealSelected

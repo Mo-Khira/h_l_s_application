@@ -6,7 +6,7 @@ import 'package:h_l_s_application/features/home/presentation/views/Diary_view/di
 import 'package:h_l_s_application/features/home/presentation/views/Home_view/homepage.dart';
 import 'package:h_l_s_application/features/home/presentation/views/widgets/custom_bottom_navigation_bar.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/plans_view.dart';
-import 'package:h_l_s_application/features/home/presentation/views/widgets/profile_page.dart';
+import 'package:h_l_s_application/features/home/presentation/views/profile_views/profile_page.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

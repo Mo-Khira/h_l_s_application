@@ -5,6 +5,12 @@ import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/data/meal_cubit.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/meal_list.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/meals_details.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/data/workouts_cubit.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_detail_screen.dart';
+import 'package:h_l_s_application/features/home/presentation/views/plans_views/training_plans/training_list.dart';
 import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/favorites_meals_cubit.dart';
 import 'package:h_l_s_application/features/home/presentation/views/profile_views/Data/favorites_workouts_cubit.dart';
 
@@ -27,6 +33,15 @@ class FavoritePageState extends State<FavoritePage> {
 
     final List<Map<String, dynamic>> favorites =
         isMealSelected ? favoriteMeals : favoriteWorkouts;
+
+    final allMeals = context.read<MealsCubit>().state;
+    final fallbackMeals = getStaticMeals();
+    final safeMeals = allMeals.isEmpty ? fallbackMeals : allMeals;
+
+    final allWorkouts = context.read<WorkoutsCubit>().state;
+    final fallbackWorkouts = WorkoutsCubit.getStaticWorkouts();
+    final exercises = getCommonExercises();
+    final safeWorkouts = allWorkouts.isEmpty ? fallbackWorkouts : allWorkouts;
 
     return Scaffold(
       backgroundColor: kPrimaryColor,
@@ -144,103 +159,157 @@ class FavoritePageState extends State<FavoritePage> {
                       )
                     : ListView.builder(
                         itemCount: favorites.length,
-                        // padding: const EdgeInsets.symmetric(horizontal: 16),
                         itemBuilder: (context, index) {
                           final item = favorites[index];
+                          return GestureDetector(
+                            onTap: () {
+                              if (isMealSelected) {
+                                final originalMeal = safeMeals.firstWhere(
+                                  (meal) => meal.title == item['title'],
+                                  // orElse: () => null,
+                                );
 
-                          return Card(
-                            color: kPrimaryColor,
-                            margin: const EdgeInsets.only(bottom: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Stack(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(15)),
-                                      child: Image.asset(
-                                        item['image'],
-                                        height: 150,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                      ),
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => MealsDetails(
+                                      imagePath: originalMeal.imagePath,
+                                      title: originalMeal.title,
+                                      calories: originalMeal.calories,
+                                      cookTime: originalMeal.cookTime,
+                                      ingredients: originalMeal.ingredients,
+                                      fat: originalMeal.fat,
+                                      protein: originalMeal.protein,
+                                      carbs: originalMeal.carbs,
                                     ),
-                                    Positioned(
-                                      top: 8,
-                                      right: 8,
-                                      child: Container(
-                                        width: 28,
-                                        height: 28,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Center(
-                                          child: IconButton(
-                                            icon: Icon(
-                                              Icons.favorite,
-                                              color: Colors.red[600],
-                                            ),
-                                            padding: EdgeInsets.zero,
-                                            onPressed: () {
-                                              if (isMealSelected) {
-                                                context
-                                                    .read<FavoritesMealsCubit>()
-                                                    .removeFavorite(
-                                                        item['title']);
-                                              } else {
-                                                context
-                                                    .read<
-                                                        FavoritesWorkoutCubit>()
-                                                    .removeFavorite(
-                                                        item['title']);
-                                              }
-                                            },
-                                          ),
-                                        ),
-                                      ),
+                                  ),
+                                );
+                              } else {
+                                final originalWorkout = safeWorkouts.firstWhere(
+                                  (w) => w["title"] == item["title"],
+                                );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => TrainingDetailScreen(
+                                      imagePath: originalWorkout["detailImage"],
+                                      title: originalWorkout["detailTitle"],
+                                      subtitle:
+                                          originalWorkout["detailSubtitle"],
+                                      duration: originalWorkout["duration"],
+                                      exercises: exercises,
+                                      selectedIndex: 0,
                                     ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(12),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  ),
+                                );
+                              }
+                            },
+                            child: Card(
+                              color: kPrimaryColor,
+                              margin: const EdgeInsets.only(bottom: 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Stack(
                                     children: [
-                                      Text(
-                                        item['title'],
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 16),
+                                      ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
+                                        child: Image.asset(
+                                          item['image'],
+                                          height: 150,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      const SizedBox(height: 8),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            child: Image.asset(
-                                              'assets/Images/fire.png',
-                                              color: Colors.cyan,
+                                      Positioned(
+                                        top: 8,
+                                        right: 8,
+                                        child: Container(
+                                          width: 28,
+                                          height: 28,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: Center(
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.favorite,
+                                                color: Colors.red[600],
+                                              ),
+                                              padding: EdgeInsets.zero,
+                                              onPressed: () {
+                                                if (isMealSelected) {
+                                                  context
+                                                      .read<
+                                                          FavoritesMealsCubit>()
+                                                      .removeFavorite(
+                                                          item['title']);
+                                                } else {
+                                                  context
+                                                      .read<
+                                                          FavoritesWorkoutCubit>()
+                                                      .removeFavorite(
+                                                          item['title']);
+                                                }
+                                              },
                                             ),
                                           ),
-                                          const SizedBox(width: 4),
-                                          Text('${item['calories']} kcal',
-                                              style: const TextStyle(
-                                                  color: Colors.grey)),
-                                          const SizedBox(width: 12),
-                                          const Icon(Icons.access_time,
-                                              color: Colors.cyan, size: 16),
-                                          const SizedBox(width: 4),
-                                          Text('${item['time']} min',
-                                              style: const TextStyle(
-                                                  color: Colors.grey)),
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item['title'],
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Image.asset(
+                                                'assets/Images/fire.png',
+                                                color: Colors.cyan,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              isMealSelected
+                                                  ? '${item['calories']}'
+                                                  : '${item['calories']} kcal',
+                                              style: const TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 12),
+                                            const Icon(Icons.access_time,
+                                                color: Colors.cyan, size: 16),
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              isMealSelected
+                                                  ? '${item['time']}'
+                                                  : '${item['time']} min',
+                                              style: const TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },

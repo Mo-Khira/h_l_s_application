@@ -127,7 +127,7 @@ class ChatBotViewState extends State<ChatbotView> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
-                        hintText: 'Ask me anything...',
+                        hintText: ' Ask me anything...',
                         hintStyle:
                             Styles.textStyle16.copyWith(color: kPrimaryColor),
                         border: textFieldBorderStyle(),

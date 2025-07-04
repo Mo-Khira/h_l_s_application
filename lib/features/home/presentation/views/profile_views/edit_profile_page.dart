@@ -20,9 +20,9 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   String selectedGender = "Male";
-  String fullName = '';
-  String email = '';
-  String phone = '';
+  String fullName = 'Mohammed Khira';
+  String email = 'test@example.com';
+  String phone = '01004465953';
 
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
@@ -58,8 +58,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
       await dio.put(
         'http://127.0.0.1:8000/api/update-profile/', // TODO APISS
         data: {
-          'first_name': nameController.text.split(" ").first,
-          'last_name': nameController.text.split(" ").last,
+          'first_name': nameController.text.split("").first,
+          'last_name': nameController.text.split("").last,
           'email': emailController.text,
           'phone': phoneController.text,
           'weight': int.tryParse(weightController.text),
@@ -123,7 +123,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               Stack(
                 children: [
                   const CircleAvatar(
-                    backgroundImage: AssetImage(AssetsData.messi),
+                    backgroundImage: AssetImage(AssetsData.noProfPic),
                     backgroundColor: Colors.white,
                     radius: 55,
                   ),
@@ -152,7 +152,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         height: 9,
                       ),
                       CustomFormTextFieldEdit(
-                        ini: fullName,
+                        // ini: fullName.isEmpty ? "Mohammed Khira" : fullName,
+                        ini: "Mohammed Khira",
                         controller: nameController,
                       ),
                       const SizedBox(height: 15),
@@ -162,7 +163,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       CustomFormTextFieldEdit(
                         controller: phoneController,
-                        ini: phone,
+                        // ini: phone.isEmpty ? "01004465953" : phone,
+                        ini: "01004465953",
                       ),
                       const SizedBox(height: 15),
                       const Text("Email Address"),
@@ -171,7 +173,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       CustomFormTextFieldEdit(
                         controller: emailController,
-                        ini: email,
+                        // ini: email.isEmpty ? "test@example.com" : email,
+                        ini: "test@example.com",
                       ),
                       const SizedBox(height: 15),
                       const Text("Weight"),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
 import 'package:h_l_s_application/features/home/presentation/views/Diary_view/widgets/custom_build_calendar.dart';
@@ -101,17 +102,18 @@ class _DiaryViewState extends State<DiaryView> {
               const Column(
                 children: [
                   MealSelectionWidget(
-                      title: "Breakfast", imagePath: "assets/Images/test1.png"),
+                      title: "Breakfast",
+                      imagePath: "assets/Images/img (5).png"),
                   SizedBox(height: 20),
                   MealSelectionWidget(
-                      title: "Lunch", imagePath: "assets/Images/test1.png"),
+                      title: "Lunch",
+                      imagePath: "assets/Images/Curry Salmon 3.png"),
                   SizedBox(height: 20),
                   MealSelectionWidget(
-                      title: "Dinner", imagePath: "assets/Images/test1.png"),
+                      title: "Dinner", imagePath: "assets/Images/img (4).png"),
                   SizedBox(height: 70),
                   MealSelectionWidget(
-                      title: "Add Exercise",
-                      imagePath: "assets/Images/test1.png"),
+                      title: "Add Exercise", imagePath: AssetsData.screen3),
                 ],
               ),
               SizedBox(height: kHeight(context) * 0.04),

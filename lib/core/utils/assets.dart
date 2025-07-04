@@ -2,6 +2,7 @@ class AssetsData {
   static const logo = 'assets/Images/projLogo.png';
   static const test1 = 'assets/Images/test1.jpg';
   static const messi = 'assets/Images/messi.jpg';
+  static const noProfPic = 'assets/Images/noProfPic.png';
   static const screen1 = 'assets/Images/screenOneImage.png';
   static const screen2 = 'assets/Images/screenTwoImage.png';
   static const screen3 = 'assets/Images/screenThreeImage.png';

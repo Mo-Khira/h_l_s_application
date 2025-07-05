@@ -11,9 +11,9 @@ class ScreenTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: GestureDetector(
+    return Scaffold(
+      body: SafeArea(
+        child: GestureDetector(
           onHorizontalDragEnd: (details) {
             if (details.primaryVelocity! < -1) {
               GoRouter.of(context).push(AppRouter.kScreenThree);

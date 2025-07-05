@@ -13,9 +13,9 @@ class ScreenThree extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Scaffold(
-        body: GestureDetector(
+    return Scaffold(
+      body: SafeArea(
+        child: GestureDetector(
           onHorizontalDragEnd: (details) {
             if (details.primaryVelocity! < 1) {
               GoRouter.of(context).pop();

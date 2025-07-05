@@ -19,137 +19,130 @@ class _UserFitnessPage extends State<UserFitnessPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions for responsive design
-    double screenHeight = kHeight(context);
-
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: kPrimaryColor,
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 24,
+    return Scaffold(
+      backgroundColor: kPrimaryColor,
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 24,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      padding: const EdgeInsetsDirectional.all(0),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kHomeView);
+                      },
+                      child: Text("Skip",
+                          style: Styles.textStyle14.copyWith(
+                              color: kSecondaryColor,
+                              fontWeight: FontWeight.w700)),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "What's your fitness level ?",
+                    style: Styles.textStyle20
+                        .copyWith(fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.left,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: kHeight(context) * 0.1,
+              ),
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.black, width: 0), // Outer border
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IconButton(
-                        padding: const EdgeInsetsDirectional.all(0),
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                          size: 28,
-                        ),
-                        onPressed: () {
-                          GoRouter.of(context).pop();
+                      FitnessLevelButton(
+                        level: 'Beginner',
+                        isSelected: selectedLevel == 'Beginner',
+                        onSelect: () {
+                          setState(() {
+                            selectedLevel = 'Beginner';
+                          });
                         },
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          GoRouter.of(context).push(AppRouter.kHomeView);
+                      const SizedBox(height: 50), // Adjusted margin
+                      FitnessLevelButton(
+                        level: 'Intermediate',
+                        isSelected: selectedLevel == 'Intermediate',
+                        onSelect: () {
+                          setState(() {
+                            selectedLevel = 'Intermediate';
+                          });
                         },
-                        child: Text("Skip",
-                            style: Styles.textStyle14.copyWith(
-                                color: kSecondaryColor,
-                                fontWeight: FontWeight.w700)),
+                      ),
+                      const SizedBox(height: 50), // Adjusted margin
+                      FitnessLevelButton(
+                        level: 'Advanced',
+                        isSelected: selectedLevel == 'Advanced',
+                        onSelect: () {
+                          setState(() {
+                            selectedLevel = 'Advanced';
+                          });
+                        },
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "What's your fitness level ?",
-                      style: Styles.textStyle20
-                          .copyWith(fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: screenHeight * 0.1,
-                ),
-                Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.black, width: 0), // Outer border
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FitnessLevelButton(
-                          level: 'Beginner',
-                          isSelected: selectedLevel == 'Beginner',
-                          onSelect: () {
-                            setState(() {
-                              selectedLevel = 'Beginner';
-                            });
-                          },
-                        ),
-                        const SizedBox(height: 50), // Adjusted margin
-                        FitnessLevelButton(
-                          level: 'Intermediate',
-                          isSelected: selectedLevel == 'Intermediate',
-                          onSelect: () {
-                            setState(() {
-                              selectedLevel = 'Intermediate';
-                            });
-                          },
-                        ),
-                        const SizedBox(height: 50), // Adjusted margin
-                        FitnessLevelButton(
-                          level: 'Advanced',
-                          isSelected: selectedLevel == 'Advanced',
-                          onSelect: () {
-                            setState(() {
-                              selectedLevel = 'Advanced';
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                CustomLoginButton(
-                  text: "Next Steps",
-                  onPressed: () {
-                    if (selectedLevel == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Please select your fitness level"),
-                          backgroundColor: Colors.orangeAccent,
-                        ),
-                      );
-                      return;
-                    }
-                    context
-                        .read<UserInfoCubit>()
-                        .setFitnessLevel(selectedLevel!);
-                    GoRouter.of(context).push(
-                      '${AppRouter.kUserInfoInputs}/${AppRouter.kUserFitnessGoalPage}',
+              ),
+              const Spacer(),
+              CustomLoginButton(
+                text: "Next Steps",
+                onPressed: () {
+                  if (selectedLevel == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Please select your fitness level"),
+                        backgroundColor: Colors.orangeAccent,
+                      ),
                     );
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
-            ),
+                    return;
+                  }
+                  context.read<UserInfoCubit>().setFitnessLevel(selectedLevel!);
+                  GoRouter.of(context).push(
+                    '${AppRouter.kUserInfoInputs}/${AppRouter.kUserFitnessGoalPage}',
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+            ],
           ),
         ),
       ),

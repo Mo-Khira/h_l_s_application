@@ -33,17 +33,22 @@ class MealsDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    HeaderImage(imagePath: imagePath),
-                    Row(
+      body: SingleChildScrollView(
+        child: SizedBox(
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  HeaderImage(imagePath: imagePath),
+                  Positioned(
+                    top: 24,
+                    left: 24,
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        const SizedBox(
+                          height: 12,
+                        ),
                         IconButton(
                           padding: const EdgeInsetsDirectional.all(18),
                           icon: const Icon(
@@ -55,7 +60,9 @@ class MealsDetails extends StatelessWidget {
                             GoRouter.of(context).pop();
                           },
                         ),
-                        const Spacer(),
+                        SizedBox(
+                          width: kWidth(context) * 0.62,
+                        ),
                         FavoriteButton(
                           meal: {
                             'image': imagePath,
@@ -69,25 +76,25 @@ class MealsDetails extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 60,
-                ),
-                MealInfoRow(calories: calories, cookTime: cookTime),
-                const SizedBox(
-                  height: 55,
-                ),
-                NutritionInfo(fat: fat, protein: protein, carbs: carbs),
-                const SizedBox(
-                  height: 50,
-                ),
-                IngredientsSection(ingredients: ingredients),
-                const SizedBox(
-                  height: 50,
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 60,
+              ),
+              MealInfoRow(calories: calories, cookTime: cookTime),
+              const SizedBox(
+                height: 55,
+              ),
+              NutritionInfo(fat: fat, protein: protein, carbs: carbs),
+              const SizedBox(
+                height: 50,
+              ),
+              IngredientsSection(ingredients: ingredients),
+              const SizedBox(
+                height: 50,
+              ),
+            ],
           ),
         ),
       ),

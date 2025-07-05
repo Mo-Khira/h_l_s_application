@@ -27,6 +27,10 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
       _isLoading = true;
     });
 
+    await Future.delayed(
+      const Duration(milliseconds: 60),
+    );
+
     String botResponse = HelpOfflineBot.getResponse(userMessage);
 
     setState(() {
@@ -37,9 +41,9 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
             children: [

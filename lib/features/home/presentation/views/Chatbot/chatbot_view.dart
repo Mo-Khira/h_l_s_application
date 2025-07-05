@@ -26,7 +26,9 @@ class ChatBotViewState extends State<ChatbotView> {
       _isLoading = true;
     });
 
-    await Future.delayed(const Duration(microseconds: 50));
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
 
     String botResponse = OfflineChatBot.getResponse(userMessage);
 

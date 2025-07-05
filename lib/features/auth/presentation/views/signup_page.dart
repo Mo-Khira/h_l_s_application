@@ -61,9 +61,9 @@ class _SignupPageState extends State<SignupPage> {
               color: kSecondaryColor,
             ),
             inAsyncCall: state is SignupLoading,
-            child: SafeArea(
-              child: Scaffold(
-                body: Padding(
+            child: Scaffold(
+              body: SafeArea(
+                child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: SingleChildScrollView(
                     child: Form(

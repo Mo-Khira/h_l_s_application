@@ -56,9 +56,9 @@ class _CreatePasswordPage extends State<CreatePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: ModalProgressHUD(
+    return Scaffold(
+      body: SafeArea(
+        child: ModalProgressHUD(
           inAsyncCall: isLoading,
           progressIndicator: const CircularProgressIndicator(
             color: kSecondaryColor,

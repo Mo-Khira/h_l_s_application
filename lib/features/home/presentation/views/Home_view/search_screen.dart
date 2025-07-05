@@ -94,6 +94,15 @@ class SearchScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 20),
+                ...ScanHelper.scanHistory.map((entry) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Text(
+                        '• $entry',
+                        style: Styles.textStyle16
+                            .copyWith(color: Colors.grey[300]),
+                      ),
+                    )),
               ],
             ),
           ),

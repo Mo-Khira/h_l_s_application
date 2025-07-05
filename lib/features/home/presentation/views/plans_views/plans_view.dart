@@ -39,8 +39,8 @@ class PlansView extends StatelessWidget {
                           size: 28,
                         ),
                         onPressed: () {
-                          GoRouter.of(context)
-                              .pushReplacement(AppRouter.kHomeView);
+                          // GoRouter.of(context).push(AppRouter.kHomeView);
+                          // GoRouter.of(context).pop();
                         },
                       ),
                     ],

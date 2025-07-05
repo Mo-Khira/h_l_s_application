@@ -16,10 +16,9 @@ class TrainingPlansPage extends StatelessWidget {
     final fallbackPlans = WorkoutsCubit.getStaticWorkouts();
     final safePlans = trainingPlans.isEmpty ? fallbackPlans : trainingPlans;
     final List<String> commonExercises = getCommonExercises();
-    return SafeArea(
-      child: Scaffold(
-        // backgroundColor: kPrimaryColor,
-        body: Padding(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

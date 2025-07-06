@@ -17,7 +17,7 @@ class ScreenThree extends StatelessWidget {
       body: SafeArea(
         child: GestureDetector(
           onHorizontalDragEnd: (details) {
-            if (details.primaryVelocity! < 1) {
+            if (details.primaryVelocity! < 5) {
               GoRouter.of(context).pop();
             }
           },

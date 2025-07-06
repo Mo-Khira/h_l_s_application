@@ -8,6 +8,7 @@ import 'package:h_l_s_application/features/auth/presentation/views/verify_code_p
 import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
+import 'package:h_l_s_application/features/home/presentation/views/Home_view/barcode_scanner_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view.dart';
 import 'package:h_l_s_application/features/home/presentation/views/Home_view/search_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/mealplans.dart';
@@ -59,6 +60,7 @@ abstract class AppRouter {
   static const kReminderCreatedPage = '/reminderCreatedPage';
   static const kTrainingPlanPage = '/trainingPlansPage';
   static const kTrainingCompletedScreen = '/trainingCompletedScreen';
+  static const kBarcodeScanner = '/barcodeScanner';
 
   static final router = GoRouter(
     routes: [
@@ -187,6 +189,10 @@ abstract class AppRouter {
       GoRoute(
         path: kTrainingCompletedScreen,
         builder: (context, state) => const TrainingCompletedScreen(),
+      ),
+      GoRoute(
+        path: kBarcodeScanner,
+        builder: (context, state) => const BarcodeScannerScreen(),
       ),
     ],
   );

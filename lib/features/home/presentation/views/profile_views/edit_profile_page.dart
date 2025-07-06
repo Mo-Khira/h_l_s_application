@@ -21,7 +21,7 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   String selectedGender = "Male";
   String fullName = 'Mohammed Khira';
-  String email = 'test@example.com';
+  String email = 'khira21@gmail.com';
   String phone = '01004465953';
 
   final nameController = TextEditingController();
@@ -70,12 +70,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Profile updated successfully")),
+        const SnackBar(content: Text("Profile updated successfully"),),
       );
     } catch (e) {
       print("Update failed: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Failed to update profile")),
+        const SnackBar(content: Text("Failed to update profile"),),
       );
     }
   }
@@ -174,7 +174,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       CustomFormTextFieldEdit(
                         controller: emailController,
                         // ini: email.isEmpty ? "test@example.com" : email,
-                        ini: "test@example.com",
+                        ini: "khira21@gmail.com",
                       ),
                       const SizedBox(height: 15),
                       const Text("Weight"),

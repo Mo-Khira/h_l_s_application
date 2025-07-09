@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
@@ -97,7 +99,8 @@ class _MealSelectionWidgetState extends State<MealSelectionWidget> {
                         child: Chip(
                           label: Text(
                             e['name'],
-                            style: Styles.textStyle12.copyWith(color: kPrimaryColor),
+                            style: Styles.textStyle12
+                                .copyWith(color: kPrimaryColor),
                           ),
                           backgroundColor: kSecondaryColor,
                         ),

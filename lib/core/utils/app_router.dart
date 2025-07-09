@@ -9,6 +9,7 @@ import 'package:h_l_s_application/features/boarding/views/screen1.dart';
 import 'package:h_l_s_application/features/boarding/views/screen2.dart';
 import 'package:h_l_s_application/features/boarding/views/screen3.dart';
 import 'package:h_l_s_application/features/home/presentation/views/Home_view/barcode_scanner_screen.dart';
+import 'package:h_l_s_application/features/home/presentation/views/Home_view/loading_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/home_view.dart';
 import 'package:h_l_s_application/features/home/presentation/views/Home_view/search_screen.dart';
 import 'package:h_l_s_application/features/home/presentation/views/plans_views/meal_plans/mealplans.dart';
@@ -47,6 +48,7 @@ abstract class AppRouter {
   static const kUserHeightPage = 'userHeightPage';
   static const kUserFitnessPage = 'userFitnessPage';
   static const kUserFitnessGoalPage = 'userFitnessGoalPage';
+  static const kLoadingScreen = '/loadingScreen';
   static const kHomeView = '/homeView';
   static const kSearchScreen = '/searchScreen';
   static const kEditProfilePage = '/editProfilePage';
@@ -111,6 +113,10 @@ abstract class AppRouter {
       GoRoute(
         path: kUserAgePage,
         builder: (context, state) => UserAgePage(),
+      ),
+      GoRoute(
+        path: kLoadingScreen,
+        builder: (context, state) => LoadingScreen(),
       ),
       GoRoute(
         path: kHomeView,

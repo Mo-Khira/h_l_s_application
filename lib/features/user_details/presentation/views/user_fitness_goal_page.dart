@@ -141,7 +141,8 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                   context
                       .read<UserInfoCubit>()
                       .setFitnessGoalLevel(selectedLevel!);
-                  GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+                  GoRouter.of(context)
+                      .pushReplacement(AppRouter.kLoadingScreen);
                 },
               ),
               const SizedBox(

@@ -48,14 +48,14 @@ class _HeartBeatAnimationState extends State<HeartBeatAnimation>
           },
         ),
         Text(
-          "115",
+          "need access",
           style: Styles.textStyle16.copyWith(
             color: Colors.black,
             fontWeight: FontWeight.w700,
           ),
         ),
         Text(
-          "bmp",
+          "to smartwatch",
           style: Styles.textStyle12.copyWith(
             color: Colors.black,
           ),

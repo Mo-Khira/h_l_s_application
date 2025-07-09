@@ -16,9 +16,7 @@ class _PlanPercentState extends State<PlanPercent> {
       padding: const EdgeInsets.all(16),
       height: 157,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: const Color.fromARGB(255, 255, 255, 255),
-      ),
+          borderRadius: BorderRadius.circular(8), color: Colors.white),
       child: Row(
         children: [
           Column(

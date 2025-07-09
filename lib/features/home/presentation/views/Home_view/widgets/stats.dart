@@ -94,8 +94,8 @@ List<dynamic> statGridList = [
   const Stats(
     text: "Calories",
     iconPath: "assets/svgs/fire.svg",
-    endPoint: 0.6,
-    text1: "399",
+    endPoint: 0.0,
+    text1: "0",
     text2: "Kcal",
   ),
   const HeartState(
@@ -105,15 +105,15 @@ List<dynamic> statGridList = [
   const Stats(
     text: "Walk",
     iconPath: "assets/svgs/shoe.svg",
-    endPoint: 0.5,
-    text1: "2265",
-    text2: "Steps",
+    endPoint: 0.0,
+    text1: "need access",
+    text2: "to smartwatch",
   ),
   const Stats(
     text: "Sleep",
     iconPath: "assets/svgs/moon.svg",
-    endPoint: 0.3,
-    text1: "8:50",
-    text2: "Hours",
+    endPoint: 0.0,
+    text1: "need access",
+    text2: "to smartwatch",
   ),
 ];

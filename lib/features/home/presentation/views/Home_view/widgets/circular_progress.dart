@@ -9,7 +9,7 @@ class CustomCircularProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: TweenAnimationBuilder(
-        tween: Tween(begin: 0.0, end: 0.7),
+        tween: Tween(begin: 0.0, end: 0.1),
         duration: const Duration(seconds: 4),
         builder: (context, value, child) {
           int percentage = (value * 100).ceil();

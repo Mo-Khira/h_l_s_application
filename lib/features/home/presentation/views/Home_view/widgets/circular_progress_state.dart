@@ -57,11 +57,12 @@ class CustomCircularProgressState extends StatelessWidget {
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             text1,
                             style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.w700,
                               color: Colors.black,
                             ),

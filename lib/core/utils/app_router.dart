@@ -3,6 +3,7 @@ import 'package:h_l_s_application/features/auth/presentation/views/create_passwo
 import 'package:h_l_s_application/features/auth/presentation/views/login_page.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/password_changed.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/reset_password_page.dart';
+import 'package:h_l_s_application/features/auth/presentation/views/signup_done_page.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/signup_page.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/verify_code_page.dart';
 import 'package:h_l_s_application/features/boarding/views/screen1.dart';
@@ -24,6 +25,7 @@ import 'package:h_l_s_application/features/home/presentation/views/profile_views
 import 'package:h_l_s_application/features/home/presentation/views/profile_views/settings_pages/widgets/reminder_created.dart';
 import 'package:h_l_s_application/features/home/presentation/views/profile_views/settings_pages/reminder_page.dart';
 import 'package:h_l_s_application/features/splash/presentation/views/splash_view.dart';
+import 'package:h_l_s_application/features/user_details/presentation/views/user_activity_level.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_age_page.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_page.dart';
 import 'package:h_l_s_application/features/user_details/presentation/views/user_fitness_goal_page.dart';
@@ -37,6 +39,7 @@ abstract class AppRouter {
   static const kScreenThree = '/screen3';
   static const kLoginPage = '/loginPage';
   static const kSignupPage = '/signupPage';
+  static const kSignupDonePage = '/signupDonePage';
   static const kResetPasswordPage = '/resetPasswordPage';
   static const kVerityCodePage = '/verityCodePage';
   static const kCreatePasswordPage = '/createPasswordPage';
@@ -47,6 +50,7 @@ abstract class AppRouter {
   static const kUserWeightGoalPage = 'userWeightGoalPage';
   static const kUserHeightPage = 'userHeightPage';
   static const kUserFitnessPage = 'userFitnessPage';
+  static const kUserActivityLevelPage = 'userActivityLevelPage';
   static const kUserFitnessGoalPage = 'userFitnessGoalPage';
   static const kLoadingScreen = '/loadingScreen';
   static const kHomeView = '/homeView';
@@ -89,6 +93,10 @@ abstract class AppRouter {
       GoRoute(
         path: kSignupPage,
         builder: (context, state) => SignupPage(),
+      ),
+      GoRoute(
+        path: kSignupDonePage,
+        builder: (context, state) => const SignupDonePage(),
       ),
       GoRoute(
         path: kResetPasswordPage,
@@ -149,6 +157,10 @@ abstract class AppRouter {
           GoRoute(
             path: kUserFitnessPage,
             builder: (context, state) => const UserFitnessPage(),
+          ),
+          GoRoute(
+            path: kUserActivityLevelPage,
+            builder: (context, state) => const UserActivityLevel(),
           ),
           GoRoute(
             path: kUserFitnessGoalPage,

@@ -113,15 +113,14 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           const SizedBox(height: 40),
                           CustomLoginButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (formKey.currentState!.validate()) {
-                                context.read<SignupCubit>().signup(
-                                      firstName: firstNameController.text,
-                                      lastName: lastNameController.text,
-                                      email: emailController.text,
-                                      phone: phoneNumberController.text,
-                                      password: passwordController.text,
-                                    );
+                                setState(() => isLoading = true);
+                                await Future.delayed(Duration(seconds: 3));
+                                setState(() => isLoading = false);
+
+                                GoRouter.of(context)
+                                    .pushReplacement(AppRouter.kSignupDonePage);
                               }
                             },
                             text: "Sign up",

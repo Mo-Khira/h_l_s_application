@@ -65,7 +65,21 @@ class _UserWeightGoalPage extends State<UserWeightGoalPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "What's your goal weight ?",
+                      "What's your ",
+                      style: Styles.textStyle20
+                          .copyWith(fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      "Goal Weight ",
+                      style: Styles.textStyle20.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: kSecondaryColor,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      "?",
                       style: Styles.textStyle20
                           .copyWith(fontWeight: FontWeight.w500),
                       textAlign: TextAlign.left,

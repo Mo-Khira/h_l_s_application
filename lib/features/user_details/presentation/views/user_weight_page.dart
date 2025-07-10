@@ -65,7 +65,21 @@ class _UserWeightPage extends State<UserWeightPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "How much do you weight ?",
+                      "How much do you ",
+                      style: Styles.textStyle20
+                          .copyWith(fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      "Weight ",
+                      style: Styles.textStyle20.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: kSecondaryColor,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      "?",
                       style: Styles.textStyle20
                           .copyWith(fontWeight: FontWeight.w500),
                       textAlign: TextAlign.left,

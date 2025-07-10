@@ -67,7 +67,21 @@ class _UserFitnessPage extends State<UserFitnessPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "What's your fitness level ?",
+                    "What's your ",
+                    style: Styles.textStyle20
+                        .copyWith(fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    "Fitness level ",
+                    style: Styles.textStyle20.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: kSecondaryColor,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    "?",
                     style: Styles.textStyle20
                         .copyWith(fontWeight: FontWeight.w500),
                     textAlign: TextAlign.left,

@@ -69,7 +69,21 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "What's your goal ?",
+                    "What's your ",
+                    style: Styles.textStyle20
+                        .copyWith(fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    "Goal ",
+                    style: Styles.textStyle20.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: kSecondaryColor,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    "?",
                     style: Styles.textStyle20
                         .copyWith(fontWeight: FontWeight.w500),
                     textAlign: TextAlign.left,
@@ -127,7 +141,7 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
               ),
               const Spacer(),
               CustomLoginButton(
-                text: "Lets Start!",
+                text: "Next Steps",
                 onPressed: () {
                   if (selectedLevel == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -141,8 +155,9 @@ class _UserFitnessGoalPage extends State<UserFitnessGoalPage> {
                   context
                       .read<UserInfoCubit>()
                       .setFitnessGoalLevel(selectedLevel!);
-                  GoRouter.of(context)
-                      .pushReplacement(AppRouter.kLoadingScreen);
+                  GoRouter.of(context).pushReplacement(
+                    '${AppRouter.kUserInfoInputs}/${AppRouter.kUserActivityLevelPage}',
+                  );
                 },
               ),
               const SizedBox(

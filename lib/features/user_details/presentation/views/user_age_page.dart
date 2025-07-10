@@ -67,9 +67,24 @@ class _UserAgePage extends State<UserAgePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "How old are you ?",
+                    "How ",
                     style: Styles.textStyle20
                         .copyWith(fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    "Old ",
+                    style: Styles.textStyle20.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: kSecondaryColor,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    "are you ?",
+                    style: Styles.textStyle20.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
                     textAlign: TextAlign.left,
                   ),
                 ],

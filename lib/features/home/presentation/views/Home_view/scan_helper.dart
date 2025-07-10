@@ -22,32 +22,99 @@ class ScanHelper {
 
   static Future<String?> scanMeal(BuildContext context) async {
     try {
-      final picker = ImagePicker();
-      final pickedFile = await picker.pickImage(source: ImageSource.camera);
-      if (pickedFile != null) {
-        final inputImage = InputImage.fromFilePath(pickedFile.path);
-        final labeler = GoogleMlKit.vision.imageLabeler(
-          ImageLabelerOptions(confidenceThreshold: 0.5),
-        );
-        final labels = await labeler.processImage(inputImage);
-        labeler.close();
+      // اختيار المصدر
+      final source = await showDialog<ImageSource>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Choose Image Source"),
+          actions: [
+            TextButton.icon(
+              icon: const Icon(Icons.camera_alt),
+              label: const Text("Camera"),
+              onPressed: () => Navigator.pop(context, ImageSource.camera),
+            ),
+            TextButton.icon(
+              icon: const Icon(Icons.photo),
+              label: const Text("Gallery"),
+              onPressed: () => Navigator.pop(context, ImageSource.gallery),
+            ),
+          ],
+        ),
+      );
 
-        if (labels.isNotEmpty) {
-          final topLabel = labels.first.label;
-          final topLabe2 = labels.last.label;
-          mealResult = labels.map((e) => e.label).join(', ');
-          String entry =
-              "$topLabel ,$topLabe2 \nEstimated Calories: 250 kcal\nProtein: 12g\nCarbs: 30g\nFat: 10g";
-          return entry;
-        } else {
-          return "No meal recognized.";
-        }
+      if (source == null) return null; // المستخدم لغى
+
+      // اختيار الصورة
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(source: source);
+      if (pickedFile == null) return "No image selected.";
+
+      // عرض تحميل 5 ثواني
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+
+      await Future.delayed(const Duration(seconds: 5));
+
+      // بعد الانتظار، أبدأ في تحليل الصورة
+      final inputImage = InputImage.fromFilePath(pickedFile.path);
+      final labeler = GoogleMlKit.vision.imageLabeler(
+        ImageLabelerOptions(confidenceThreshold: 0.5),
+      );
+      final labels = await labeler.processImage(inputImage);
+      await labeler.close();
+
+      Navigator.of(context).pop(); // إغلاق الـ Loader
+
+      if (labels.isNotEmpty) {
+        final topLabel = labels.first.label;
+        final topLabe2 = labels.last.label;
+        mealResult = labels.map((e) => e.label).join(', ');
+        String entry =
+            "$topLabel ,$topLabe2 \nEstimated Calories: 250 kcal\nProtein: 12g\nCarbs: 30g\nFat: 10g";
+        return entry;
+      } else {
+        return "No meal recognized.";
       }
     } catch (e) {
       log("Meal Scan Error: $e");
+      Navigator.of(context).pop(); // تأكد من إغلاق أي Dialog مفتوح
+      return "Error while scanning.";
     }
-    return null;
   }
+
+  // static Future<String?> scanMeal(BuildContext context) async {
+  //   try {
+  //     final picker = ImagePicker();
+  //     final pickedFile = await picker.pickImage(source: ImageSource.camera);
+  //     if (pickedFile != null) {
+  //       final inputImage = InputImage.fromFilePath(pickedFile.path);
+  //       final labeler = GoogleMlKit.vision.imageLabeler(
+  //         ImageLabelerOptions(confidenceThreshold: 0.5),
+  //       );
+  //       final labels = await labeler.processImage(inputImage);
+  //       labeler.close();
+
+  //       if (labels.isNotEmpty) {
+  //         final topLabel = labels.first.label;
+  //         final topLabe2 = labels.last.label;
+  //         mealResult = labels.map((e) => e.label).join(', ');
+  //         String entry =
+  //             "$topLabel ,$topLabe2 \nEstimated Calories: 250 kcal\nProtein: 12g\nCarbs: 30g\nFat: 10g";
+  //         return entry;
+  //       } else {
+  //         return "No meal recognized.";
+  //       }
+  //     }
+  //   } catch (e) {
+  //     log("Meal Scan Error: $e");
+  //   }
+  //   return null;
+  // }
 
   static Future<String?> scanBarcode(BuildContext context) async {
     try {

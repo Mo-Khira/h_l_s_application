@@ -7,6 +7,7 @@ class UserInfoState {
   final int? height;
   final String? fitnessLevel;
   final String? fitnessGoalLevel;
+  final String? activityLevel;
 
   const UserInfoState({
     this.age,
@@ -15,6 +16,7 @@ class UserInfoState {
     this.goalWeight,
     this.fitnessLevel,
     this.fitnessGoalLevel,
+    this.activityLevel,
   });
 
   UserInfoState copyWith({
@@ -24,6 +26,7 @@ class UserInfoState {
     int? height,
     String? fitnessLevel,
     String? fitnessGoalLevel,
+    String? activityLevel,
   }) {
     return UserInfoState(
       age: age ?? this.age,
@@ -32,6 +35,7 @@ class UserInfoState {
       height: height ?? this.height,
       fitnessLevel: fitnessLevel ?? this.fitnessLevel,
       fitnessGoalLevel: fitnessGoalLevel ?? this.fitnessGoalLevel,
+      activityLevel: activityLevel ?? this.activityLevel,
     );
   }
 }

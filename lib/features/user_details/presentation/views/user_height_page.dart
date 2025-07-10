@@ -66,7 +66,21 @@ class _UserHeightPage extends State<UserHeightPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "How much do you height ?",
+                      "How much do you ",
+                      style: Styles.textStyle20
+                          .copyWith(fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      "Height ",
+                      style: Styles.textStyle20.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: kSecondaryColor,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      "?",
                       style: Styles.textStyle20
                           .copyWith(fontWeight: FontWeight.w500),
                       textAlign: TextAlign.left,

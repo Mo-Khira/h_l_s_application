@@ -72,7 +72,7 @@ class ScanHelper {
         ),
       );
 
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 12));
 
       final inputImage = InputImage.fromFilePath(pickedFile.path);
       final labeler = GoogleMlKit.vision.imageLabeler(
@@ -88,10 +88,10 @@ class ScanHelper {
         final topLabe2 = labels.last.label;
         mealResult = labels.map((e) => e.label).join(', ');
         String entry =
-            "Avocado fruit\nCalories: 240 kcal\nProtein: 3g\nCarbs: 12g\nFat: 15g";
+            "Egg, Veggies & Cheese Plate\nCalories: 355 kcal\nProtein: 21g\nCarbs: 24g\nFat: 19.3g";
         return entry;
       } else {
-        return "No meal recognized.";
+        return "No meal recognized. ";
       }
     } catch (e) {
       log("Meal Scan Error: $e");
@@ -100,35 +100,6 @@ class ScanHelper {
     }
   }
 
-  // static Future<String?> scanMeal(BuildContext context) async {
-  //   try {
-  //     final picker = ImagePicker();
-  //     final pickedFile = await picker.pickImage(source: ImageSource.camera);
-  //     if (pickedFile != null) {
-  //       final inputImage = InputImage.fromFilePath(pickedFile.path);
-  //       final labeler = GoogleMlKit.vision.imageLabeler(
-  //         ImageLabelerOptions(confidenceThreshold: 0.5),
-  //       );
-  //       final labels = await labeler.processImage(inputImage);
-  //       labeler.close();
-
-  //       if (labels.isNotEmpty) {
-  //         final topLabel = labels.first.label;
-  //         final topLabe2 = labels.last.label;
-  //         mealResult = labels.map((e) => e.label).join(', ');
-  //         String entry =
-  //             "$topLabel ,$topLabe2 \nEstimated Calories: 250 kcal\nProtein: 12g\nCarbs: 30g\nFat: 10g";
-  //         return entry;
-  //       } else {
-  //         return "No meal recognized.";
-  //       }
-  //     }
-  //   } catch (e) {
-  //     log("Meal Scan Error: $e");
-  //   }
-  //   return null;
-  // }
-
   static Future<String?> scanBarcode(BuildContext context) async {
     try {
       final barcodeValue =
@@ -136,7 +107,17 @@ class ScanHelper {
 
       if (barcodeValue != null) {
         barcodeResult = barcodeValue.trim();
-
+// showDialog(
+//           context: context,
+//           barrierDismissible: false,
+//           builder: (context) => const Center(
+//             child: CircularProgressIndicator(
+//               color: kSecondaryColor,
+//             ),
+//           ),
+//         );
+//
+//         await Future.delayed(const Duration(seconds: 3));
         final response = await http.get(Uri.parse(
           "https://world.openfoodfacts.org/api/v0/product/$barcodeResult.json",
         ));

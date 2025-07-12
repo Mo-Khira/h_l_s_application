@@ -48,7 +48,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     _controller.forward();
     _secController.forward();
 
-    Timer(Duration(seconds: 25), () {
+    Timer(Duration(seconds: 30), () {
       GoRouter.of(context).push(AppRouter.kHomeView);
     });
   }

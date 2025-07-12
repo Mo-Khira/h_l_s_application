@@ -113,13 +113,31 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           const SizedBox(height: 40),
                           CustomLoginButton(
-                            onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                setState(() => isLoading = true);
-                                await Future.delayed(
-                                    const Duration(seconds: 4));
-                                setState(() => isLoading = false);
+                            // onPressed: () async {
+                            //   if (formKey.currentState!.validate()) {
+                            //     setState(() => isLoading = true);
+                            //     await Future.delayed(
+                            //         const Duration(seconds: 4));
+                            //     setState(() => isLoading = false);
 
+                            //     GoRouter.of(context)
+                            //         .pushReplacement(AppRouter.kSignupDonePage);
+                            //   }
+                            // },
+                            onPressed: () async {
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (_) => const Center(
+                                  child: CircularProgressIndicator(
+                                    color: kSecondaryColor,
+                                  ),
+                                ),
+                              );
+
+                              await Future.delayed(const Duration(seconds: 3));
+
+                              if (context.mounted) {
                                 GoRouter.of(context)
                                     .pushReplacement(AppRouter.kSignupDonePage);
                               }
@@ -134,7 +152,9 @@ class _SignupPageState extends State<SignupPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+
+                                },
                                 icon: const Icon(
                                   Icons.apple_sharp,
                                   color: Colors.white,

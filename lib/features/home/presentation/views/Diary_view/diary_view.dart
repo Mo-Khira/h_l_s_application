@@ -103,7 +103,7 @@ class _DiaryViewState extends State<DiaryView> {
               children: items.map((item) {
                 final lines = item.split('\n');
                 final titleLine =
-                    lines.isNotEmpty ? "Avocado fruit" : "Unknown Item";
+                    lines.isNotEmpty ? lines.first : "Unknown Item ";
 
                 String? calories = lines.firstWhere(
                   (line) => line.toLowerCase().contains('calories'),
@@ -217,7 +217,7 @@ class _DiaryViewState extends State<DiaryView> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        "2500",
+                        "3500",
                         style: Styles.textStyle16,
                       ),
                       Text(
@@ -233,7 +233,7 @@ class _DiaryViewState extends State<DiaryView> {
                         style: Styles.textStyle16,
                       ),
                       Text(
-                        "${2500 - foodCalories}",
+                        "${3500 - foodCalories}",
                         style: Styles.textStyle16,
                       ),
                     ],
@@ -294,7 +294,7 @@ class _DiaryViewState extends State<DiaryView> {
 
                   if (context.mounted) Navigator.pop(context);
                   setState(() {
-                    foodCalories += 240;
+                    foodCalories += 1155;
                   });
 
                   showDialog(

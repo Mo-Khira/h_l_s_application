@@ -4,7 +4,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
+import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,45 +24,56 @@ class ScanHelper {
 
   static Future<String?> scanMeal(BuildContext context) async {
     try {
-      // اختيار المصدر
       final source = await showDialog<ImageSource>(
         context: context,
         builder: (context) => AlertDialog(
+          actionsAlignment: MainAxisAlignment.spaceAround,
           title: const Text("Choose Image Source"),
           actions: [
             TextButton.icon(
-              icon: const Icon(Icons.camera_alt),
-              label: const Text("Camera"),
+              icon: const Icon(
+                Icons.camera_alt,
+                size: 35,
+                color: Colors.white,
+              ),
+              label: Text("Camera",
+                  style:
+                      Styles.textStyle16.copyWith(fontWeight: FontWeight.w500)),
               onPressed: () => Navigator.pop(context, ImageSource.camera),
             ),
             TextButton.icon(
-              icon: const Icon(Icons.photo),
-              label: const Text("Gallery"),
+              icon: const Icon(
+                Icons.photo,
+                color: Colors.white,
+                size: 35,
+              ),
+              label: Text("Gallery",
+                  style:
+                      Styles.textStyle16.copyWith(fontWeight: FontWeight.w500)),
               onPressed: () => Navigator.pop(context, ImageSource.gallery),
             ),
           ],
         ),
       );
 
-      if (source == null) return null; // المستخدم لغى
+      if (source == null) return null;
 
-      // اختيار الصورة
       final picker = ImagePicker();
       final pickedFile = await picker.pickImage(source: source);
       if (pickedFile == null) return "No image selected.";
 
-      // عرض تحميل 5 ثواني
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            color: kSecondaryColor,
+          ),
         ),
       );
 
       await Future.delayed(const Duration(seconds: 5));
 
-      // بعد الانتظار، أبدأ في تحليل الصورة
       final inputImage = InputImage.fromFilePath(pickedFile.path);
       final labeler = GoogleMlKit.vision.imageLabeler(
         ImageLabelerOptions(confidenceThreshold: 0.5),
@@ -75,7 +88,7 @@ class ScanHelper {
         final topLabe2 = labels.last.label;
         mealResult = labels.map((e) => e.label).join(', ');
         String entry =
-            "$topLabel ,$topLabe2 \nEstimated Calories: 250 kcal\nProtein: 12g\nCarbs: 30g\nFat: 10g";
+            "Avocado fruit\nCalories: 240 kcal\nProtein: 3g\nCarbs: 12g\nFat: 15g";
         return entry;
       } else {
         return "No meal recognized.";

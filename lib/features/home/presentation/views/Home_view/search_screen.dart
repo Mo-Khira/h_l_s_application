@@ -16,8 +16,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    // تحديث تلقائي بعد الرجوع من سكان
-    Future.delayed(Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {});
     });
   }
@@ -53,6 +52,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           if (result != null) {
                             setState(() {
                               ScanHelper.addToHistory("Meal: \n$result");
+                              Navigator.of(context)
+                                  .pop(result); // يرجّع النتيجة لـ DiaryView
                             });
                             showDialog(
                               context: context,
@@ -70,6 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           if (result != null) {
                             setState(() {
                               ScanHelper.addToHistory("Product:\n$result");
+                              Navigator.of(context).pop(result);
                             });
                             showDialog(
                               context: context,

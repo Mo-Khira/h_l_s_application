@@ -46,12 +46,12 @@ class ReminderCreatedPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 56),
                 Text('ReminderCreated !', style: Styles.textStyle26),
-                const SizedBox(height: 90),
+                const SizedBox(height: 30),
                 Center(
                   child: CustomLoginButton(
-                    text: "Return to Home",
+                    text: "Return",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kHomeView);
+                      GoRouter.of(context).pop();
                     },
                   ),
                 ),

@@ -28,7 +28,7 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
     });
 
     await Future.delayed(
-      const Duration(milliseconds: 60),
+      const Duration(seconds: 2),
     );
 
     String botResponse = HelpOfflineBot.getResponse(userMessage);
@@ -129,11 +129,6 @@ class _HelpAndSupportPage extends State<HelpAndSupportPage> {
                   },
                 ),
               ),
-              if (_isLoading)
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: CircularProgressIndicator(),
-                ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0, top: 8),
                 child: Row(

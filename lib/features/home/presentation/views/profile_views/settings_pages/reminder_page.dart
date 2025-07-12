@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
@@ -100,7 +101,25 @@ class _ReminderPage extends State<ReminderPage> {
                 child: SizedBox(),
               ),
               CustomLoginButton(
-                onPressed: _handleCreate,
+                onPressed: () async {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (_) => const Center(
+                      child: CircularProgressIndicator(
+                        color: kSecondaryColor,
+                      ),
+                    ),
+                  );
+
+                  await Future.delayed(const Duration(seconds: 2));
+                  setState(() {});
+
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                    _handleCreate();
+                  }
+                },
                 text: 'Create',
               ),
               const SizedBox(height: 20),

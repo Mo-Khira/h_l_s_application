@@ -116,7 +116,8 @@ class _SignupPageState extends State<SignupPage> {
                             onPressed: () async {
                               if (formKey.currentState!.validate()) {
                                 setState(() => isLoading = true);
-                                await Future.delayed(Duration(seconds: 3));
+                                await Future.delayed(
+                                    const Duration(seconds: 4));
                                 setState(() => isLoading = false);
 
                                 GoRouter.of(context)

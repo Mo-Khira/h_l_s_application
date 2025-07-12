@@ -5,7 +5,7 @@ List<Meal> getStaticMeals() {
     Meal(
       imagePath: 'assets/Images/img (3).png',
       title: 'Green beans, tomatoes, eggs',
-      calories: '135 kcal',
+      calories: '235 kcal',
       cookTime: '5 min',
       ingredients: [
         '2-3 eggs',
@@ -22,7 +22,7 @@ List<Meal> getStaticMeals() {
     Meal(
       imagePath: 'assets/Images/img (4).png',
       title: 'Greek salad with lettuce, green onion',
-      calories: '150 kcal',
+      calories: '250 kcal',
       cookTime: '5 min',
       ingredients: [
         'Cheese',
@@ -55,7 +55,7 @@ List<Meal> getStaticMeals() {
     Meal(
       imagePath: 'assets/Images/avocado.png',
       title: 'Avocado Dish',
-      calories: '457 kcal',
+      calories: '240 kcal',
       cookTime: '6 min',
       ingredients: ['Avocado', 'Spices'],
       fat: '1.5 g',
@@ -66,7 +66,7 @@ List<Meal> getStaticMeals() {
     Meal(
       imagePath: 'assets/Images/sNAKS 1.png',
       title: 'Healthy Snacks',
-      calories: '230 kcal',
+      calories: '330 kcal',
       cookTime: '7 min',
       ingredients: ['apple', 'Strawberry', 'Green Peas', 'banana', 'nuts'],
       fat: '1.5 g',
@@ -77,8 +77,8 @@ List<Meal> getStaticMeals() {
     Meal(
       imagePath: 'assets/Images/Curry Salmon 3.png',
       title: 'Curry salmon',
-      calories: '176 kcal',
-      cookTime: '7 min',
+      calories: '476 kcal',
+      cookTime: '10 min',
       ingredients: ['Salmon', 'Curry', 'Spices'],
       fat: '1.5 g',
       protein: '10.9 g',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:h_l_s_application/constants.dart';
+import 'package:h_l_s_application/core/utils/app_router.dart';
 import 'package:h_l_s_application/core/utils/assets.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/auth/presentation/views/widgets/custom_login_button.dart';
@@ -14,14 +16,177 @@ class DiaryView extends StatefulWidget {
 }
 
 class _DiaryViewState extends State<DiaryView> {
+  Map<String, List<String>> scannedItems = {
+    'Breakfast': [],
+    'Lunch': [],
+    'Dinner': [],
+    'Add Exercise': [],
+  };
+  Map<String, bool> isExpanded = {
+    'Breakfast': false,
+    'Lunch': false,
+    'Dinner': false,
+    'Add Exercise': false,
+  };
+
   DateTime selectedDate = DateTime.now();
 
   TimeOfDay selectedTime = TimeOfDay.now();
 
   bool isReminderOn = true;
 
+  late int foodCalories = 0;
+  late int remainingCalories;
+
   void _onDateSelected(DateTime newDate) {
     setState(() => selectedDate = newDate);
+  }
+
+  Future<void> _handleScan(String title) async {
+    final result =
+        await GoRouter.of(context).push<String>(AppRouter.kSearchScreen);
+    if (result != null) {
+      setState(() => scannedItems[title]?.add(result));
+    }
+  }
+
+  Widget _buildMealSection(String title, String imagePath) {
+    final items = scannedItems[title] ?? [];
+    final hasItems = items.isNotEmpty;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MealSelectionWidget(
+          title: title,
+          imagePath: imagePath,
+          onTap: () async {
+            final result = await GoRouter.of(context)
+                .push<String>(AppRouter.kSearchScreen);
+            if (result != null && result.trim().isNotEmpty) {
+              setState(() {
+                scannedItems[title]?.add(result.trim());
+              });
+            }
+          },
+        ),
+        if (hasItems)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  items.length == 1
+                      ? "${items.length} item"
+                      : "${items.length} items",
+                  style: Styles.textStyle14.copyWith(color: Colors.white),
+                ),
+                IconButton(
+                  icon: Icon(
+                    isExpanded[title]! ? Icons.expand_less : Icons.expand_more,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isExpanded[title] = !isExpanded[title]!;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+        if (hasItems && isExpanded[title]!)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Column(
+              children: items.map((item) {
+                final lines = item.split('\n');
+                final titleLine =
+                    lines.isNotEmpty ? "Avocado fruit" : "Unknown Item";
+
+                String? calories = lines.firstWhere(
+                  (line) => line.toLowerCase().contains('calories'),
+                  orElse: () => '',
+                );
+                String? protein = lines.firstWhere(
+                  (line) => line.toLowerCase().contains('protein'),
+                  orElse: () => '',
+                );
+                String? carbs = lines.firstWhere(
+                  (line) => line.toLowerCase().contains('carbs'),
+                  orElse: () => '',
+                );
+
+                return ListTile(
+                  tileColor: Colors.white.withOpacity(0.07),
+                  title: Text(
+                    titleLine,
+                    style: Styles.textStyle14.copyWith(color: Colors.white),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (calories.isNotEmpty)
+                        Text(calories,
+                            style: Styles.textStyle12
+                                .copyWith(color: Colors.grey[400])),
+                      if (protein.isNotEmpty)
+                        Text(protein,
+                            style: Styles.textStyle12
+                                .copyWith(color: Colors.grey[400])),
+                      if (carbs.isNotEmpty)
+                        Text(carbs,
+                            style: Styles.textStyle12
+                                .copyWith(color: Colors.grey[400])),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildScannedList(String title) {
+    final items = scannedItems[title]!;
+    if (items.isEmpty) return const SizedBox();
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("${items.length} item(s)", style: Styles.textStyle14),
+              IconButton(
+                icon: Icon(
+                  isExpanded[title]! ? Icons.expand_less : Icons.expand_more,
+                  color: kPrimaryColor,
+                ),
+                onPressed: () {
+                  setState(() => isExpanded[title] = !isExpanded[title]!);
+                },
+              ),
+            ],
+          ),
+        ),
+        if (isExpanded[title]!)
+          Column(
+            children: items.map((item) {
+              final lines = item.split('\n');
+              return ListTile(
+                title: Text(lines.first, style: Styles.textStyle14),
+                subtitle: Text(lines.sublist(1).join("\n"),
+                    style: Styles.textStyle12),
+              );
+            }).toList(),
+          ),
+      ],
+    );
   }
 
   @override
@@ -60,7 +225,7 @@ class _DiaryViewState extends State<DiaryView> {
                         style: Styles.textStyle16,
                       ),
                       Text(
-                        "816",
+                        "$foodCalories",
                         style: Styles.textStyle16,
                       ),
                       Text(
@@ -68,7 +233,7 @@ class _DiaryViewState extends State<DiaryView> {
                         style: Styles.textStyle16,
                       ),
                       Text(
-                        "1684",
+                        "${2500 - foodCalories}",
                         style: Styles.textStyle16,
                       ),
                     ],
@@ -101,33 +266,45 @@ class _DiaryViewState extends State<DiaryView> {
               ),
               Column(
                 children: [
-                  MealSelectionWidget(
-                    title: "Breakfast",
-                    imagePath: "assets/Images/img (5).png",
-                    onTap: () {},
-                  ),
+                  _buildMealSection("Breakfast", "assets/Images/img (5).png"),
                   const SizedBox(height: 20),
-                  MealSelectionWidget(
-                    title: "Lunch",
-                    imagePath: "assets/Images/Curry Salmon 3.png",
-                    onTap: () {},
-                  ),
+                  _buildMealSection(
+                      "Lunch", "assets/Images/Curry Salmon 3.png"),
                   const SizedBox(height: 20),
-                  MealSelectionWidget(
-                    title: "Dinner",
-                    imagePath: "assets/Images/img (4).png",
-                    onTap: () {},
-                  ),
+                  _buildMealSection("Dinner", "assets/Images/img (4).png"),
                   const SizedBox(height: 70),
-                  MealSelectionWidget(
-                    title: "Add Exercise",
-                    imagePath: AssetsData.screen3,
-                    onTap: () {},
-                  ),
+                  _buildMealSection("Add Exercise", AssetsData.screen3),
                 ],
               ),
               SizedBox(height: kHeight(context) * 0.04),
-              CustomLoginButton(text: "Complete Diary"),
+              CustomLoginButton(
+                text: "Complete Diary",
+                onPressed: () async {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (_) => const Center(
+                      child: CircularProgressIndicator(
+                        color: kSecondaryColor,
+                      ),
+                    ),
+                  );
+
+                  await Future.delayed(const Duration(seconds: 2));
+
+                  if (context.mounted) Navigator.pop(context);
+                  setState(() {
+                    foodCalories += 240;
+                  });
+
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: const Text('Diary Completed Successfully!'),
+                    ),
+                  );
+                },
+              ),
               const SizedBox(height: 20),
             ],
           ),
@@ -136,6 +313,34 @@ class _DiaryViewState extends State<DiaryView> {
     );
   }
 }
+
+
+/**
+ * 
+ * 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */
+
+
+
+
+
+
+
 
 
 // ignore_for_file: prefer_const_constructors

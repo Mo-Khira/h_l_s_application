@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:h_l_s_application/constants.dart';
 import 'package:h_l_s_application/core/utils/styles.dart';
 import 'package:h_l_s_application/features/home/presentation/views/Chatbot/data/chatbot_offline_data.dart';
-import 'package:h_l_s_application/features/home/presentation/views/Chatbot/widgets/custom_appbar.dart';
 
 class ChatbotView extends StatefulWidget {
   const ChatbotView({super.key});
@@ -27,7 +26,7 @@ class ChatBotViewState extends State<ChatbotView> {
     });
 
     await Future.delayed(
-      const Duration(seconds: 1),
+      const Duration(seconds: 4),
     );
 
     String botResponse = OfflineChatBot.getResponse(userMessage);
@@ -47,7 +46,60 @@ class ChatBotViewState extends State<ChatbotView> {
             const SizedBox(
               height: 20,
             ),
-            const CustomAppBar(),
+            Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  )),
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  SizedBox(
+                    height: 45,
+                    width: 45,
+                    child: Image.asset(
+                      'assets/Images/projLogo.png',
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Chatbot',
+                          style: Styles.textStyle22
+                              .copyWith(fontWeight: FontWeight.bold)),
+                      Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: 6,
+                            backgroundColor: kSecondaryColor,
+                          ),
+                          Text(
+                            ' online',
+                            style: Styles.textStyle14.copyWith(
+                              color: kSecondaryColor,
+                            ),
+                          ),
+                          if (_isLoading)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child:
+                                  Text("typing...", style: Styles.textStyle12),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: ListView.builder(
                 reverse: true,
@@ -110,13 +162,6 @@ class ChatBotViewState extends State<ChatbotView> {
                 },
               ),
             ),
-            if (_isLoading)
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(
-                  color: kSecondaryColor,
-                ),
-              ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
